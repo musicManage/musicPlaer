@@ -1,17 +1,18 @@
 <template>
-  <div class="sidebar">
+  <div class="sidebar el-aside">
     <el-menu
         :collapse="collapse"
         default-active="Index"
-        class="el-menu-vertical-demo"
+        class="el-menu-vertical-demo el-menu"
         background-color="#334256"
         text-color="#fff"
-        active-text-color="#ffd04b" router>
+        active-text-color="#ffd04b"
+        router>
       <template v-for="item in items">
         <template>
           <el-menu-item :index="item.index" :key="item.index" >
             <i :class="item.icon"></i>
-            {{item.title}}
+            <span>{{item.title}}</span>
           </el-menu-item>
         </template>
       </template>
@@ -70,10 +71,23 @@ export default {
 .sidebar::-webkit-scrollbar {
   display: none;
 }
-.sidebar-el-menu :not(el-menu--collapse){
+.sidebar-el-menu:not(.el-menu--collapse){
   width: 150px;
 }
 .sidebar >ur {
   height: 100%;
 }
+/* 加过渡给侧边导航*/
+.el-aside {
+  transition: width 0.25s;
+  -webkit-transition: width 0.25s;
+  -moz-transition: width 0.25s;
+  -webkit-transition: width 0.25s;
+  -o-transition: width 0.25s;
+}
+/*加快侧边栏文字消失的速度*/
+.el-menu {
+  transition: all 10ms;
+}
+
 </style>
