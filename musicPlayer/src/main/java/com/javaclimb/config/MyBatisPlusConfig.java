@@ -1,0 +1,22 @@
+package com.javaclimb.config;
+
+import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+@Configuration
+@MapperScan("com.javaclimb.dao")//mapper接口扫描注解
+@EnableTransactionManagement
+public class MyBatisPlusConfig {//分页配置,本博客不展示分页操作
+
+    @Bean
+    public PaginationInnerInterceptor paginationInnerInterceptor() {
+        PaginationInnerInterceptor paginationInnerInterceptor = new PaginationInnerInterceptor();
+        return paginationInnerInterceptor;
+    }
+
+
+}
+
