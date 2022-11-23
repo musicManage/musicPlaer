@@ -1,7 +1,8 @@
 <template>
   <div class="sidebar">
     <el-menu
-        default-active="2"
+        :collapse="collapse"
+        default-active="Index"
         class="el-menu-vertical-demo"
         background-color="#334256"
         text-color="#fff"
@@ -19,23 +20,24 @@
 </template>
 
 <script>
+import bus from "@/assets/js/bus"
 export default {
   data() {
     return {
       collapse: false,
       items:[
         {
-          icon: 'el-icon-document',
+          icon: 'el-icon-house',
           index: "Index",
           title: '系统首页'
         },
         {
-          icon: 'el-icon-document',
+          icon: 'el-icon-user',
           index: "Consumer",
           title: '用户管理'
         },
         {
-          icon: 'el-icon-document',
+          icon: 'el-icon-headset',
           index: "Singer",
           title: '歌手管理'
         },
@@ -46,6 +48,11 @@ export default {
         },
       ]
     }
+  },
+  created() {
+    bus.$on('collapse',msg =>{
+      this.collapse = msg;
+    })
   }
 }
 </script>
@@ -60,7 +67,13 @@ export default {
   background: #334256;
   overflow-y: scroll;
 }
-.sidebar-el-menu {
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
+.sidebar-el-menu :not(el-menu--collapse){
   width: 150px;
+}
+.sidebar >ur {
+  height: 100%;
 }
 </style>

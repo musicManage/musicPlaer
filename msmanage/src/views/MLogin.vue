@@ -77,8 +77,6 @@ export default {
   background-size: cover;
   width: 100%;
   height: 100%;
-  margin-top: -8px;
-  margin-left: -8px;
 }
 .title {
   position: relative;
