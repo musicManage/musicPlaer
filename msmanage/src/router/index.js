@@ -5,7 +5,7 @@ import MIndex from "@/views/MIndex";
 import Home from "@/components/Home";
 import SingerPage from "@/views/SingerPage";
 import SongListPage from "@/views/SongListPage";
-import Consumer from "@/views/Consumer";
+import ConsumerPage from "@/views/ConsumerPage";
 
 Vue.use(VueRouter)
 
@@ -26,8 +26,8 @@ const routes = [
       },
       {
         path: '/Consumer',
-        name: 'consumer',
-        component: Consumer
+        name: 'Consumer',
+        component: ConsumerPage
       },
       {
         path: '/Singer',
