@@ -38,7 +38,6 @@ export default {
   background-color: #253041;
   color: #fff;
   text-align: center;
-  line-height: 100px;
 }
 .el-aside {
   overflow-x:hidden;
