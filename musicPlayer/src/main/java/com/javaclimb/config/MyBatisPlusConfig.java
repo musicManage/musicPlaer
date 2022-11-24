@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@MapperScan("com.javaclimb.dao")//mapper接口扫描注解
+@MapperScan("com.javaclimb.mapper")//mapper接口扫描注解
 @EnableTransactionManagement
 public class MyBatisPlusConfig {
 

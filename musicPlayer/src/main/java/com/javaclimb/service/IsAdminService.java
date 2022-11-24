@@ -1,16 +1,14 @@
 package com.javaclimb.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.javaclimb.controller.util.R;
-import com.javaclimb.pojo.Admin;
-import org.springframework.context.annotation.Bean;
+import com.javaclimb.entity.Admin;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.servlet.http.HttpSession;
 
 @Service
-public interface AdminService{
+public interface IsAdminService {
     /**
      * 验证密码是否正确
      */

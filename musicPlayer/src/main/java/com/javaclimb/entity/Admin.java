@@ -1,4 +1,4 @@
-package com.javaclimb.pojo;
+package com.javaclimb.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

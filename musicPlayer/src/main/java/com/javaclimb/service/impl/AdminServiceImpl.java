@@ -2,19 +2,19 @@ package com.javaclimb.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.javaclimb.controller.util.R;
-import com.javaclimb.dao.AdminDao;
-import com.javaclimb.pojo.Admin;
-import com.javaclimb.service.AdminService;
+import com.javaclimb.mapper.AdminMapper;
+import com.javaclimb.entity.Admin;
+import com.javaclimb.service.IsAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 
 @Service
-public class AdminServiceImpl implements AdminService {
+public class AdminServiceImpl implements IsAdminService {
 
     @Autowired
-    private AdminDao adminDao;
+    private AdminMapper adminMapper;
 
     /**
      * 验证密码是否正确
@@ -27,7 +27,7 @@ public class AdminServiceImpl implements AdminService {
         QueryWrapper<Admin> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("name",admin.getName());
         queryWrapper.eq("password",admin.getPassword());
-        if (adminDao.selectCount(queryWrapper)>0){
+        if (adminMapper.selectCount(queryWrapper)>0){
             session.setAttribute("name",admin.getName());
             return R.success("登录成功");
         }

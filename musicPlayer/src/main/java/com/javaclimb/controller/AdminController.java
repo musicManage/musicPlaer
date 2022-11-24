@@ -1,13 +1,13 @@
 package com.javaclimb.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.javaclimb.controller.util.R;
-import com.javaclimb.pojo.Admin;
-import com.javaclimb.service.AdminService;
+import com.javaclimb.entity.Admin;
+import com.javaclimb.service.IsAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @RestController
@@ -15,14 +15,14 @@ import javax.servlet.http.HttpSession;
 public class AdminController {
 
     @Autowired
-    private AdminService adminService;
+    private IsAdminService isAdminService;
 
     /**
      * 判断是否登录成功
      */
     @PostMapping("/admin/login/status")
     public R loginStatus( Admin admin, HttpSession session){
-        return adminService.verifyPassword(admin,session);
+        return isAdminService.verifyPassword(admin,session);
     }
 
 }
