@@ -29,10 +29,7 @@ export default {
 <style scoped>
 .header {
   position: relative;
-  background-color: #253041;
   box-sizing: border-box;
-  width: 100%;
-  height: 70px;
   font-size: 22px;
   color: #fff;
 }
