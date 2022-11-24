@@ -1,7 +1,7 @@
-package service;
+package com.javaclimb.service;
 
-import entity.Singer;
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.javaclimb.controller.util.R;
+import com.javaclimb.entity.Singer;
 
 /**
  * <p>
@@ -11,6 +11,43 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author admin
  * @since 2022-11-24
  */
-public interface ISingerService extends IService<Singer> {
+public interface ISingerService {
 
+    /**
+     * 增加
+     *
+     * @param singer
+     * @return
+     */
+    public R insert(Singer singer);
+
+    /**
+     * 修改
+     */
+    public R update(Singer singer);
+
+    /**
+     * 删除
+     */
+    public R delete(Integer id);
+
+    /**
+     * 根据主键查询整个对象
+     */
+    public R selectByPrimaryKey(Integer id);
+
+    /**
+     * 查询所有歌手
+     */
+    public R allSinger();
+
+    /**
+     * 根据歌手名字模糊查询列表
+     */
+    public  R singerOfName(String name);
+
+    /**
+     * 根据歌手性别模糊查询列表
+     */
+    public  R singerOfSex(Integer sex);
 }

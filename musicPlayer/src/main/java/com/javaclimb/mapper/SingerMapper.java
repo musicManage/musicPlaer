@@ -1,6 +1,6 @@
-package mapper;
+package com.javaclimb.mapper;
 
-import entity.Singer;
+import com.javaclimb.entity.Singer;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 

@@ -4,14 +4,14 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.javaclimb.controller.util.R;
 import com.javaclimb.mapper.AdminMapper;
 import com.javaclimb.entity.Admin;
-import com.javaclimb.service.IsAdminService;
+import com.javaclimb.service.IAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 
 @Service
-public class AdminServiceImpl implements IsAdminService {
+public class AdminServiceImpl implements IAdminService {
 
     @Autowired
     private AdminMapper adminMapper;

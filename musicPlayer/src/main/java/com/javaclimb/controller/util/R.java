@@ -34,6 +34,13 @@ public class R {
         return r;
     }
 
+    public static R success(String msg,Object data){
+        R r = success(msg);
+        r.setData(data);
+
+        return r;
+    }
+
     public static R error(String msg){
         R r = success(msg);
         r.setFlag(false);

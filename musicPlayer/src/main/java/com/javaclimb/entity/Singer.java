@@ -1,4 +1,4 @@
-package entity;
+package com.javaclimb.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -6,8 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import lombok.Getter;
-import lombok.Setter;
+
+import lombok.*;
 import lombok.experimental.Accessors;
 
 /**
@@ -18,8 +18,9 @@ import lombok.experimental.Accessors;
  * @author admin
  * @since 2022-11-24
  */
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Accessors(chain = true)
 @TableName("singer")
 public class Singer implements Serializable {
@@ -42,7 +43,7 @@ public class Singer implements Serializable {
      * 性别(1男0女)
      */
     @TableField("sex")
-    private Boolean sex;
+    private Integer sex;
 
     /**
      * 头像

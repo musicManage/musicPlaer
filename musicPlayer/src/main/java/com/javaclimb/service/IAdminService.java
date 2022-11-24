@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.servlet.http.HttpSession;
 
-@Service
-public interface IsAdminService {
+
+public interface IAdminService {
     /**
      * 验证密码是否正确
      */
