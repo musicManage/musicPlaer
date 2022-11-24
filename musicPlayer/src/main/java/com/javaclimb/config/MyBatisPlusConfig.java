@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @MapperScan("com.javaclimb.dao")//mapper接口扫描注解
 @EnableTransactionManagement
-public class MyBatisPlusConfig {//分页配置,本博客不展示分页操作
+public class MyBatisPlusConfig {
 
     @Bean
     public PaginationInnerInterceptor paginationInnerInterceptor() {
