@@ -31,23 +31,35 @@ public class SingerController {
         return iSingerService.insert(singer);
     }
 
+    /**
+     * 更新歌手信息
+     */
     @PostMapping("/update")
     public R updateSinger(Singer singer){
         return iSingerService.update(singer);
     }
 
+    /**
+     * 返回所有歌手信息
+     */
     @GetMapping("/all")
     public R allSinger(){
         return iSingerService.allSinger();
     }
 
-    @GetMapping("/singerName")
-    public R selectOfName(String name){
+    /**
+     * 根据歌手名字查询
+     */
+    @GetMapping("/singerName/{name}")
+    public R selectOfName(@PathVariable(value = "name") String name){
         return iSingerService.singerOfName(name);
     }
 
-    @GetMapping("/singerSex")
-    public R selectOfSex(Integer sex){
+    /**
+     * 根据歌手性别查询
+     */
+    @GetMapping("/singerSex/{sex}")
+    public R selectOfSex(@PathVariable(value = "sex") Integer sex){
         return iSingerService.singerOfSex(sex);
     }
 
