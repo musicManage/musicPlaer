@@ -1,4 +1,4 @@
-package controller;
+package com.javaclimb.controller;
 
 import com.javaclimb.controller.util.R;
 import com.javaclimb.entity.Singer;
