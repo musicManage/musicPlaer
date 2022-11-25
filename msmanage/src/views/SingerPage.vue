@@ -6,7 +6,7 @@
      </div>
    </div>
    <el-table
-       size="mini" border style="width: 100%;height: 500px" :data="tableData">
+       size="mini" border style="width: 100%;height: 600px" :data="tableData">
      <el-table-column
          prop="pic"
          label="歌手头像"
@@ -119,6 +119,7 @@ export default {
               this.registerForm.birth='';
               this.registerForm.location='';
               this.registerForm.introduction='';
+              this.getData();
             } else {
               this.$notify({
                 title: '添加失败',
