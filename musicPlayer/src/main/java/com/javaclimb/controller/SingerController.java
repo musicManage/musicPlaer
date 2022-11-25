@@ -27,7 +27,7 @@ public class SingerController {
      * 添加歌手
      */
     @PostMapping("/add")
-    public R addSinger(@RequestBody Singer singer){
+    public R addSinger(Singer singer){
         return iSingerService.insert(singer);
     }
 
@@ -42,7 +42,7 @@ public class SingerController {
     /**
      * 返回所有歌手信息
      */
-    @GetMapping("/all")
+    @GetMapping("/")
     public R allSinger(){
         return iSingerService.allSinger();
     }
@@ -50,7 +50,7 @@ public class SingerController {
     /**
      * 根据歌手名字查询
      */
-    @GetMapping("/singerName/{name}")
+    @GetMapping("/name/{name}")
     public R selectOfName(@PathVariable(value = "name") String name){
         return iSingerService.singerOfName(name);
     }
@@ -58,7 +58,7 @@ public class SingerController {
     /**
      * 根据歌手性别查询
      */
-    @GetMapping("/singerSex/{sex}")
+    @GetMapping("/sex/{sex}")
     public R selectOfSex(@PathVariable(value = "sex") Integer sex){
         return iSingerService.singerOfSex(sex);
     }

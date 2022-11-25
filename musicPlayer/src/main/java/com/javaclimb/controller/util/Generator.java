@@ -5,6 +5,9 @@ import com.baomidou.mybatisplus.generator.config.OutputFile;
 
 import java.util.Collections;
 
+/**
+ * mybatis-plus 代码生成器
+ */
 public class Generator {
     public static void main(String[] args) {
         FastAutoGenerator.create("jdbc:mysql://localhost:3306/music?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false", "root", "123456")

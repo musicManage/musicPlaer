@@ -6,9 +6,12 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * <p>
@@ -55,7 +58,8 @@ public class Singer implements Serializable {
      * 生日
      */
     @TableField("birth")
-    private LocalDateTime birth;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date birth;
 
     /**
      * 地区

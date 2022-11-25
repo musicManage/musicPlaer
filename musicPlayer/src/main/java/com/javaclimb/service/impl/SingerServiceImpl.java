@@ -30,8 +30,6 @@ public class SingerServiceImpl implements ISingerService {
      */
     @Override
     public R insert(Singer singer) {
-        String pic = "/img/singerImg/user.jpg";
-        singer.setPic(pic);
         if (singerMapper.insert(singer)>0){
             return R.success("添加成功");
         } else {
