@@ -18,26 +18,22 @@
          </div>
        </template>
      </el-table-column>
-     <el-table-column
-         prop="name"
-         label="姓名"
-         width="180">
+     <el-table-column prop="name" label="歌手" width="120" align="center"></el-table-column>
+     <el-table-column label="性别" width="50" align="center">
+       <template slot-scope="scope">
+         {{changeSex(scope.row.sex)}}
+       </template>
      </el-table-column>
-     <el-table-column
-         prop="location"
-         label="地址">
+     <el-table-column label="生日" width="120" align="center">
+       <template slot-scope="scope">
+         {{attachBirth(scope.row.birth)}}
+       </template>
      </el-table-column>
-     <el-table-column
-         prop="birth"
-         label="生日">
-     </el-table-column>
-     <el-table-column
-         prop="introduction"
-         label="介绍">
-     </el-table-column>
-     <el-table-column
-         prop="address"
-         label="地址">
+     <el-table-column prop="location" label="地区" width="100" align="center"></el-table-column>
+     <el-table-column label="简介">
+       <template slot-scope="scope">
+         <p style="height:100px;overflow:scroll">{{scope.row.introduction}}</p>
+       </template>
      </el-table-column>
    </el-table>
 
@@ -74,9 +70,10 @@
 </template>
 
 <script>
-import {mixin} from "@/mixins/index";
 import {allSinger, setSinger} from "@/api/index"
+import {mixin} from "@/mixins";
 export default {
+  mixins:[mixin],
   data() {
     return {
       centerDialogVisible:false,
@@ -95,9 +92,6 @@ export default {
     this.getData();
   },
   methods:{
-    getUrl(url) {
-      return `${this.$store.state.HOST}/${url}`;
-    },
     getData(){
       this.tableData=[];
       allSinger().then(res => {
