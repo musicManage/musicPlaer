@@ -21,7 +21,7 @@ export const mixin = {
         },
         //获取生日
         attachBirth(val){
-            return String(val).substr(0,10);
+            return String(val).substring(0,10);
         },
     }
 }
