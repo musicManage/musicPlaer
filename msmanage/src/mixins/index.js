@@ -15,7 +15,7 @@ export const mixin = {
                 return '组合';
             }
             if(value == 3){
-                return '不明';
+                return '未知';
             }
             return value;
         },
