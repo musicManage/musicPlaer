@@ -1,5 +1,6 @@
 package com.javaclimb;
 
+import com.javaclimb.common.Constants;
 import com.javaclimb.controller.AdminController;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ class MusicPlayerApplicationTests {
 
     @Test
     void contextLoads() {
+        System.out.println(Constants.SINGER_PATH);
     }
 
 }
