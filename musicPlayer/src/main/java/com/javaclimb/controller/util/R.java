@@ -48,4 +48,11 @@ public class R {
 
         return r;
     }
+
+    public static R error(String msg,Object data){
+        R r = success(msg);
+        r.setData(data);
+
+        return r;
+    }
 }

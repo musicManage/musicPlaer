@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * <p>
@@ -63,4 +64,11 @@ public class SingerController {
         return iSingerService.singerOfSex(sex);
     }
 
+    /**
+     * 更新歌手图片
+     */
+    @PostMapping("/pic/update/{id}")
+    public R updateSinger(@RequestParam("file") MultipartFile picFile, @PathVariable(value = "id") int id){
+        return iSingerService.updateOfPic(picFile,id);
+    }
 }

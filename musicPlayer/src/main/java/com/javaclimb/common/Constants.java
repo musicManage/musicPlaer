@@ -5,6 +5,5 @@ public class Constants {
 
     public  static String PATHS = System.getProperty("file.separator");
 
-    //D:\SpringBoot\music\musicPlayer\src\main\resources\static\img\singerPic
-    public static String SINGER_PATH = "file:"+PROJECT_PATH+PATHS+"img"+PATHS+"singerPic"+PATHS;
+    public static String PIC_PATH = PROJECT_PATH + PATHS + "src"+PATHS+"main"+PATHS+"resources"+PATHS+"static"+PATHS+"img"+PATHS+"singerPic"+PATHS;
 }

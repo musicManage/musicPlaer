@@ -14,7 +14,7 @@ class MusicPlayerApplicationTests {
 
     @Test
     void contextLoads() {
-        System.out.println(Constants.SINGER_PATH);
+        System.out.println(Constants.PIC_PATH);
     }
 
 }

@@ -16,6 +16,9 @@
          <div class="singer-img">
            <img :src="getUrl(scope.row.pic)" style="width: 100%"/>
          </div>
+         <el-upload :action="updatePic(scope.row.id)" :before-upload="beforeUpdate" :on-success="updateSuccess">
+           <el-button size="mini" >更新图片</el-button>
+         </el-upload>
        </template>
      </el-table-column>
      <el-table-column prop="name" label="歌手" width="120" align="center"></el-table-column>
@@ -131,6 +134,9 @@ export default {
             console.log(err);
           });
       this.centerDialogVisible = false;
+    },
+    updatePic(id){
+      return `${this.$store.state.HOST}/singer/pic/update/${id}`;
     }
   }
 }

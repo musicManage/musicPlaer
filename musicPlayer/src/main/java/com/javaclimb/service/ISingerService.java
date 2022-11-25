@@ -2,6 +2,7 @@ package com.javaclimb.service;
 
 import com.javaclimb.controller.util.R;
 import com.javaclimb.entity.Singer;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * <p>
@@ -50,4 +51,9 @@ public interface ISingerService {
      * 根据歌手性别模糊查询列表
      */
     public  R singerOfSex(Integer sex);
+
+    /**
+     * 更新歌手头像
+     */
+    public R updateOfPic(MultipartFile picFile, int id);
 }
