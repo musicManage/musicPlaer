@@ -5,6 +5,43 @@
       <el-button type="primary" size="mini" @click="centerDialogVisible = true">添加歌手</el-button>
      </div>
    </div>
+   <el-table
+       size="mini" border style="width: 100%;height: 500px" :data="tableData">
+     <el-table-column
+         prop="pic"
+         label="歌手头像"
+         width="110"
+         align="center">
+       <template slot-scope="scope">
+         <div class="singer-img">
+           <img :src="getUrl(scope.row.pic)" style="width: 100%"/>
+         </div>
+       </template>
+     </el-table-column>
+     <el-table-column
+         prop="name"
+         label="姓名"
+         width="180">
+     </el-table-column>
+     <el-table-column
+         prop="location"
+         label="地址">
+     </el-table-column>
+     <el-table-column
+         prop="birth"
+         label="生日">
+     </el-table-column>
+     <el-table-column
+         prop="introduction"
+         label="介绍">
+     </el-table-column>
+     <el-table-column
+         prop="address"
+         label="地址">
+     </el-table-column>
+   </el-table>
+
+<!--   添加歌手-->
    <el-dialog title="添加歌手" :visible.sync="centerDialogVisible" width="400px" center>
      <el-form :model="registerForm" ref="registerForm" label-width="80px">
        <el-form-item prop="name" label="歌手名" size="mini">
@@ -37,7 +74,8 @@
 </template>
 
 <script>
-import {setSinger} from "@/api/index"
+import {mixin} from "@/mixins/index";
+import {allSinger, setSinger} from "@/api/index"
 export default {
   data() {
     return {
@@ -49,15 +87,28 @@ export default {
         birth:'',
         location:'',
         introduction:'',
-      }
+      },
+      tableData:[],
     }
   },
+  created() {
+    this.getData();
+  },
   methods:{
+    getUrl(url) {
+      return `${this.$store.state.HOST}/${url}`;
+    },
+    getData(){
+      this.tableData=[];
+      allSinger().then(res => {
+        this.tableData = res.data;
+      })
+    },
     addSinger(){
       let params = new URLSearchParams();
       params.append('name',this.registerForm.name);
       params.append('sex',this.registerForm.sex);
-      params.append('pic','/img/singerPic/user.jpg');
+      params.append('pic','img/singerPic/user.jpg');
       params.append('birth',this.registerForm.birth);
       params.append('location',this.registerForm.location);
       params.append('introduction',this.registerForm.introduction);
@@ -102,5 +153,12 @@ export default {
 }
 .handle-box {
   margin-bottom: 20px;
+}
+.singer-img {
+  width: 100%;
+  height: 80px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  overflow: hidden;
 }
 </style>

@@ -100,6 +100,6 @@ export default {
   left: -30px;
 }
 .btn_sub{
-  width: 80%;
+  width: 100%;
 }
 </style>
