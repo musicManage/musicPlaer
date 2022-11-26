@@ -16,7 +16,7 @@ public class SingerPicConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry){
         registry.addResourceHandler("/img/singerPic/**").addResourceLocations(
-                "classpath:/static/img/singerPic/"
+                "file:"+Constants.PIC_PATH
         );
     }
 

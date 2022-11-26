@@ -71,4 +71,6 @@ public class SingerController {
     public R updateSinger(@RequestParam("file") MultipartFile picFile, @PathVariable(value = "id") int id){
         return iSingerService.updateOfPic(picFile,id);
     }
+
 }
+

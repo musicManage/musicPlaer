@@ -2,6 +2,9 @@
  <div class="table">
    <div class="container">
      <div class="handle-box">
+       <el-input v-model="select_word" size="mini" placeholder="请输入歌手名" class="handle-input">
+       </el-input>
+       <el-button type="primary" size="mini" @click="selectSingerList">搜索</el-button>
       <el-button type="primary" size="mini" @click="centerDialogVisible = true">添加歌手</el-button>
      </div>
    </div>
@@ -73,7 +76,7 @@
 </template>
 
 <script>
-import {allSinger, setSinger} from "@/api/index"
+import {allSinger, selectSinger, setSinger} from "@/api/index"
 import {mixin} from "@/mixins";
 export default {
   mixins:[mixin],
@@ -89,10 +92,24 @@ export default {
         introduction:'',
       },
       tableData:[],
+      select_word:'',
+      singerList:[],
     }
   },
   created() {
     this.getData();
+  },
+  watch: {
+    singerList() {
+      if (this.singerList == ''){
+        this.getData();
+      } else {
+        this.tableData = [];
+        for (let item of this.singerList){
+          this.tableData.push(item);
+        }
+      }
+    }
   },
   methods:{
     getData(){
@@ -105,7 +122,7 @@ export default {
       let params = new URLSearchParams();
       params.append('name',this.registerForm.name);
       params.append('sex',this.registerForm.sex);
-      params.append('pic','img/singerPic/user.jpg');
+      params.append('pic',"img/singerPic/user.jpg");
       params.append('birth',this.registerForm.birth);
       params.append('location',this.registerForm.location);
       params.append('introduction',this.registerForm.introduction);
@@ -137,6 +154,17 @@ export default {
     },
     updatePic(id){
       return `${this.$store.state.HOST}/singer/pic/update/${id}`;
+    },
+    selectSingerList(){
+      if(this.select_word != ''){
+        const url = "singer/name/" + this.select_word;
+        axios.get(url).then(res => {
+          this.singerList = res.data;
+        })
+      } else {
+        this.$message.error("搜索内容不能为空");
+      }
+
     }
   }
 }
@@ -161,5 +189,9 @@ export default {
   border-radius: 5px;
   margin-bottom: 5px;
   overflow: hidden;
+}
+.handle-input {
+  width: 300px;
+  display: inline-block;
 }
 </style>

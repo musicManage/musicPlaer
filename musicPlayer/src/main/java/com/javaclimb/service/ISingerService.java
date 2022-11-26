@@ -56,4 +56,9 @@ public interface ISingerService {
      * 更新歌手头像
      */
     public R updateOfPic(MultipartFile picFile, int id);
+
+    /**
+     * 删除原有歌手头像
+     */
+    public R deleteOfPic(String path);
 }

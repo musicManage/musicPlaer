@@ -26,7 +26,7 @@ public class ISingerServiceTest {
 
     @Test
     public void addSinger(){
-        iSingerService.insert(new Singer(null,"张三",1,null,null,"地球",null));
+//        iSingerService.insert(new Singer(null,"张三",1,null,null,"地球",null));
     }
 
     @Test

@@ -8,3 +8,6 @@ export const setSinger = (params) => post('singer/add',params);
 
 //查询歌手
 export const allSinger = () => get('singer/');
+
+//模糊查询歌手
+export const selectSinger = (params) => get('singer/name/');

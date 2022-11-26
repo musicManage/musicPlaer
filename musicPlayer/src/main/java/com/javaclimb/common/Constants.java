@@ -5,5 +5,7 @@ public class Constants {
 
     public  static String PATHS = System.getProperty("file.separator");
 
-    public static String PIC_PATH = PROJECT_PATH + PATHS + "src"+PATHS+"main"+PATHS+"resources"+PATHS+"static"+PATHS+"img"+PATHS+"singerPic"+PATHS;
+    public static String PIC_PATH = Constants.PROJECT_PATH+Constants.PATHS+"resources"+Constants.PATHS+"img"+Constants.PATHS+"singerPic"+Constants.PATHS;
+
+    public static String RESOURCE = Constants.PROJECT_PATH+Constants.PATHS+"resources"+Constants.PATHS;
 }

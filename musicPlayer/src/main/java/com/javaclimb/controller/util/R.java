@@ -51,7 +51,9 @@ public class R {
 
     public static R error(String msg,Object data){
         R r = success(msg);
+        r.setFlag(false);
         r.setData(data);
+        r.setCode(0);
 
         return r;
     }

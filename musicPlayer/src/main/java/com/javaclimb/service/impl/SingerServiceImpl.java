@@ -6,11 +6,9 @@ import com.javaclimb.controller.util.R;
 import com.javaclimb.entity.Singer;
 import com.javaclimb.mapper.SingerMapper;
 import com.javaclimb.service.ISingerService;
-import lombok.SneakyThrows;
-import org.apache.tomcat.util.bcel.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
+import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -38,11 +36,13 @@ public class SingerServiceImpl implements ISingerService {
      */
     @Override
     public R insert(Singer singer) {
-        if (singerMapper.insert(singer)>0){
-            return R.success("添加成功");
-        } else {
-            return R.error("添加失败");
-        }
+
+            if (singerMapper.insert(singer)>0){
+                return R.success("添加成功");
+            } else {
+                return R.error("添加失败");
+            }
+
     }
 
     /**
@@ -116,20 +116,20 @@ public class SingerServiceImpl implements ISingerService {
         return R.success(null,singerMapper.selectList(lambdaQueryWrapper));
     }
 
+
     /**
      * 更新歌手头像
      *
      * @param picFile
      * @param id
      */
-    @SneakyThrows
     @Override
     public R updateOfPic(MultipartFile picFile, int id) {
         if (picFile.isEmpty()){
             return R.error("文件上传失败");
         }
         String fileName = System.currentTimeMillis()+picFile.getOriginalFilename();
-        String filePath = ResourceUtils.getURL("classpath:").getPath()+ "static/img/singerPic";
+        String filePath = Constants.PIC_PATH;
         File fPath = new File(filePath);
         if (!fPath.exists()){
             fPath.mkdir();
@@ -139,8 +139,8 @@ public class SingerServiceImpl implements ISingerService {
         String storePic = "img/singerPic/"+fileName;
         try {
             picFile.transferTo(file);
-            Singer singer = new Singer();
-            singer.setId(id);
+            Singer singer = singerMapper.selectById(id);
+            deleteOfPic(singer.getPic());
             singer.setPic(storePic);
             boolean flag = singerMapper.updateById(singer)>0;
             if (flag){
@@ -150,8 +150,25 @@ public class SingerServiceImpl implements ISingerService {
             }
         } catch (IOException e) {
             return R.error("上传失败",e.getMessage());
-        } finally {
-            return new R();
+        }
+    }
+
+    /**
+     * 删除原有歌手头像
+     *
+     * @param path
+     */
+    @Override
+    public R deleteOfPic(String path) {
+        if (path.equals("img/singerPic/user.jpg")){
+            return R.error("不能删除默认头像图片");
+        }
+        String picOldPath = Constants.RESOURCE+path;
+        boolean b = FileSystemUtils.deleteRecursively(new File(picOldPath));
+        if (b){
+            return R.success("删除成功");
+        } else {
+            return R.error("删除失败");
         }
     }
 }
