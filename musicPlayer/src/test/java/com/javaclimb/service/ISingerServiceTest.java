@@ -1,5 +1,7 @@
 package com.javaclimb.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.javaclimb.entity.Singer;
 import com.javaclimb.service.impl.SingerServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -21,7 +23,7 @@ public class ISingerServiceTest {
 
     @Test
     public void singerOfName(){
-        iSingerService.singerOfName("炎");
+        iSingerService.singerOfName("坤");
     }
 
     @Test
@@ -48,5 +50,12 @@ public class ISingerServiceTest {
     @Test
     public void selectBySex(){
         iSingerService.singerOfSex(1);
+    }
+
+    @Test
+    public void getPage(){
+        LambdaQueryWrapper<Singer> lambdaQueryWrapper = new LambdaQueryWrapper<Singer>();
+        lambdaQueryWrapper.like(true,Singer::getName,"1");
+        iSingerService.getByPage(1, 10, "坤");
     }
 }

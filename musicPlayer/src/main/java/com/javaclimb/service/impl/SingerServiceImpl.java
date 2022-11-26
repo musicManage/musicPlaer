@@ -1,6 +1,9 @@
 package com.javaclimb.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.javaclimb.common.Constants;
 import com.javaclimb.controller.util.R;
 import com.javaclimb.entity.Singer;
@@ -170,5 +173,22 @@ public class SingerServiceImpl implements ISingerService {
         } else {
             return R.error("删除失败");
         }
+    }
+
+    /**
+     * 分页处理
+     *
+     * @param currentPage
+     * @param pageSize
+     */
+    @Override
+    public R getByPage(int currentPage, int pageSize, String name) {
+        Page<Singer> singerPage = new Page<>(currentPage, pageSize);
+        LambdaQueryWrapper<Singer> lambdaQueryWrapper = new LambdaQueryWrapper<Singer>();
+        if (name!=null){
+            lambdaQueryWrapper.like(true,Singer::getName,name);
+        }
+
+        return R.success("查询成功",singerMapper.selectPage(singerPage,lambdaQueryWrapper));
     }
 }
