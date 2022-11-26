@@ -1,5 +1,8 @@
 package com.javaclimb.service;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.javaclimb.controller.util.R;
 import com.javaclimb.entity.Singer;
 import org.springframework.web.multipart.MultipartFile;
@@ -61,4 +64,9 @@ public interface ISingerService {
      * 删除原有歌手头像
      */
     public R deleteOfPic(String path);
+
+    /**
+     * 分页处理
+     */
+    R getByPage(int currentPage, int pageSize, String name);
 }

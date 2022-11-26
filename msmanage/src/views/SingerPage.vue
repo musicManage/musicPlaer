@@ -2,7 +2,7 @@
  <div class="table">
    <div class="container">
      <div class="handle-box">
-       <el-input v-model="select_word" size="mini" placeholder="请输入歌手名" class="handle-input">
+       <el-input v-model="select_word" size="mini" placeholder="请输入歌手名" class="handle-input" clearable>
        </el-input>
        <el-button type="primary" size="mini" @click="selectSingerList">搜索</el-button>
       <el-button type="primary" size="mini" @click="centerDialogVisible = true">添加歌手</el-button>
@@ -42,6 +42,18 @@
        </template>
      </el-table-column>
    </el-table>
+   <div class="pagination">
+       <span class="demonstration">调整每页显示条数</span>
+       <el-pagination
+           @size-change="handleSizeChange"
+           @current-change="handleCurrentChange"
+           :current-page.sync="currentPage2"
+           :page-sizes="[100, 200, 300, 400]"
+           :page-size="100"
+           layout="sizes, prev, pager, next"
+           :total="1000">
+       </el-pagination>
+   </div>
 
 <!--   添加歌手-->
    <el-dialog title="添加歌手" :visible.sync="centerDialogVisible" width="400px" center>
@@ -76,7 +88,7 @@
 </template>
 
 <script>
-import {allSinger, selectSinger, setSinger} from "@/api/index"
+import {allSinger, setSinger} from "@/api/index";
 import {mixin} from "@/mixins";
 export default {
   mixins:[mixin],
@@ -94,6 +106,7 @@ export default {
       tableData:[],
       select_word:'',
       singerList:[],
+      pageSize: 5,
     }
   },
   created() {
@@ -101,13 +114,13 @@ export default {
   },
   watch: {
     singerList() {
-      if (this.singerList == ''){
-        this.getData();
-      } else {
+      if (this.select_word != ''){
         this.tableData = [];
         for (let item of this.singerList){
           this.tableData.push(item);
         }
+      } else {
+        this.getData();
       }
     }
   },
@@ -156,14 +169,11 @@ export default {
       return `${this.$store.state.HOST}/singer/pic/update/${id}`;
     },
     selectSingerList(){
-      if(this.select_word != ''){
-        const url = "singer/name/" + this.select_word;
-        axios.get(url).then(res => {
-          this.singerList = res.data;
-        })
-      } else {
-        this.$message.error("搜索内容不能为空");
-      }
+      let param = new URLSearchParams();
+      param.append('name',this.select_word);
+      axios.post("/singer/name",param).then(res => {
+        this.singerList = res.data;
+      })
 
     }
   }
