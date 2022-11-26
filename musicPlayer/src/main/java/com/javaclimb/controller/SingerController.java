@@ -1,6 +1,5 @@
 package com.javaclimb.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.javaclimb.controller.util.R;
 import com.javaclimb.entity.Singer;
 import com.javaclimb.service.ISingerService;
@@ -44,17 +43,17 @@ public class SingerController {
     /**
      * 返回所有歌手信息
      */
-    @PostMapping("/")
-    public Object allSinger(@RequestParam(value = "current") int current,@RequestParam(value = "size") int size){
-        return iSingerService.getByPage(current,size,null).getData();
+    @GetMapping("/")
+    public R allSinger(){
+        return iSingerService.allSinger();
     }
 
     /**
      * 根据歌手名字查询
      */
-    @PostMapping("/name")
-    public Object selectOfName(@RequestParam("name") String name,@RequestParam("current") int current,@RequestParam("size") int size){
-        return iSingerService.getByPage(current,size,name);
+    @GetMapping("/name/{name}")
+    public R selectOfName(@PathVariable(value = "name") String name){
+        return iSingerService.singerOfName(name);
     }
 
     /**
@@ -72,8 +71,6 @@ public class SingerController {
     public R updateSinger(@RequestParam("file") MultipartFile picFile, @PathVariable(value = "id") int id){
         return iSingerService.updateOfPic(picFile,id);
     }
-
-
 
 }
 

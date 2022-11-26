@@ -2,7 +2,7 @@
  <div class="table">
    <div class="container">
      <div class="handle-box">
-       <el-input v-model="select_word" size="mini" placeholder="请输入歌手名" class="handle-input" clearable>
+       <el-input v-model="select_word" size="mini" placeholder="请输入歌手名" class="handle-input">
        </el-input>
        <el-button type="primary" size="mini" @click="selectSingerList">搜索</el-button>
       <el-button type="primary" size="mini" @click="centerDialogVisible = true">添加歌手</el-button>
@@ -42,15 +42,6 @@
        </template>
      </el-table-column>
    </el-table>
-   <div class="pagination">
-       <span class="demonstration">调整每页显示条数</span>
-       <el-pagination
-           :page-sizes="[1, 5, 10, 20]"
-           :page-size="100"
-           layout="sizes, prev, pager, next"
-           :total="1000">
-       </el-pagination>
-   </div>
 
 <!--   添加歌手-->
    <el-dialog title="添加歌手" :visible.sync="centerDialogVisible" width="400px" center>
@@ -85,9 +76,8 @@
 </template>
 
 <script>
-import {setSinger} from "@/api/index";
+import {allSinger, selectSinger, setSinger} from "@/api/index"
 import {mixin} from "@/mixins";
-
 export default {
   mixins:[mixin],
   data() {
@@ -104,9 +94,6 @@ export default {
       tableData:[],
       select_word:'',
       singerList:[],
-      current:1,
-      size: 5,
-      totalPage:''
     }
   },
   created() {
@@ -114,24 +101,21 @@ export default {
   },
   watch: {
     singerList() {
-      // if (this.select_word != ''){
-      //   this.tableData = [];
-      //   for (let item of this.singerList){
-      //     this.tableData.push(item);
-      //   }
-      // } else {
-      //   this.getData();
-      // }
+      if (this.singerList == ''){
+        this.getData();
+      } else {
+        this.tableData = [];
+        for (let item of this.singerList){
+          this.tableData.push(item);
+        }
+      }
     }
   },
   methods:{
     getData(){
       this.tableData=[];
-      let param = new URLSearchParams();
-      param.append('current',this.current);
-      param.append('size',this.size);
-      axios.post("/singer/",param).then(res => {
-        this.tableData.push(res.data);
+      allSinger().then(res => {
+        this.tableData = res.data;
       })
     },
     addSinger(){
@@ -172,11 +156,14 @@ export default {
       return `${this.$store.state.HOST}/singer/pic/update/${id}`;
     },
     selectSingerList(){
-      // let param = new URLSearchParams();
-      // param.append('name',this.select_word);
-      // axios.post("/singer/name",param).then(res => {
-      //   this.singerList = res.data;
-      // })
+      if(this.select_word != ''){
+        const url = "singer/name/" + this.select_word;
+        axios.get(url).then(res => {
+          this.singerList = res.data;
+        })
+      } else {
+        this.$message.error("搜索内容不能为空");
+      }
 
     }
   }
