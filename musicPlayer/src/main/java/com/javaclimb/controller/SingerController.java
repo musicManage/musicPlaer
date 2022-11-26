@@ -44,9 +44,9 @@ public class SingerController {
     /**
      * 返回所有歌手信息
      */
-    @GetMapping("/{current}/{size}")
-    public R allSinger(@PathVariable(value = "current") int current,@PathVariable(value = "size") int size){
-        return iSingerService.getByPage(current,size,null);
+    @PostMapping("/")
+    public Object allSinger(@RequestParam(value = "current") int current,@RequestParam(value = "size") int size){
+        return iSingerService.getByPage(current,size,null).getData();
     }
 
     /**

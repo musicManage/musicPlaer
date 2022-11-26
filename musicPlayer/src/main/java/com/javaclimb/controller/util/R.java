@@ -1,8 +1,11 @@
 package com.javaclimb.controller.util;
 
+import com.javaclimb.entity.Singer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,9 +23,14 @@ public class R {
     //返回信息
     private String msg;
 
+    private long total;
+
+    private long pages;
+
     public R(Boolean flag){
         this.flag=flag;
     }
+
 
     public static R success(String msg){
         R r = new R();
@@ -54,6 +62,15 @@ public class R {
         r.setFlag(false);
         r.setData(data);
         r.setCode(0);
+
+        return r;
+    }
+
+    public static R success(String msg, Object data, long total, long pages) {
+        R r = success(msg);
+        r.setData(data);
+        r.setTotal(total);
+        r.setPages(pages);
 
         return r;
     }

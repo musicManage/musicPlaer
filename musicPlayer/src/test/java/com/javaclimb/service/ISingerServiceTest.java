@@ -56,6 +56,6 @@ public class ISingerServiceTest {
     public void getPage(){
         LambdaQueryWrapper<Singer> lambdaQueryWrapper = new LambdaQueryWrapper<Singer>();
         lambdaQueryWrapper.like(true,Singer::getName,"1");
-        iSingerService.getByPage(1, 10, "坤");
+        iSingerService.getByPage(1, 10, null);
     }
 }

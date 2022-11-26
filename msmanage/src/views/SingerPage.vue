@@ -45,10 +45,7 @@
    <div class="pagination">
        <span class="demonstration">调整每页显示条数</span>
        <el-pagination
-           @size-change="handleSizeChange"
-           @current-change="handleCurrentChange"
-           :current-page.sync="currentPage2"
-           :page-sizes="[100, 200, 300, 400]"
+           :page-sizes="[1, 5, 10, 20]"
            :page-size="100"
            layout="sizes, prev, pager, next"
            :total="1000">
@@ -88,8 +85,9 @@
 </template>
 
 <script>
-import {allSinger, setSinger} from "@/api/index";
+import {setSinger} from "@/api/index";
 import {mixin} from "@/mixins";
+
 export default {
   mixins:[mixin],
   data() {
@@ -106,7 +104,9 @@ export default {
       tableData:[],
       select_word:'',
       singerList:[],
-      pageSize: 5,
+      current:1,
+      size: 5,
+      totalPage:''
     }
   },
   created() {
@@ -114,21 +114,24 @@ export default {
   },
   watch: {
     singerList() {
-      if (this.select_word != ''){
-        this.tableData = [];
-        for (let item of this.singerList){
-          this.tableData.push(item);
-        }
-      } else {
-        this.getData();
-      }
+      // if (this.select_word != ''){
+      //   this.tableData = [];
+      //   for (let item of this.singerList){
+      //     this.tableData.push(item);
+      //   }
+      // } else {
+      //   this.getData();
+      // }
     }
   },
   methods:{
     getData(){
       this.tableData=[];
-      allSinger().then(res => {
-        this.tableData = res.data;
+      let param = new URLSearchParams();
+      param.append('current',this.current);
+      param.append('size',this.size);
+      axios.post("/singer/",param).then(res => {
+        this.tableData.push(res.data);
       })
     },
     addSinger(){
@@ -169,11 +172,11 @@ export default {
       return `${this.$store.state.HOST}/singer/pic/update/${id}`;
     },
     selectSingerList(){
-      let param = new URLSearchParams();
-      param.append('name',this.select_word);
-      axios.post("/singer/name",param).then(res => {
-        this.singerList = res.data;
-      })
+      // let param = new URLSearchParams();
+      // param.append('name',this.select_word);
+      // axios.post("/singer/name",param).then(res => {
+      //   this.singerList = res.data;
+      // })
 
     }
   }
