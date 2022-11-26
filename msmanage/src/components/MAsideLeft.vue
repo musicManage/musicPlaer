@@ -52,6 +52,7 @@ export default {
     }
   },
   created() {
+    //通过Bus进行组件间的通信，来折叠侧边栏
     bus.$on('collapse',msg =>{
       this.collapse = msg;
     })

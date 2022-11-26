@@ -1,11 +1,14 @@
 <template>
  <div class="header">
+   <!-- 折叠按钮图片-->
    <div class="collapse-btn" @click="collapseChanges">
     <i class="el-icon-menu"></i>
    </div>
+
    <div class="logo">
      音乐后台管理
    </div>
+
    <div class="header-right">
      <div class="admin-box">
        <img src="../assets/img/admin.jpg" alt=""/>
