@@ -35,7 +35,6 @@ public class SongListController {
         return iSongListService.delete(id);
     }
 
-    //TODO 这块就是前端显现相应的歌单list
     // 返回所有歌单
     @GetMapping("/")
     public R allSongList() {
@@ -62,10 +61,9 @@ public class SongListController {
     }
 
     // 更新歌单图片
-    @PostMapping("/img/update")
+    @PostMapping("/update/pic")
     public R updateSongListPic(@RequestParam("file") MultipartFile mpFile, @RequestParam(value = "id") int id) {
-//        return iSongListService.(avatorFile,id);
-        return null;
+        return iSongListService.updateSongListImg(mpFile,id);
     }
 
 }

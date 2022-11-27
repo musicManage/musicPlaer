@@ -59,4 +59,14 @@ public interface ISongListService {
      */
     public  R likeStyle(String style);
 
+    /**
+     * 更新歌单图片
+     */
+    public R updateSongListImg(MultipartFile mpFile, int id);
+
+    /**
+     * 删除原有歌单图片
+     * */
+    public R deleteOfPic(String path);
+
 }
