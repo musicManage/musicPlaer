@@ -17,7 +17,6 @@ class MusicPlayerApplicationTests {
 
     @Test
     void contextLoads() throws FileNotFoundException {
-        System.out.println("file:"+Constants.PROJECT_PATH+Constants.PATHS+"img"+Constants.PATHS+"singerPic"+Constants.PATHS);
     }
 
 }

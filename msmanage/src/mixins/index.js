@@ -53,6 +53,23 @@ export const mixin = {
                     title:'上传失败',
                 })
             }
-        }
+        },
+        //删除窗口显示
+        handleDelete(id) {
+            this.idx = id;
+            this.delVisible=true;
+        },
+        //把已经选择的项赋值给multipleSelection
+        handleSelectionChange(val){
+            this.multipleSelection = val;
+        },
+        //批量删除已经选择的项
+        delAll(){
+            for(let item of this.multipleSelection){
+                this.handleDelete(item.id);
+                this.deleteRow();
+            }
+            this.multipleSelection = [];
+        },
     }
 }

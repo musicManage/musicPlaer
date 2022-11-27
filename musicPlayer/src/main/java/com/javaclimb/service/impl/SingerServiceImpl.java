@@ -1,6 +1,7 @@
 package com.javaclimb.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.javaclimb.common.Constants;
 import com.javaclimb.controller.util.R;
 import com.javaclimb.entity.Singer;
@@ -53,9 +54,9 @@ public class SingerServiceImpl implements ISingerService {
     @Override
     public R update(Singer singer) {
         if (singerMapper.updateById(singer)>0){
-            return R.success("添加成功");
+            return R.success("更新成功");
         } else {
-            return R.error("添加失败");
+            return R.error("更新失败");
         }
     }
 
@@ -66,6 +67,8 @@ public class SingerServiceImpl implements ISingerService {
      */
     @Override
     public R delete(Integer id) {
+        Singer singer = singerMapper.selectById(id);
+        deleteOfPic(singer.getPic());
         if (singerMapper.deleteById(id)>0){
             return R.success("删除成功");
         } else {
@@ -171,4 +174,5 @@ public class SingerServiceImpl implements ISingerService {
             return R.error("删除失败");
         }
     }
+
 }

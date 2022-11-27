@@ -41,6 +41,15 @@ public class SingerController {
     }
 
     /**
+     * 删除歌手信息
+     */
+    @PostMapping("/delete")
+    public R deleteSinger(@RequestParam(value = "id") String id){
+        Integer integer = Integer.valueOf(id);
+        return iSingerService.delete(integer);
+    }
+
+    /**
      * 返回所有歌手信息
      */
     @GetMapping("/")
@@ -51,9 +60,9 @@ public class SingerController {
     /**
      * 根据歌手名字查询
      */
-    @GetMapping("/name/{name}")
-    public R selectOfName(@PathVariable(value = "name") String name){
-        return iSingerService.singerOfName(name);
+    @PostMapping("/name")
+    public Object selectOfName(@RequestParam(value = "name") String name){
+        return iSingerService.singerOfName(name).getData();
     }
 
     /**

@@ -3,7 +3,7 @@
        :class="collapse ? 'noSpan':''">
     <el-menu
         :collapse="collapse"
-        default-active="Index"
+        :default-active="defaultIndex"
         class="el-menu-vertical-demo"
         background-color="#334256"
         text-color="#fff"
@@ -48,7 +48,8 @@ export default {
           index: "SongList",
           title: '歌单管理'
         },
-      ]
+      ],
+      defaultIndex:'Index'
     }
   },
   created() {
@@ -56,6 +57,11 @@ export default {
     bus.$on('collapse',msg =>{
       this.collapse = msg;
     })
+  },
+  methods: {
+    changeIndex(row){
+      this.defaultIndex = row.index;
+    }
   }
 }
 </script>

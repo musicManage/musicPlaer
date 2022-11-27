@@ -49,4 +49,9 @@ public class ISingerServiceTest {
     public void selectBySex(){
         iSingerService.singerOfSex(1);
     }
+
+    @Test
+    public void selectIDByName(){
+        iSingerService.nameOfID("坤");
+    }
 }

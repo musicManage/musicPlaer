@@ -6,6 +6,7 @@ import Home from "@/components/Home";
 import SingerPage from "@/views/SingerPage";
 import SongListPage from "@/views/SongListPage";
 import ConsumerPage from "@/views/ConsumerPage";
+import SongPage from "@/views/SongPage";
 
 Vue.use(VueRouter)
 
@@ -38,6 +39,11 @@ const routes = [
         path: '/SongList',
         name: 'SongList',
         component: SongListPage
+      },
+      {
+        path: '/Song',
+        name: 'Song',
+        component: SongPage
       },
     ]
   },

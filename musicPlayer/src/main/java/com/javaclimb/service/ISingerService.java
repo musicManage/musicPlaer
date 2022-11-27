@@ -61,4 +61,5 @@ public interface ISingerService {
      * 删除原有歌手头像
      */
     public R deleteOfPic(String path);
+
 }
