@@ -135,7 +135,7 @@
 </template>
 
 <script>
-import {allSinger, delSinger, setSinger, updateSinger} from "@/api/index"
+import {allSinger, delSinger, delSongList, setSinger, updateSinger} from "@/api/index"
 import {mixin} from "@/mixins";
 export default {
   mixins:[mixin],
@@ -287,7 +287,7 @@ export default {
     deleteRow(){
       let param = new URLSearchParams();
       param.append("id",this.idx);
-      delSinger(param)
+      delSongList(param)
           .then(res => {
             if (res.code==1){
               this.$notify({

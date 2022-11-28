@@ -30,8 +30,8 @@ public class SongListController {
     }
 
     // 删除歌单
-    @GetMapping("/delete")
-    public R deleteSongList(@RequestParam(value = "id") int id) {
+    @GetMapping("/delete/{id}")
+    public R deleteSongList(@PathVariable(value = "id") int id) {
         return iSongListService.delete(id);
     }
 
@@ -43,13 +43,13 @@ public class SongListController {
 
     // 返回标题包含文字的歌单
     @GetMapping("/likeTitle/detail")
-    public R songListOfLikeTitle(@RequestParam String title) {
+    public R songListOfLikeTitle(@RequestParam(value = "title") String title) {
         return iSongListService.likeTitle('%' + title + '%');
     }
 
     // 返回指定类型的歌单
     @GetMapping("/style/detail")
-    public R songListOfStyle(@RequestParam String style) {
+    public R songListOfStyle(@RequestParam(value = "style") String style) {
         return iSongListService.likeStyle('%' + style + '%');
     }
 
@@ -61,8 +61,8 @@ public class SongListController {
     }
 
     // 更新歌单图片
-    @PostMapping("/update/pic")
-    public R updateSongListPic(@RequestParam("file") MultipartFile mpFile, @RequestParam(value = "id") int id) {
+    @PostMapping("/update/pic/{id}")
+    public R updateSongListPic(@RequestParam("file") MultipartFile mpFile, @PathVariable(value = "id") int id) {
         return iSongListService.updateSongListImg(mpFile,id);
     }
 

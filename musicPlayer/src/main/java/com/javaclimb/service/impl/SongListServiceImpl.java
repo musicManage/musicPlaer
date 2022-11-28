@@ -38,8 +38,6 @@ public class SongListServiceImpl implements ISongListService {
      */
     @Override
     public R insert(SongList songList) {
-        String pic = "/img/songListPic/default.jpg";
-        songList.setPic(pic);
         if (songListMapper.insert(songList) > 0) {
             return R.success("添加成功");
         } else {
@@ -166,7 +164,7 @@ public class SongListServiceImpl implements ISongListService {
      */
     @Override
     public R deleteOfPic(String path) {
-        if (path.equals("img/songPic/default.jpg")){
+        if (path.equals("img/songListPic/default.jpg")){
             return R.error("不能删除默认头像图片");
         }
         String picOldPath = Constants.RESOURCE+path;
