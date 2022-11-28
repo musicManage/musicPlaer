@@ -185,7 +185,7 @@ export default {
   },
   watch: {
     singerList() {
-      if (this.singerList == ''){
+      if (this.select_word == ''){
         this.getData();
       } else {
         this.tableData = [];
@@ -244,7 +244,7 @@ export default {
       let param = new URLSearchParams();
       param.append("name",this.select_word);
       axios.post("/song/name",param).then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         this.singerList = res.data;
       })
     },

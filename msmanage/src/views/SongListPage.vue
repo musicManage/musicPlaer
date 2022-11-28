@@ -5,7 +5,7 @@
         <el-button type="primary" size="mini" @click="delAll">批量删除</el-button>
         <el-input v-model="select_word" size="mini" placeholder="筛选关键字" class="handle-input" clearable>
         </el-input>
-        <el-button type="primary" size="mini" @click="selectsongListList">搜索</el-button>
+        <el-button type="primary" size="mini" @click="selectSongListList">搜索</el-button>
         <el-button type="primary" size="mini" @click="centerDialogVisible = true">添加歌单</el-button>
       </div>
     </div>
@@ -144,7 +144,7 @@ export default {
   },
   watch: {
     songListList() {
-      if (this.songListList == ''){
+      if (this.select_word == ''){
         this.getData();
       } else {
         this.tableData = [];
@@ -193,11 +193,11 @@ export default {
     updatePic(id){
       return `${this.$store.state.HOST}/songList/update/pic/${id}`;
     },
-    selectsongListList(){
+    selectSongListList(){
       let param = new URLSearchParams();
-      param.append("name",this.select_word);
-      axios.post("/songList/name",param).then(res => {
-        console.log(res.data);
+      param.append("title",this.select_word);
+      axios.post("/songList/title",param).then(res => {
+        // console.log(res.data);
         this.songListList = res.data;
       })
     },

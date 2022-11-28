@@ -21,7 +21,7 @@ public class ISingerServiceTest {
 
     @Test
     public void singerOfName(){
-        iSingerService.singerOfName("炎");
+        System.out.println(iSingerService.singerOfName("炎").getData());
     }
 
     @Test
@@ -52,6 +52,6 @@ public class ISingerServiceTest {
 
     @Test
     public void selectIDByName(){
-        iSingerService.nameOfID("坤");
+//        iSingerService.nameOfID("坤");
     }
 }

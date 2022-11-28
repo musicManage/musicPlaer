@@ -24,7 +24,7 @@ export const updateSong = (params) => post('song/update',params);
 //删除歌曲
 export const delSong = (params) => post(`song/delete/`,params);
 
-//添加歌手
+//添加歌单
 export const setSongList = (params) => post('songList/add',params);
 
 //查询歌单

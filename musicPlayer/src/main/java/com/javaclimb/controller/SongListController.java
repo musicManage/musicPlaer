@@ -42,13 +42,13 @@ public class SongListController {
     }
 
     // 返回标题包含文字的歌单
-    @GetMapping("/likeTitle/detail")
-    public R songListOfLikeTitle(@RequestParam(value = "title") String title) {
-        return iSongListService.likeTitle('%' + title + '%');
+    @PostMapping("/title")
+    public Object songListOfLikeTitle(@RequestParam(value = "title") String title) {
+        return iSongListService.likeTitle('%' + title + '%').getData();
     }
 
     // 返回指定类型的歌单
-    @GetMapping("/style/detail")
+    @GetMapping("/style")
     public R songListOfStyle(@RequestParam(value = "style") String style) {
         return iSongListService.likeStyle('%' + style + '%');
     }
