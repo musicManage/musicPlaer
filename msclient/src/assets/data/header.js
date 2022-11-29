@@ -5,3 +5,6 @@ const navMsg = [
     {name:'歌手',path:'/singer'},
     {name:'我的音乐',path:'/my-music'},
 ]
+export {
+    navMsg
+}

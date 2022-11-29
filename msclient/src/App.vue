@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <the-header />
-    <router-view class="music-content" />
+    <TheHeader/>
+    <router-view class="music-content"/>
   </div>
 </template>
 
@@ -15,9 +15,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-    @import "./assets/css/app.scss";
-
+<style  lang="scss" scoped>
+    @import './assets/css/app.scss';
 
 
 </style>

@@ -5,9 +5,9 @@
   position: fixed;
   @include layout;
   width: 100%;
-  height: $header-height;
-  line-height: $header-height;
-  padding: $header-padding;
+  height: 60px;
+  line-height: 60px;
+  //padding: $header-padding;
   margin: $header-margin;
   background-color: $theme-header-color;
   @include box-shadow($box-shadow);
@@ -16,8 +16,9 @@
 }
 
 .header-logo {
-  margin: $header-logo-margin;
-  font-size: $font-size-logo;
+  margin-top: auto;
+  margin-left: 10px;
+  font-size: 20px;
   font-weight: bold;
   white-space: nowrap;
   cursor: pointer;
@@ -32,14 +33,20 @@
   height: $header-height;
   white-space: nowrap;
   li {
-    margin: $header-nav-margin;
-    padding: $header-nav-padding;
+    //margin: $header-nav-margin;
+    //padding: $header-nav-padding;
     font-size: $font-size-header;
     color: $color-grey;
     text-align: center;
     border-bottom: none;
     box-sizing: border-box;
     cursor: pointer;
+    display: inline;
+    float: left;
+    padding: 0 15px;
+    margin:auto;
+    height:40px;
+    line-height:40px;
   }
 }
 
