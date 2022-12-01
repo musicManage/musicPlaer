@@ -186,6 +186,11 @@ export default {
         this.tableData = [];
         this.tableData = this.singerList;
       }
+    },
+    select_word(newV){
+      if (newV == ''){
+        this.getData();
+      }
     }
   },
   methods:{

@@ -50,6 +50,11 @@ public interface ISongService {
     public  R songOfName(String name);
 
     /**
+     * 根据歌名精确查询
+     */
+    public  R selectSongOfName(String name);
+
+    /**
      * 根据歌手ID模糊查询歌曲
      */
     public  R songOfSingerID(Integer singerID);

@@ -67,11 +67,27 @@ public class SongController {
     }
 
     /**
+     * 根据歌手精确查询
+     */
+    @PostMapping("/select/{name}")
+    public Object selectPOfName(@PathVariable(value = "name") String name){
+        return iSongService.selectSongOfName(name).getData();
+    }
+
+    /**
      * 根据歌手ID查询
      */
     @GetMapping("/singer/{singerId}")
     public R selectOfSId(@PathVariable(value = "singerId") Integer singerId){
         return iSongService.songOfSingerID(singerId);
+    }
+
+    /**
+     * 根据歌曲ID查询
+     */
+    @GetMapping("/key/{id}")
+    public R selectOfPrimary(@PathVariable(value = "id") Integer songId){
+        return iSongService.selectByPrimaryKey(songId);
     }
 
     /**

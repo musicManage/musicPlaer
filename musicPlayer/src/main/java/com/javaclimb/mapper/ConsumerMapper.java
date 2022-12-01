@@ -1,19 +1,18 @@
 package com.javaclimb.mapper;
 
-import com.github.yulichang.base.MPJBaseMapper;
-import com.javaclimb.entity.Song;
+import com.javaclimb.entity.Consumer;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
  * <p>
- * 歌曲 Mapper 接口
+ * 前端用户 Mapper 接口
  * </p>
  *
  * @author admin
- * @since 2022-11-27
+ * @since 2022-11-28
  */
 @Mapper
-public interface SongMapper extends MPJBaseMapper<Song> {
+public interface ConsumerMapper extends BaseMapper<Consumer> {
 
 }

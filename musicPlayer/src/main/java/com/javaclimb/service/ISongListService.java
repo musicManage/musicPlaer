@@ -69,4 +69,6 @@ public interface ISongListService {
      * */
     public R deleteOfPic(String path);
 
+
+
 }

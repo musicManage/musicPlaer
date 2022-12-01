@@ -70,7 +70,7 @@ export default {
 .sidebar {
   display: block;
   width: 150px;
-  height: calc(100vh - 70px);
+  height: 100%;
   background: #334256;
   overflow-y: scroll;
 }

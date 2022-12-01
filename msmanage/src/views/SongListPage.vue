@@ -150,6 +150,11 @@ export default {
         this.tableData = [];
         this.tableData = this.songListList;
       }
+    },
+    select_word(newV){
+      if (newV == ''){
+        this.getData();
+      }
     }
   },
   methods:{
@@ -261,7 +266,7 @@ export default {
     },
     //转向歌曲管理页面
     songEdit(id,name){
-      this.$router.push({path:`/Song`,query:{id,name}});
+      this.$router.push({path:`/ListSong`,query:{id}});
     },
   }
 }

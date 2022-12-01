@@ -7,6 +7,7 @@ import SingerPage from "@/views/SingerPage";
 import SongListPage from "@/views/SongListPage";
 import ConsumerPage from "@/views/ConsumerPage";
 import SongPage from "@/views/SongPage";
+import ListSongPage from "@/views/ListSongPage";
 
 Vue.use(VueRouter)
 
@@ -44,6 +45,11 @@ const routes = [
         path: '/Song',
         name: 'Song',
         component: SongPage
+      },
+      {
+        path: '/ListSong',
+        name: 'ListSong',
+        component: ListSongPage
       },
     ]
   },
