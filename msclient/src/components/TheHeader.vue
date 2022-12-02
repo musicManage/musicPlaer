@@ -18,6 +18,13 @@
           </el-menu-item>
         </template>
       </template>
+      <div class="search">
+        <form action="">
+          <input>
+          <!-- placeholder 占位符 内容输入自动清除默认值 -->
+          <input type="submit" value="" >
+        </form>
+      </div>
     </el-menu>
 
 <!--    登录后的状态-->
@@ -110,4 +117,38 @@ export default {
   position: relative;
   vertical-align: middle;
 }
+/*搜索框部分*/
+.search {
+  width: 410px;   /*360 50 */
+  height: 60px;
+  float: right;
+  padding-top: 5px;
+}
+.search input { /*属性选择器 type为text文本框*/
+  width: 300px;
+  height: 20px;
+  padding-left: 20px;
+  float: left;
+  padding-top: 10px;
+  margin-top: 10px;
+  border-style:solid hidden solid solid;
+  border-radius: 15px 0px 0px 15px;
+}
+
+.search input[type=submit] { /*属性选择器 type为submit文本框*/
+  width: 50px;
+  height: 34px;
+  float: left;
+  padding-top: 10px;
+  margin-top: 10px;
+  background: #00a4ff url(../assets/img/search.png)  center no-repeat;
+  border-style:solid solid solid hidden;
+  border-radius: 0px 15px 15px 0px;
+}
+input {
+  outline:none;
+}
+
+/*搜索框部分结束*/
+
 </style>
