@@ -7,6 +7,7 @@
       </div>
       <content-list :contentList="item.list"></content-list>
     </div>
+    <TheFooter/>
   </div>
 </template>
 
@@ -14,10 +15,12 @@
 import Swiper from "@/components/Swiper";
 import {allSinger,allSongList} from '../api/index';
 import contentList from "@/components/ContentList";
+import TheFooter from "@/components/TheFooter";
 
 export default {
   name: "home",
   components:{
+    TheFooter,
     Swiper,
     contentList
   },
