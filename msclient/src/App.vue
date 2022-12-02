@@ -15,8 +15,14 @@ export default {
 }
 </script>
 
-<style  lang="scss" scoped>
-    @import './assets/css/app.scss';
-
+<style scoped>
+#app{
+  background-color: #CCCCCC;
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
 
 </style>

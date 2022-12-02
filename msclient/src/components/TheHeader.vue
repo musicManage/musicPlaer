@@ -77,7 +77,39 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@import '../assets/css/the-header.scss';
-
+<style scoped>
+.the-header {
+  position: fixed;
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  margin: 0;
+  background-color: #fefefe;
+  box-shadow: 0 0 10px rgb(0 0 0 / 40%);
+  box-sizing: border-box;
+  z-index: 100;
+}
+.header-logo {
+  argin-top: auto;
+  margin-left: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.icon {
+  width: 46.66667px;
+  height: 46.66667px;
+  font-size: 46.66667px;
+  color: #000000;
+  fill: currentColor;
+  overflow: hidden;
+  position: relative;
+  vertical-align: middle;
+}
 </style>

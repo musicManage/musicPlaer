@@ -25,5 +25,8 @@ export default {
 </script>
 
 <style scoped>
-  @import "../assets/css/swiper.scss";
+.swiper {
+  width: 90%;
+  margin: 40px auto auto;
+}
 </style>
