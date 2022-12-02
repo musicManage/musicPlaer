@@ -58,9 +58,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
-        'activeName'
-    ])
+
   },
   created() {
     this.navMsg = navMsg;

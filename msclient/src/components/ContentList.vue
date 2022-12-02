@@ -33,6 +33,10 @@ export default {
   margin-bottom: 20px;
   overflow: hidden;
 }
+.content-item:hover{
+  transform: scale(1.1);
+}
+
 li {
   list-style: none;
 }
@@ -52,6 +56,8 @@ li {
   margin-right: auto;
   border-radius: 126px;
 }
+
+
 h3 {
   overflow: hidden;
   text-overflow: ellipsis;
