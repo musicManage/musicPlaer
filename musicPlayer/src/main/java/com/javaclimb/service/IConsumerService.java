@@ -30,6 +30,11 @@ public interface IConsumerService {
     public R update(Consumer consumer);
 
     /**
+     * 修改密码
+     */
+    public R updatePass(Consumer consumer);
+
+    /**
      * 删除
      */
     public R delete(Integer id);
@@ -69,4 +74,13 @@ public interface IConsumerService {
      */
     public R deleteOfPic(String path);
 
+    /**
+     * 校验密码
+     */
+    public R verifyPass(Consumer consumer);
+
+    /**
+     * 查询用户邮箱
+     */
+    public R getEmail(String username);
 }

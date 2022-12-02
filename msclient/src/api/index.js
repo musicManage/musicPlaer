@@ -71,3 +71,16 @@ export const consumerOfName = (name) => get(`consumer/name/${name}`);
 
 //检测用户名是否重复
 export const verifyUsername = (name) => get(`consumer/verify/${name}`);
+
+
+//校验用户密码
+export const verifyPass = (params) => post(`consumer/verifyPass`,params);
+
+//邮箱验证
+export const verifyEmail = (mail) => get(`/getCheckCode/${mail}`);
+
+//获得邮箱
+export const getEmail = (name) => get(`consumer/email/${name}`);
+
+//修改密码
+export const setPass = (params) => post(`consumer/pass/update`,params);

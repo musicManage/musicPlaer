@@ -160,12 +160,10 @@
 import {
   addConsumer,
   allConsumer,
-  allSinger, consumerOfName,
+  consumerOfName,
   delConsumer,
-  delSinger,
-  delSongList,
-  setSinger, updateConsumer,
-  updateSinger, verifyUsername
+  updateConsumer,
+  verifyUsername
 } from "@/api/index"
 import {mixin} from "@/mixins";
 import {provinceAndCityData} from "element-china-area-data";
@@ -211,7 +209,7 @@ export default {
       } else {
         callback("请输入正确的手机号");
       }
-    }
+    };
     return {
       centerDialogVisible:false,//添加弹窗显示
       editVisible:false,//编辑弹窗显示
@@ -219,7 +217,7 @@ export default {
       registerForm: {
         username: '',
         password: '',
-        sex: '',
+        sex: 1,
         phoneNum: '',
         email: '',
         birth: '',
@@ -290,8 +288,9 @@ export default {
     },
     centerDialogVisible(newV){
       if (!newV){
-        if (this.registerForm.username=='')
-        this.$refs.registerForm.clearValidate();
+        if (this.registerForm.username==''){
+          this.$refs.registerForm.clearValidate();
+        }
       }
     },
     editVisible(newV){

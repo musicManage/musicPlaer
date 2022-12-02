@@ -18,12 +18,26 @@ spring:
     multipart:
       max-request-size: 50MB
       max-file-size: 50MB
+  mail:
+    default-encoding: UTF-8
+    host: smtp.qq.com
+    username: 1911317393@qq.com
+    password: ubqymfuvumzeegcf
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**Mapper.xml
   type-aliases-package: com.javaclimb.pojo
 
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
 
 
 

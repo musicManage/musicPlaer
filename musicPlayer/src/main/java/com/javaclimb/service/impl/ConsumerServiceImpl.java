@@ -75,6 +75,24 @@ public class ConsumerServiceImpl implements IConsumerService {
     }
 
     /**
+     * 修改密码
+     *
+     * @param consumer
+     */
+    @Override
+    public R updatePass(Consumer consumer) {
+        LambdaQueryWrapper<Consumer> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Consumer::getUsername,consumer.getUsername());
+        Consumer consumer1 = consumerMapper.selectOne(wrapper);
+        consumer1.setPassword(consumer.getPassword());
+        if (consumerMapper.updateById(consumer1)>0){
+            return R.success("更新成功");
+        } else {
+            return R.error("更新失败");
+        }
+    }
+
+    /**
      * 删除
      *
      * @param id
@@ -198,6 +216,39 @@ public class ConsumerServiceImpl implements IConsumerService {
             return R.success("删除成功");
         } else {
             return R.error("删除失败");
+        }
+    }
+
+    /**
+     * 校验密码
+     *
+     * @param consumer
+     */
+    @Override
+    public R verifyPass(Consumer consumer) {
+        LambdaQueryWrapper<Consumer> wrapper = new LambdaQueryWrapper<Consumer>();
+        wrapper.eq(Consumer::getUsername,consumer.getUsername());
+        wrapper.eq(Consumer::getPassword,consumer.getPassword());
+        if (!(consumerMapper.selectList(wrapper).isEmpty())){
+            return R.success("校验成功",consumerMapper.selectList(wrapper));
+        } else {
+            return R.error("校验失败");
+        }
+    }
+
+    /**
+     * 查询用户邮箱
+     *
+     * @param username
+     */
+    @Override
+    public R getEmail(String username) {
+        LambdaQueryWrapper<Consumer> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Consumer::getUsername,username);
+        if (!(consumerMapper.selectList(wrapper).isEmpty())){
+            return R.success("查找成功",consumerMapper.selectOne(wrapper).getEmail());
+        } else {
+            return R.error("查找失败");
         }
     }
 }

@@ -1,19 +1,23 @@
 <template>
   <div id="app">
-    <TheHeader/>
-    <router-view class="music-content"/>
+    <el-container>
+      <el-header><TheHeader/></el-header>
+      <el-main><router-view class="music-content"/></el-main>
+      <el-footer><TheFooter/></el-footer>
+    </el-container>
     <scroll-top/>
   </div>
-
 </template>
 
 <script>
 import TheHeader from "@/components/TheHeader";
 import ScrollTop from "@/components/ScrollTop";
 
+import TheFooter from "@/components/TheFooter";
 export default {
     name: 'App',
     components:{
+      TheFooter,
       ScrollTop,
       TheHeader
     }
@@ -29,5 +33,7 @@ export default {
   flex-direction: column;
   flex-wrap: nowrap;
 }
-
+.el-header{
+  padding: 0;
+}
 </style>

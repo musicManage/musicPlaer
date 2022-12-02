@@ -8,8 +8,6 @@
       <content-list :contentList="item.list"></content-list>
     </div>
 
-    <TheFooter/>
-
   </div>
 
 </template>

@@ -59,6 +59,14 @@ public class ConsumerController {
     }
 
     /**
+     * 修改用户密码
+     */
+    @PostMapping("/pass/update")
+    public R updateConsumerPass(Consumer consumer){
+        return iConsumerService.updatePass(consumer);
+    }
+
+    /**
      * 返回含指定用户名的用户
      */
     @GetMapping("/name/{name}")
@@ -80,5 +88,21 @@ public class ConsumerController {
     @PostMapping("/pic/update/{id}")
     public R updateSinger(@RequestParam("file") MultipartFile picFile, @PathVariable(value = "id") int id){
         return iConsumerService.updateOfPic(picFile,id);
+    }
+
+    /**
+     * 校验密码
+     */
+    @PostMapping("/verifyPass")
+    public R verifyUser(Consumer consumer){
+        return iConsumerService.verifyPass(consumer);
+    }
+
+    /**
+     * 获得用户邮箱
+     */
+    @GetMapping("/email/{name}")
+    public R getEmailOfName(@PathVariable(value = "name") String name){
+        return iConsumerService.getEmail(name);
     }
 }
