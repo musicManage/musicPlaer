@@ -2,10 +2,12 @@
   <div id="app">
     <el-container>
       <el-header><TheHeader/></el-header>
-      <el-main><router-view class="music-content"/></el-main>
+      <el-main>
+        <router-view class="music-content"/>
+        <scroll-top/>
+      </el-main>
       <el-footer><TheFooter/></el-footer>
     </el-container>
-    <scroll-top/>
   </div>
 </template>
 
@@ -35,5 +37,9 @@ export default {
 }
 .el-header{
   padding: 0;
+}
+.el-footer{
+  padding: 0;
+  height: 0 !important;
 }
 </style>

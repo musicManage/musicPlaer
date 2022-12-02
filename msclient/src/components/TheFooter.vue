@@ -14,5 +14,6 @@ export default {
   width: 100%;
   height: 40px;
   text-align: center;
+  background: #fff;
 }
 </style>
