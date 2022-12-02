@@ -50,3 +50,21 @@ export const delListSong = (params) => post(`listSong/delete`,params);
 
 //添加歌曲到歌单中
 export const addSongInList = (params) => post('listSong/add',params);
+
+//添加用户
+export const addConsumer = (params) => post(`consumer/add`,params);
+
+//返回全部用户
+export const allConsumer = () => get(`consumer/`);
+
+//删除用户
+export const delConsumer = (params) => post(`consumer/delete`,params);
+
+//更新用户信息
+export const updateConsumer = (params) => post(`consumer/update`,params);
+
+//根据用户名查询
+export const consumerOfName = (name) => get(`consumer/name/${name}`);
+
+//检测用户名是否重复
+export const verifyUsername = (name) => get(`consumer/verify/${name}`);

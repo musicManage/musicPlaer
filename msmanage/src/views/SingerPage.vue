@@ -258,7 +258,7 @@ export default {
         birth: row.birth,
         location: row.location,
         introduction: row.introduction,
-      }
+      };
     },
     editSinger(){
       let params = new URLSearchParams();
