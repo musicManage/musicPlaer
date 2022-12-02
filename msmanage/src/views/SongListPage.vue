@@ -63,7 +63,14 @@
           <el-input type="textarea" v-model="registerForm.introduction" placeholder="简介"></el-input>
         </el-form-item>
         <el-form-item prop="style" label="风格" size="mini">
-          <el-input v-model="registerForm.style" placeholder="风格"></el-input>
+          <el-select v-model="registerForm.style" placeholder="请选择风格">
+            <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+            </el-option>
+          </el-select>
         </el-form-item>
       </el-form>
       <span slot="footer">
@@ -82,7 +89,14 @@
           <el-input type="textarea" v-model="editForm.introduction" placeholder="简介"></el-input>
         </el-form-item>
         <el-form-item prop="style" label="风格" size="mini">
-          <el-input v-model="editForm.style" placeholder="风格"></el-input>
+          <el-select v-model="editForm.style" placeholder="请选择风格">
+            <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+            </el-option>
+          </el-select>
         </el-form-item>
       </el-form>
       <span slot="footer">
@@ -131,7 +145,37 @@ export default {
       pageSize: 5,
       currentPage: 1,
       idx:'',//当前选择项
-      multipleSelection: []   //已选项
+      multipleSelection: [],   //已选项
+      options:[
+        {
+          value:'华语',
+          label:'华语'
+        },
+        {
+          value:'粤语',
+          label:'粤语'
+        },
+        {
+          value:'欧美',
+          label:'欧美'
+        },
+        {
+          value:'日韩',
+          label:'日韩'
+        },
+        {
+          value:'BGM',
+          label:'BGM'
+        },
+        {
+          value:'轻音乐',
+          label:'轻音乐'
+        },
+        {
+          value:'乐器',
+          label:'乐器'
+        },
+      ],
     }
   },
   created() {
@@ -247,7 +291,9 @@ export default {
       this.editVisible = false;
     },
     deleteRow(){
-      delSongList(this.idx)
+      let param = new URLSearchParams();
+      param.append("id",this.idx);
+      delSongList(param)
           .then(res => {
             if (res.code==1){
               this.$notify({
