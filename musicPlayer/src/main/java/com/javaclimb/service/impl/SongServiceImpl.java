@@ -1,12 +1,18 @@
 package com.javaclimb.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import com.javaclimb.common.Constants;
 import com.javaclimb.controller.util.R;
+import com.javaclimb.entity.ListSong;
 import com.javaclimb.entity.Singer;
 import com.javaclimb.entity.Song;
+import com.javaclimb.entity.SongList;
 import com.javaclimb.mapper.SongMapper;
 import com.javaclimb.service.ISongService;
+import com.javaclimb.vo.SongAndSingerVo;
+import com.javaclimb.vo.SongInListVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -126,6 +133,23 @@ public class SongServiceImpl implements ISongService {
         LambdaQueryWrapper<Song> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         lambdaQueryWrapper.like(true,Song::getName,name);
         return R.success(null,songMapper.selectList(lambdaQueryWrapper));
+    }
+
+    /**
+     * 根据歌名精确查询
+     *
+     * @param name
+     */
+    @Override
+    public R selectSongOfName(String name) {
+        List<SongAndSingerVo> songInListVos = songMapper.selectJoinList(SongAndSingerVo.class,
+                new MPJLambdaWrapper<Song>()
+                        .selectAll(Song.class)
+                        .selectAs(Singer::getName,SongAndSingerVo::getSingerName)
+                        .innerJoin(Singer.class, Singer::getId, Song::getSingerId)
+                        .eq(Singer::getName,name)
+        );
+        return  R.success(null,songInListVos);
     }
 
     /**
