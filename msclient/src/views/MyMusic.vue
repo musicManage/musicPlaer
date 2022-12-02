@@ -400,7 +400,7 @@ export default {
 }
 .loginBox {
   width: 980px;
-  min-height: 676px;
+  min-height: 677px;
   margin: 0 auto;
   background-color: #fff;
   border: 1px solid #d3d3d3;
