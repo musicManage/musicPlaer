@@ -55,7 +55,7 @@ export default {
                 type: 'success',
                 message: '欢迎进入音乐网站后台管理系统'
               });
-              this.$router.push('/index');
+              this.$router.push('/Index');
             }else {
               this.$notify({
                 title: '用户名或密码错误',
