@@ -11,6 +11,8 @@ public class Constants {
 
     public static String SONGLISTPIC_PATH = Constants.PROJECT_PATH + Constants.PATHS + "resources" + Constants.PATHS + "img" + Constants.PATHS + "songListPic" + Constants.PATHS;
 
+    public static String USERPIC_PATH = Constants.PROJECT_PATH + Constants.PATHS + "resources" + Constants.PATHS + "img" + Constants.PATHS + "userPic" + Constants.PATHS;
+
     public static String SONG_PATH = Constants.PROJECT_PATH+Constants.PATHS+"resources"+Constants.PATHS+"song"+Constants.PATHS;
 
     public static String RESOURCE = Constants.PROJECT_PATH+Constants.PATHS+"resources"+Constants.PATHS;

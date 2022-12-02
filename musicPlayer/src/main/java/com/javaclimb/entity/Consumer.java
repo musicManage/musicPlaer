@@ -5,9 +5,11 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -43,7 +45,7 @@ public class Consumer implements Serializable {
     /**
      * 性别(1男0女)
      */
-    private Boolean sex;
+    private Integer sex;
 
     /**
      * 电话
@@ -58,7 +60,8 @@ public class Consumer implements Serializable {
     /**
      * 生日
      */
-    private LocalDateTime birth;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date birth;
 
     /**
      * 个性签名
@@ -78,12 +81,12 @@ public class Consumer implements Serializable {
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 更新时间
      */
-    private LocalDateTime updateTime;
+    private Date updateTime;
 
 
 }

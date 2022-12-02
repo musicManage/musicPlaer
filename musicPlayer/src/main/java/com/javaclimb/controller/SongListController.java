@@ -30,8 +30,8 @@ public class SongListController {
     }
 
     // 删除歌单
-    @GetMapping("/delete/{id}")
-    public R deleteSongList(@PathVariable(value = "id") int id) {
+    @PostMapping("/delete")
+    public R deleteSongList(@RequestParam(value = "id") int id) {
         return iSongListService.delete(id);
     }
 

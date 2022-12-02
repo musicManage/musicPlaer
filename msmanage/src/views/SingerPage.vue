@@ -81,7 +81,14 @@
          <el-date-picker type="date" v-model="registerForm.birth" placeholder="选择日期" style="width: 100%;" value-format="yyyy-MM-dd"></el-date-picker>
        </el-form-item>
        <el-form-item prop="location" label="地区" size="mini">
-         <el-input v-model="registerForm.location" placeholder="地区"></el-input>
+         <el-select v-model="registerForm.location" placeholder="请选择地区">
+           <el-option
+               v-for="item in options"
+               :key="item.value"
+               :label="item.label"
+               :value="item.value">
+           </el-option>
+         </el-select>
        </el-form-item>
        <el-form-item prop="name" label="简介" size="mini">
          <el-input type="textarea" v-model="registerForm.introduction" placeholder="简介"></el-input>
@@ -111,7 +118,14 @@
          <el-date-picker type="date" v-model="editForm.birth" placeholder="选择日期" style="width: 100%;" value-format="yyyy-MM-dd"></el-date-picker>
        </el-form-item>
        <el-form-item prop="location" label="地区" size="mini">
-         <el-input v-model="editForm.location" placeholder="地区"></el-input>
+         <el-select v-model="editForm.location" placeholder="请选择地区">
+           <el-option
+               v-for="item in options"
+               :key="item.value"
+               :label="item.label"
+               :value="item.value">
+           </el-option>
+         </el-select>
        </el-form-item>
        <el-form-item prop="name" label="简介" size="mini">
          <el-input type="textarea" v-model="editForm.introduction" placeholder="简介"></el-input>
@@ -167,7 +181,41 @@ export default {
       pageSize: 5,
       currentPage: 1,
       idx:'',//当前选择项
-      multipleSelection: []   //已选项
+      multipleSelection: [],   //已选项
+      options:[
+        {
+          value:'中国',
+          label:'中国'
+        },
+        {
+          value:'韩国',
+          label:'韩国'
+        },
+        {
+          value:'日本',
+          label:'日本'
+        },
+        {
+          value:'美国',
+          label:'美国'
+        },
+        {
+          value:'新加坡',
+          label:'新加坡'
+        },
+        {
+          value:'意大利',
+          label:'意大利'
+        },
+        {
+          value:'马来西亚',
+          label:'马来西亚'
+        },
+        {
+          value:'西班牙',
+          label:'西班牙'
+        },
+      ]
     }
   },
   created() {
@@ -258,7 +306,7 @@ export default {
         birth: row.birth,
         location: row.location,
         introduction: row.introduction,
-      }
+      };
     },
     editSinger(){
       let params = new URLSearchParams();
