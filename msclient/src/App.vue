@@ -17,7 +17,7 @@ export default {
 
 <style scoped>
 #app{
-  background-color: #CCCCCC;
+  background-color: #fafafa;
   display: flex;
   justify-content: flex-start;
   align-items: stretch;
