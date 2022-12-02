@@ -1,5 +1,5 @@
 <template>
-  <div class="home" style="margin-top: 60px">
+  <div class="home">
     <swiper/>
     <div class="section" v-for="(item,index) in songsList" :key="index">
       <div class="section-title" style="text-align: center" >

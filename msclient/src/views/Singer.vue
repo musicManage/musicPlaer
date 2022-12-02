@@ -1,5 +1,5 @@
 <template>
-    <div style="margin-top: 60px">
+    <div>
       歌手
     </div>
 </template>
