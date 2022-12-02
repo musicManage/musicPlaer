@@ -20,18 +20,7 @@
       </template>
     </el-menu>
 
-
-<!--    <ul class="navbar">-->
-<!--      <li :class="{active: item.name == activeName}" v-for="item in navMsg" :key="item.path" @click="goPage(item.path,item.name)">-->
-<!--        {{item.name}}-->
-<!--      </li>-->
-<!--    </ul>-->
-
-
-
-
-
-
+<!--    登录后的状态-->
   </div>
 </template>
 
