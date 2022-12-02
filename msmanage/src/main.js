@@ -7,6 +7,7 @@ import './plugins/element.js'
 import axios from "axios";
 import './plugins/charts.js'
 import VCharts from 'v-charts'
+
 Vue.use(VCharts)
 
 Vue.config.productionTip = false
@@ -16,5 +17,6 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app');
+
 
 
