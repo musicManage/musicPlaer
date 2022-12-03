@@ -33,4 +33,8 @@ public class SongAndSingerVo {
      * 歌手
      */
     private String singerName;
+    /**
+     * 专辑
+     */
+    private String introduction;
 }

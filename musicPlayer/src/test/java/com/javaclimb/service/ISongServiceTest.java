@@ -12,6 +12,6 @@ public class ISongServiceTest {
 
     @Test
     public void testSongOfSingerName(){
-        iSongService.selectSongOfName("张杰-超级英雄战记");
+        iSongService.selectSongOfName("张杰");
     }
 }

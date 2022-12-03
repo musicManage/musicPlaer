@@ -14,10 +14,9 @@
 
 <script>
 import Swiper from "@/components/Swiper";
-import {allSinger,allSongList} from '../api/index';
+import {allSinger, allSongList} from '../api/index';
 import contentList from "@/components/ContentList";
 import TheFooter from "@/components/TheFooter";
-
 
 
 export default {
@@ -69,8 +68,9 @@ home {
 }
 .section {
   width: 100%;
+  height: 800px;
   margin-top: 20px;
-  padding: 0 120px 50px 120px;
+  /*padding: 0 120px 50px 120px;*/
   background-color: #ffffff;
   box-sizing: border-box;
 }

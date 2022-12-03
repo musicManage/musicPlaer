@@ -136,7 +136,7 @@
 <script>
 import {mixin} from "@/mixins";
 import {mapGetters} from "vuex";
-import {delSong, songOfSId, updateSong} from "@/api/index";
+import {delSong, songOfSId, songOfSName, updateSong} from "@/api/index";
 import "@/assets/js/iconfont";
 
 export default {
@@ -213,7 +213,7 @@ export default {
       let _this = this;
       var form = new FormData(document.getElementById('tf'));
       form.append('singerId',this.singerId);
-      form.set('name',this.singerName+'-'+form.get('name'));
+      form.set('name',this.registerForm.name);
       if(!form.get('lyric')){
         form.set('lyric','[00:00:00]暂无歌词');
       }
@@ -246,11 +246,9 @@ export default {
       return `${this.$store.state.HOST}/song/update/file/${id}`;
     },
     selectSingerList(){
-      let param = new URLSearchParams();
-      param.append("name",this.select_word);
-      axios.post("/song/name",param).then(res => {
+      songOfSName(this.select_word).then(res => {
         // console.log(res.data);
-        this.singerList = res.data;
+        this.singerList = res;
       })
     },
     handleCurrentChange(val){

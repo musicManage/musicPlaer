@@ -2,14 +2,10 @@ package com.javaclimb.controller;
 
 import com.javaclimb.controller.util.R;
 import com.javaclimb.entity.Song;
-import com.javaclimb.service.ISingerService;
 import com.javaclimb.service.ISongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.util.List;
 
 /**
  * <p>
@@ -61,8 +57,8 @@ public class SongController {
     /**
      * 根据歌名查询
      */
-    @PostMapping("/name")
-    public Object selectOfName(@RequestParam(value = "name") String name){
+    @GetMapping("/name/{name}")
+    public Object selectOfName(@PathVariable(value = "name") String name){
         return iSongService.songOfName(name).getData();
     }
 

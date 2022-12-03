@@ -3,8 +3,10 @@
     <ul class="section-content">
       <li class="content-item" v-for="(item,index) in contentList" :key="index">
         <div class="kuo">
-          <img class="item-img":src="attachImageUrl(item.pic)">
-          <h3 >{{item.title||item.name}}</h3>
+          <div class="kuo2">
+            <img class="item-img":src="attachImageUrl(item.pic)">
+          </div>
+            <h3 >{{item.title||item.name}}</h3>
         </div>
       </li>
     </ul>
@@ -24,55 +26,61 @@ export default {
 
 <style scoped>
 .content-list{
-  margin-top: 10px;
+  max-width: 1240px;
+  max-height: 764px;
+  margin: 0 auto;
+  position: relative;
 }
 .content-item{
-  width: 20%;
-  margin-bottom: 20px;
+  display: inline-block;
+  width: 248px;
+  height: 353px;
   overflow: hidden;
+  font-size: 14px;
+  vertical-align: top;
 }
-.content-item:hover{
-  transform: scale(1.1);
-}
-
 li {
   list-style: none;
 }
 .kuo {
   position: relative;
   margin-right: 20px;
-  background-color: #fbfbfd;
-  min-height: 195px;
-  padding: 25px 0;
+  display: block;
   overflow: hidden;
+  margin-bottom: 15px;
+}
+.kuo2{
+  position: relative;
+ overflow: hidden;
+  width: 230px;
+  height: 230px;
 }
 .item-img {
-  display: block;
-  width: 140px;
-  height: 140px;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 126px;
+  width: 228px;
+  height: 228px;
+  cursor: pointer;
+
 }
-
-
+.item-img:hover {
+  transform: scale(1.2);
+  transition: transform .75s;
+  overflow: hidden;
+  -webkit-filter: brightness(0.5);
+  filter: brightness(0.5);
+}
 h3 {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 16px;
+  font-size: medium;
   font-weight: 400;
   zoom: 1;
-  margin: 20px 0;
+  margin-top: 10px;
   text-align: center;
   width: 100%;
+  cursor: pointer;
 }
 ul {
   margin-right: -20px;
-  overflow: hidden;
-  zoom: 1;
-  margin-bottom: 4px;
-  width: 100%;
-  height: 100%;
 }
 </style>

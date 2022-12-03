@@ -13,10 +13,11 @@
 </template>
 
 <script>
-import {getPostList, songOfSingerName} from "@/api";
+import {getPostList, songOfSName} from "@/api";
 import ContentList from "@/components/ContentList";
 import SongList from "@/views/SongList";
 import SongMsg from "@/components/SongMsg";
+import bus from "@/assets/js/bus";
 
 export default {
   name: "SearchPage",
@@ -30,6 +31,18 @@ export default {
     }
   },
   created() {
+    bus.$on('keywords',msg =>{
+      this.keywords = msg;
+    });
+    this.getMsg();
+  },
+  watch:{
+    "$route.query.keywords": {
+      immediate: true,
+      handler() {
+        this.getMsg();
+      },
+    },
   },
   methods:{
     getMsg(){
@@ -50,7 +63,7 @@ export default {
         if(!this.$route.query.keywords){
           this.$notify.warning('您输入的内容为空');
         }else{
-          songOfSingerName(this.$route.query.keywords)
+          songOfSName(this.$route.query.keywords)
               .then(res =>{
                 if(res){
                   this.songMsg = res;
@@ -67,6 +80,9 @@ export default {
 
 <style scoped>
 .el-tabs {
-  height: 87vh;
+  height: 100%;
+  width: 1240px;
+  margin: 0 auto;
+  background: white;
 }
 </style>

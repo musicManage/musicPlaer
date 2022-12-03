@@ -1,4 +1,4 @@
-import {get,post} from "./http";
+import {get, post} from "./http";
 
 //判断管理员是否登录成功
 export const getLoginStatus = (params) => post(`admin/login/status`,params);
@@ -29,6 +29,9 @@ export const delSong = (params) => post(`song/delete/`,params);
 
 //根据歌曲id查询歌曲对象
 export const songOfId = (id) => get(`song/key/${id}`);
+
+//歌名查找歌曲
+export const songOfSName = (name) => get(`song/name/${name}`);
 
 //根据歌曲名获取歌曲对象
 export const songOfSingerName = (name) => post(`song/select/${name}`);

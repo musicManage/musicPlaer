@@ -2,20 +2,33 @@
   <div>
     <el-table
         :data="songMsg"
-        style="width: 100%">
+        style="width: 100%"
+    >
+      <el-table-column
+          type="index"
+          width="180"
+          align="center"
+      >
+      </el-table-column>
       <el-table-column
           prop="name"
           label="歌名"
-          width="180">
+          width="180"
+          align="center"
+      >
       </el-table-column>
       <el-table-column
           prop="singerName"
-          label="歌名"
-          width="180">
+          label="歌手"
+          width="180"
+          align="center"
+      >
       </el-table-column>
       <el-table-column
           prop="introduction"
-          label="专辑">
+          label="专辑"
+          align="center"
+      >
       </el-table-column>
     </el-table>
   </div>
@@ -24,7 +37,17 @@
 <script>
 export default {
   name: "SongMsg",
-  props:['songMsg']
+  props:['songMsg'],
+  data(){
+    return{
+
+    }
+  },
+  computed:{
+
+  },
+  methods:{
+  }
 }
 </script>
 
