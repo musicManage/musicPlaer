@@ -1,13 +1,17 @@
 <template>
     <div>
-      <div class="loginBox">
+      <div class="loginBox" v-if="!logined">
         <div class="n-pglg">
           <div class="pic">
             <h2>登录音乐</h2>
             <el-button type="primary" class="login-btn" @click="LoginView">登录</el-button>
           </div>
         </div>
+      </div>
 
+
+      <div v-if="logined">
+        个人界面
       </div>
 
 
@@ -246,6 +250,7 @@ export default {
       time:4,
       code:'',//验证码
       options: provinceAndCityData,//地区选择
+      logined:false,
     }
   },
   watch: {
@@ -285,6 +290,8 @@ export default {
             if (res.code == 1){
               this.$notify.success("登录成功");
               this.LoginVisible = false;
+              localStorage.setItem('username',this.loginForm.username);
+              this.logined = true;
             } else {
               this.$notify({
                 title:"登录失败",
