@@ -21,7 +21,7 @@
     </el-menu>
 
     <div class="search">
-      <el-input placeholder="搜索音乐" v-model="select_word">
+      <el-input placeholder="搜索音乐" v-model="select_word" style="margin-bottom: 10px">
         <el-button slot="suffix" type="text" icon="el-icon-search" @click="goSearch"></el-button>
       </el-input>
       <!-- placeholder 占位符 内容输入自动清除默认值 -->
@@ -185,9 +185,9 @@ export default {
 /*搜索框部分*/
 .search {
   width: 300px;   /*360 50 */
-  height: 60px;
+  height: 40px;
   float: right;
-  padding-top: 5px;
+  /*padding-top: 0px;*/
 }
 .search .el-button--text {
   color: #606266;
@@ -200,7 +200,7 @@ export default {
 
 .header-right {
   float: right;
-  padding-left: 480px;
+  padding-left: 400px;
   display: flex;
   align-items: center;
 }
