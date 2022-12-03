@@ -28,8 +28,8 @@
     </el-menu>
 
 <!--    登录前-->
-    <div v-if="!logined">
-      <el-button>登录</el-button>
+    <div class="header-right" v-if="!logined">
+      <span class="rightWord" @click="LoginView">登录</span>
     </div>
 
 <!--    登录后的状态-->
@@ -47,16 +47,24 @@
         </el-dropdown-menu>
       </el-dropdown>
     </div>
+
+    <LoginView/>
+
   </div>
+
+
 </template>
 
 <script>
 import {mixin} from "@/mixins";
 import {navMsg} from '../assets/data/header';
+import bus from "@/assets/js/bus";
+import LoginView from "@/components/LoginView";
 
 
 export default {
   name: 'the-header',
+  components: {LoginView},
   mixins:[mixin],
   data(){
     return {
@@ -83,25 +91,31 @@ export default {
         },
       ],
       logined:false,
+      LoginVisible:false,
+      registerVisible:false,
     }
   },
   created() {
     this.navMsg = navMsg;
     this.loginedStatus();
+    bus.$on('logined',msg =>{
+      this.logined = msg;
+    })
   },
   methods: {
+    LoginView(){
+      this.LoginVisible = true;
+      bus.$emit('LoginVisible',this.LoginVisible);
+    },
     goHome(){
       this.$router.push({path:"/"});
-    },
-    goPage(path,name) {
-      this.$store.commit('setActiveName',name);
-      this.$router.push({path:path});
     },
     handleCommand(command) {
       if (command === "logout"){
         localStorage.removeItem('username');
         localStorage.removeItem('pic');
         this.$router.push('/');
+        this.logined = false;
       }
     },
     loginedStatus(){
@@ -194,7 +208,6 @@ input {
   float: right;
   padding-left: 480px;
   display: flex;
-  height: 70px;
   align-items: center;
 }
 .admin-box {
@@ -210,5 +223,15 @@ input {
 .el-dropdown-link{
   color: #000;
   cursor: pointer;
+}
+.rightWord {
+  text-align: center;
+  color:#999999;
+  cursor: pointer;
+  font-size: medium;
+  margin-left: 60px
+}
+.rightWord:hover {
+  color: black;
 }
 </style>
