@@ -4,8 +4,7 @@
       <li class="content-item" v-for="(item,index) in contentList" :key="index">
         <div class="kuo">
           <img class="item-img":src="attachImageUrl(item.pic)">
-          <h3 v-if="item.title">{{item.title}}</h3>
-          <h3 v-if="item.name">{{item.name}}</h3>
+          <h3 >{{item.title||item.name}}</h3>
         </div>
       </li>
     </ul>

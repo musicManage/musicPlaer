@@ -84,3 +84,6 @@ export const getEmail = (name) => get(`consumer/email/${name}`);
 
 //修改密码
 export const setPass = (params) => post(`consumer/pass/update`,params);
+
+//搜索歌单
+export const getPostList = (word) => get(`songList/title/${word}`);

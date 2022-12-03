@@ -49,7 +49,7 @@ export default {
       getLoginStatus(params)
           .then((res) => {
             if (res.code == 1){
-              localStorage.setItem('username',this.adminForm.username);
+              localStorage.setItem('ausername',this.adminForm.username);
               this.$notify({
                 title: '登录成功',
                 type: 'success',

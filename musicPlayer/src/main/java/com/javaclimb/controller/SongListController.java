@@ -42,8 +42,8 @@ public class SongListController {
     }
 
     // 返回标题包含文字的歌单
-    @PostMapping("/title")
-    public Object songListOfLikeTitle(@RequestParam(value = "title") String title) {
+    @GetMapping("/title/{title}")
+    public Object songListOfLikeTitle(@PathVariable(value = "title") String title) {
         return iSongListService.likeTitle('%' + title + '%').getData();
     }
 

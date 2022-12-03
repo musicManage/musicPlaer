@@ -18,14 +18,14 @@
           </el-menu-item>
         </template>
       </template>
-      <div class="search">
-        <form action="">
-          <input>
-          <!-- placeholder 占位符 内容输入自动清除默认值 -->
-          <input type="submit" value="" >
-        </form>
-      </div>
     </el-menu>
+
+    <div class="search">
+      <el-input placeholder="搜索音乐" v-model="select_word">
+        <el-button slot="suffix" type="text" icon="el-icon-search" @click="goSearch"></el-button>
+      </el-input>
+      <!-- placeholder 占位符 内容输入自动清除默认值 -->
+    </div>
 
 <!--    登录前-->
     <div class="header-right" v-if="!logined">
@@ -68,6 +68,7 @@ export default {
   mixins:[mixin],
   data(){
     return {
+      select_word:'',//搜索内容
       activeIndex: '1',
       items:[//导航栏
         {
@@ -103,6 +104,9 @@ export default {
     })
   },
   methods: {
+    goSearch(){//搜索按钮点击后的事件
+      this.$router.push({path:'/search',query:{keywords: this.select_word}},()=>{});
+    },
     LoginView(){
       this.LoginVisible = true;
       bus.$emit('LoginVisible',this.LoginVisible);
@@ -180,34 +184,17 @@ export default {
 }
 /*搜索框部分*/
 .search {
-  width: 410px;   /*360 50 */
+  width: 300px;   /*360 50 */
   height: 60px;
   float: right;
   padding-top: 5px;
 }
-.search input { /*属性选择器 type为text文本框*/
-  width: 300px;
-  height: 20px;
-  padding-left: 20px;
-  float: left;
-  padding-top: 10px;
-  margin-top: 10px;
-  border-style:solid hidden solid solid;
-  border-radius: 15px 0px 0px 15px;
+.search .el-button--text {
+  color: #606266;
+  width: 40px;
 }
-
-.search input[type=submit] { /*属性选择器 type为submit文本框*/
-  width: 50px;
-  height: 34px;
-  float: left;
-  padding-top: 10px;
-  margin-top: 10px;
-  background: #00a4ff url(../assets/img/search.png)  center no-repeat;
-  border-style:solid solid solid hidden;
-  border-radius: 0px 15px 15px 0px;
-}
-input {
-  outline:none;
+.search .el-button:focus, .el-button:hover {
+  color: #409EFF;
 }
 /*搜索框部分结束*/
 

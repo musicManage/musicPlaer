@@ -243,9 +243,7 @@ export default {
       return `${this.$store.state.HOST}/songList/update/pic/${id}`;
     },
     selectSongListList(){
-      let param = new URLSearchParams();
-      param.append("title",this.select_word);
-      axios.post("/songList/title",param).then(res => {
+      axios.get(`/songList/title/${this.select_word}`).then(res => {
         // console.log(res.data);
         this.songListList = res.data;
       })

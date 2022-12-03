@@ -42,14 +42,14 @@ export default {
     },
     handleCommand(command) {
       if (command === "logout"){
-        localStorage.removeItem('username');
+        localStorage.removeItem('ausername');
         this.$router.push('/');
       }
     }
   },
   computed: {
     userName() {
-      return localStorage.getItem('username');
+      return localStorage.getItem('ausername');
     }
   }
 }
