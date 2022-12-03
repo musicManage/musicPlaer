@@ -28,7 +28,6 @@ export default {
   margin-top: 10px;
 }
 .content-item{
-  float: left;
   width: 20%;
   margin-bottom: 20px;
   overflow: hidden;

@@ -112,9 +112,8 @@ export default {
     },
     handleCommand(command) {
       if (command === "logout"){
-        localStorage.removeItem('username');
-        localStorage.removeItem('pic');
         this.$router.push('/');
+        localStorage.clear();
         this.logined = false;
       }
     },
@@ -126,11 +125,19 @@ export default {
   },
   computed: {
     userName() {
-      return localStorage.getItem('username');
+      if (this.logined === false){
+        return '';
+      } else {
+        return localStorage.getItem('username');
+      }
     },
     pic() {
-      // console.log(localStorage.getItem('pic'))
-      return localStorage.getItem('pic');
+      if (this.logined === false){
+        return '';
+      } else {
+        return localStorage.getItem('pic');
+      }
+
     },
   }
 }
