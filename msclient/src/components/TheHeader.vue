@@ -27,17 +27,37 @@
       </div>
     </el-menu>
 
+<!--    登录前-->
+    <div v-if="!logined">
+      <el-button>登录</el-button>
+    </div>
+
 <!--    登录后的状态-->
+    <div class="header-right" v-if="logined">
+      <div class="admin-box">
+        <img :src="attachImageUrl(pic)" alt=""/>
+      </div>
+      <el-dropdown class="admin-name" trigger="click" @command="handleCommand">
+       <span class="el-dropdown-link">
+         {{ userName }}
+         <i class="el-icon-caret-bottom"></i>
+       </span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item command="logout">退出登录</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </div>
   </div>
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
+import {mixin} from "@/mixins";
 import {navMsg} from '../assets/data/header';
 
 
 export default {
   name: 'the-header',
+  mixins:[mixin],
   data(){
     return {
       activeIndex: '1',
@@ -61,14 +81,13 @@ export default {
           label: '我的音乐',
           name: 'MyMusic'
         },
-      ]
+      ],
+      logined:false,
     }
-  },
-  computed: {
-
   },
   created() {
     this.navMsg = navMsg;
+    this.loginedStatus();
   },
   methods: {
     goHome(){
@@ -77,7 +96,28 @@ export default {
     goPage(path,name) {
       this.$store.commit('setActiveName',name);
       this.$router.push({path:path});
-    }
+    },
+    handleCommand(command) {
+      if (command === "logout"){
+        localStorage.removeItem('username');
+        localStorage.removeItem('pic');
+        this.$router.push('/');
+      }
+    },
+    loginedStatus(){
+      if (localStorage.getItem('username')){
+        this.logined = true;
+      };
+    },
+  },
+  computed: {
+    userName() {
+      return localStorage.getItem('username');
+    },
+    pic() {
+      // console.log(localStorage.getItem('pic'))
+      return localStorage.getItem('pic');
+    },
   }
 }
 </script>
@@ -148,7 +188,27 @@ export default {
 input {
   outline:none;
 }
-
 /*搜索框部分结束*/
 
+.header-right {
+  float: right;
+  padding-left: 480px;
+  display: flex;
+  height: 70px;
+  align-items: center;
+}
+.admin-box {
+  margin-left: 20px;
+  padding-right: 7px;
+}
+.admin-box img{
+  display: block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.el-dropdown-link{
+  color: #000;
+  cursor: pointer;
+}
 </style>

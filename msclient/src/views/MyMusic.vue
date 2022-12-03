@@ -109,7 +109,7 @@
 </template>
 
 <script>
-import {provinceAndCityData} from "element-china-area-data";
+import {provinceAndCityData,CodeToText} from "element-china-area-data";
 import {addConsumer, getEmail, setPass, verifyEmail, verifyPass, verifyUsername} from "@/api";
 
 export default {
@@ -123,7 +123,7 @@ export default {
       } else{
         verifyUsername(value)
             .then(res => {
-              if (res.code == 1) {
+              if (res.code === 1) {
                 callback();
               } else {
                 callback(new Error('用户名已重复,请修改用户名'));
@@ -166,7 +166,7 @@ export default {
       } else if (value !== '') {
         getEmail(this.forgetForm.username)
             .then(res => {
-              if (res.code == 1){
+              if (res.code === 1){
                 this.forgetForm.email = res.data;
                 callback();
               } else {
@@ -180,7 +180,7 @@ export default {
     const checkEmailCode = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请输入验证码'));
-      } else if (value != this.code) {
+      } else if (value !== this.code) {
         callback(new Error('验证码错误'));
       } else {
         callback();
@@ -210,7 +210,6 @@ export default {
         birth: '',
         introduction: '',
         location: '',
-        arr:[],
       },
       rules2:{
         username:[
@@ -250,8 +249,13 @@ export default {
       time:4,
       code:'',//验证码
       options: provinceAndCityData,//地区选择
+      arr:[],
       logined:false,
+      loginedForm:[],//接受登录后的信息
     }
+  },
+  created() {
+    this.loginedStatus();
   },
   watch: {
     forgetVisible(newV){
@@ -271,7 +275,7 @@ export default {
       }
     },
     arr(newV){
-      if (newV != ''){
+      if (newV !== ''){
         this.registerForm.location = `${CodeToText[newV[0]]}`+"-"+`${CodeToText[newV[1]]}`;
       }
     },
@@ -287,10 +291,14 @@ export default {
 
       verifyPass(param)
           .then(res => {
-            if (res.code == 1){
+            if (res.code === 1){
               this.$notify.success("登录成功");
+              this.loginedForm = res.data;
+              console.log(this.loginedForm);
+              // console.log(this.loginedForm.avator);
               this.LoginVisible = false;
               localStorage.setItem('username',this.loginForm.username);
+              localStorage.setItem('pic',this.loginedForm.avator);
               this.logined = true;
             } else {
               this.$notify({
@@ -310,16 +318,16 @@ export default {
       this.forgetVisible = true;
     },
     updatePass(){
-      if (this.code != this.forgetForm.checkCode){
+      if (this.code !== this.forgetForm.checkCode){
         this.$message.error("验证码错误");
-      } else if (this.forgetForm.password == this.forgetForm.checkPass){
+      } else if (this.forgetForm.password === this.forgetForm.checkPass){
         let param = new URLSearchParams();
         param.append("username",this.forgetForm.username);
         param.append("password",this.forgetForm.password);
 
         setPass(param)
             .then(res => {
-              if (res.code == 1){
+              if (res.code === 1){
                 this.$message.success("密码修改成功 将在3s后转到登录窗口");
 
                 setTimeout(() => {
@@ -368,7 +376,7 @@ export default {
 
       addConsumer(params)
           .then(res => {
-            if (res.code==1){
+            if (res.code===1){
               this.$message.success("注册成功 将在1s内转到登录窗口");
               this.registerForm = [];
               this.registerVisible = false;
@@ -376,15 +384,17 @@ export default {
                 this.LoginVisible = true;
               }, 800);
             } else {
-              this.$notify({
-                title: '添加失败',
-                type: 'error',
-              });
+              this.$notify.error('注册失败');
             }
           })
           .catch(err => {
             console.log(err);
           });
+    },
+    loginedStatus(){
+      if (localStorage.getItem('username')){
+        this.logined = true;
+      };
     },
   }
 }

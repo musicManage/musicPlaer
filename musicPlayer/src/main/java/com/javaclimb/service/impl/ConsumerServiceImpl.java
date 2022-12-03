@@ -230,7 +230,7 @@ public class ConsumerServiceImpl implements IConsumerService {
         wrapper.eq(Consumer::getUsername,consumer.getUsername());
         wrapper.eq(Consumer::getPassword,consumer.getPassword());
         if (!(consumerMapper.selectList(wrapper).isEmpty())){
-            return R.success("校验成功",consumerMapper.selectList(wrapper));
+            return R.success("校验成功",consumerMapper.selectOne(wrapper));
         } else {
             return R.error("校验失败");
         }
