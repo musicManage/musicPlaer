@@ -88,6 +88,8 @@ export default {
     return{
       nowTime:'00:00', //当前播放进度的时间
       songTime:'00:00', //当前歌曲总时间
+      curLength:0, //进度条位置
+      progressLength: 0, //进度条长度
     }
   },
   computed:{

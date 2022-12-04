@@ -90,3 +90,9 @@ export const setPass = (params) => post(`consumer/pass/update`,params);
 
 //搜索歌单
 export const getPostList = (word) => get(`songList/title/${word}`);
+
+//根据歌手性别查询
+export const getSingerBySex = (sex) => get(`song/sex/${sex}`);
+
+//根据歌单风格查询
+export const getSongListByStyle = (style) => get(`songList/style/${style}`);

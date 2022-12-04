@@ -3,7 +3,6 @@ package com.javaclimb.controller;
 import com.javaclimb.controller.util.R;
 import com.javaclimb.entity.SongList;
 import com.javaclimb.service.ISongListService;
-import com.javaclimb.service.ISongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -48,8 +47,8 @@ public class SongListController {
     }
 
     // 返回指定类型的歌单
-    @GetMapping("/style")
-    public R songListOfStyle(@RequestParam(value = "style") String style) {
+    @GetMapping("/style/{style}")
+    public R songListOfStyle(@PathVariable(value = "style") String style) {
         return iSongListService.likeStyle('%' + style + '%');
     }
 
