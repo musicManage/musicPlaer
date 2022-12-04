@@ -52,7 +52,7 @@ export default {
   },
   methods:{
     toplays(row){
-      this.toplay(row.id,row.url);
+      this.toplay(row.id,row.url,row.pic,row.index,row.name,row.singerName,row.lyric);
     }
   }
 }

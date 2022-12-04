@@ -8,9 +8,9 @@
         </svg>
       </div>
 <!--      播放-->
-      <div class="item">
+      <div class="item" @click="togglePlay">
         <svg class="icon">
-          <use xlink:href="#icon-bofang"></use>
+          <use :xlink:href="playButtonUrl"></use>
         </svg>
       </div>
 <!--      下一首-->
@@ -20,7 +20,7 @@
         </svg>
       </div>
 <!--      歌曲图片-->
-      <div class="item">
+      <div class="item-img">
         <img :src="picUrl"/>
       </div>
 <!--      播放进度-->
@@ -28,6 +28,10 @@
 <!--        播放开始时间-->
         <div class="current-time">{{nowTime}}</div>
         <div class="progress-box">
+          <div class="item-song-title">
+            <div>{{this.title}}</div>
+            <div>{{this.artist}}</div>
+          </div>
           <div ref="progress" class="progress">
 <!--            进度条-->
             <div ref="bg" class="bg">
@@ -105,6 +109,26 @@ export default {
       'userId',               //当前登录用户的id
       'isActive',             //当前播放的歌曲是否已收藏
     ])
+  },
+  watch:{
+    //切换播放状态图标
+    isPlay(){
+      if (this.isPlay){
+        this.$store.commit('setPlayButtonUrl','#icon-zanting');
+      } else {
+        this.$store.commit('setPlayButtonUrl','#icon-bofang');
+      }
+    },
+  },
+  methods:{
+    //控制音乐播放，暂停
+    togglePlay() {
+      if (this.isPlay){
+        this.$store.commit('setIsPlay',false);
+      } else {
+        this.$store.commit('setIsPlay',true);
+      };
+    },
   }
 }
 </script>

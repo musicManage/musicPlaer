@@ -42,4 +42,15 @@ public class SongAndSingerVo {
      * 歌曲地址
      */
     private String url;
+
+    /**
+     * 歌曲图片
+     */
+    private String pic;
+
+    /**
+     * 歌词
+     */
+    private String lyric;
+
 }
