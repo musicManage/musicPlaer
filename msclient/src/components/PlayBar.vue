@@ -32,14 +32,22 @@
             <div>{{this.title}}</div>
             <div>{{this.artist}}</div>
           </div>
-          <div ref="progress" class="progress" @mousemove="mousemove">
+<!--          <div ref="progress" class="progress" @mousemove="mousemove" >-->
 <!--            进度条-->
             <div ref="bg" class="bg" >
-              <div ref="curProgress" class="cur-progress" :style="{width: curLength+'%'}"></div>
+              <el-slider :max="endTimePoint"
+                         v-model="nowTimePoint"
+
+                         @change="changeTime"
+              ></el-slider>
+<!--              <div ref="curProgress" class="cur-progress" :style="{width: curLength+'%'}" ></div>-->
             </div>
 <!--            拖动点-->
-            <div ref="idot" class="idot" :style="{left:curLength+'%'}" @mousedown="mousedown" @mouseup="mouseup"></div>
-          </div>
+<!--            <div ref="idot" class="idot" :style="{left:curLength+'%'}"-->
+<!--                 @mousedown="mousedown"-->
+<!--                 @mouseup="mouseup"-->
+<!--            ></div>-->
+<!--          </div>-->
         </div>
 
 <!--        播放结束时间-->
@@ -87,10 +95,15 @@ export default {
   data(){
     return{
       nowTime:'00:00', //当前播放进度的时间
+      nowTimePoint:'',
       songTime:'00:00', //当前歌曲总时间
+      endTimePoint:'',
       curLength:0, //进度条位置
       progressLength: 0, //进度条长度
       mouseStartX: 0,//进度条拖拽开始位置
+      tag: false,             //拖拽开始结束的标志，当开始拖拽，它的值才会变成true
+      volume: 50,             //音量，默认一半
+      toggle: true            //显示隐藏播放器页面
     }
   },
   computed:{
@@ -123,7 +136,9 @@ export default {
       }
     },
     curTime(){
-      this.nowTime = this.formatSeconds(this.curTime);
+      this.nowTimePoint = this.curTime;
+      this.endTimePoint = this.duration;
+      this.nowTime = this.formatSeconds(this.nowTimePoint);
       this.songTime = this.formatSeconds(this.duration);
       this.curLength = (this.curTime/this.duration)*100;
     },
@@ -201,14 +216,21 @@ export default {
       }
     },
     //更改歌曲进度
-    changeTime(percent){
-      let newCurTime = (percent*0.01)* this.duration;
-      this.$store.commit('setChangeTime',newCurTime);
+    changeTime(val){
+      console.log(val);
+      // let newCurTime = (percent*0.01)* this.duration;
+      this.$store.commit('setChangeTime',val);
     },
+    formatTooltip(val){
+      return this.formatSeconds(val);
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 @import '../assets/css/play-bar.scss';
+* {
+  user-select: none;
+}
 </style>
