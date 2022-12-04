@@ -32,13 +32,13 @@
             <div>{{this.title}}</div>
             <div>{{this.artist}}</div>
           </div>
-          <div ref="progress" class="progress">
+          <div ref="progress" class="progress" @mousemove="mousemove">
 <!--            进度条-->
-            <div ref="bg" class="bg">
-              <div ref="curProgress" class="cur-progress" :style="{width:'30%'}"></div>
+            <div ref="bg" class="bg" >
+              <div ref="curProgress" class="cur-progress" :style="{width: curLength+'%'}"></div>
             </div>
 <!--            拖动点-->
-            <div ref="idot" class="idot" :style="{left:'30%'}"></div>
+            <div ref="idot" class="idot" :style="{left:curLength+'%'}" @mousedown="mousedown" @mouseup="mouseup"></div>
           </div>
         </div>
 
@@ -122,6 +122,11 @@ export default {
         this.$store.commit('setPlayButtonUrl','#icon-bofang');
       }
     },
+    curTime(){
+      this.nowTime = this.formatSeconds(this.curTime);
+      this.songTime = this.formatSeconds(this.duration);
+      this.curLength = (this.curTime/this.duration)*100;
+    },
   },
   mounted() {
     this.progressLength = this.$refs.progress.getBoundingClientRect().width;
@@ -134,6 +139,71 @@ export default {
       } else {
         this.$store.commit('setIsPlay',true);
       };
+    },
+    //解析时间
+    formatSeconds(value){
+      let theTime = parseInt(value);
+      let result = '';    //返回值
+      let hour = parseInt(theTime / 3600);    //小时
+      let minute = parseInt((theTime / 60) % 60); //分钟
+      let second = parseInt(theTime % 60);        //秒
+      if(hour > 0){
+        if(hour < 10){
+          result = '0' + hour + ":";
+        }else{
+          result = hour + ":";
+        }
+      }
+      if(minute > 0){
+        if(minute < 10){
+          result += "0" + minute + ":";
+        }else{
+          result += minute + ":";
+        }
+      }else{
+        result += "00:";
+      }
+      if(second > 0){
+        if(second < 10){
+          result += "0" + second;
+        }else{
+          result += second;
+        }
+      }else{
+        result += "00";
+      }
+      return result;
+    },
+    //拖拽开始
+    mousedown(e){
+      this.mouseStartX = e.clientX;
+      this.tag = true;
+    },
+    //拖拽结束
+    mouseup(){
+      this.tag = false;
+    },
+    //拖拽中
+    mousemove(e){
+      if(!this.duration){
+        return false;
+      }
+      if(this.tag){
+        let movementX = e.clientX - this.mouseStartX;       //点点移动的距离
+        let curLength = this.$refs.curProgress.getBoundingClientRect().width;
+        let newPercent = ((movementX+curLength)/this.progressLength)*100;
+        if(newPercent>100){
+          newPercent = 100;
+        }
+        this.curLength = newPercent;
+        this.mouseStartX = e.clientX;
+        this.changeTime(newPercent);
+      }
+    },
+    //更改歌曲进度
+    changeTime(percent){
+      let newCurTime = (percent*0.01)* this.duration;
+      this.$store.commit('setChangeTime',newCurTime);
     },
   }
 }
