@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-tabs type="card" v-model="activeName" stretch @tab-click="getMsg">
+    <el-tabs type="border-card" v-model="activeName" stretch @tab-click="getMsg">
       <el-tab-pane label="歌曲" name="first">
         <SongMsg :songMsg="songMsg"></SongMsg>
       </el-tab-pane>
@@ -80,9 +80,9 @@ export default {
 
 <style scoped>
 .el-tabs {
-  height: 100%;
+  min-height: 100vh;
   width: 1240px;
-  margin: 0 auto;
+  margin: 20px auto;
   background: white;
 }
 </style>

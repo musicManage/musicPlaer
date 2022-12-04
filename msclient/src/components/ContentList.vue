@@ -61,7 +61,7 @@ li {
 }
 .kuo2:hover {
   transform: scale(1.2);
-
+  transition: all 1s;
 }
 .item-img {
   width: 228px;
