@@ -3,6 +3,7 @@
     <el-table
         :data="songMsg"
         style="width: 100%"
+        @row-dblclick="toplays"
     >
       <el-table-column
           type="index"
@@ -35,9 +36,12 @@
 </template>
 
 <script>
+import {mixin} from "@/mixins";
+
 export default {
   name: "SongMsg",
   props:['songMsg'],
+  mixins:[mixin],
   data(){
     return{
 
@@ -47,6 +51,9 @@ export default {
 
   },
   methods:{
+    toplays(row){
+      this.toplay(row.id,row.url);
+    }
   }
 }
 </script>

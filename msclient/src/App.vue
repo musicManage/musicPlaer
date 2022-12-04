@@ -4,6 +4,8 @@
       <el-header><TheHeader/></el-header>
       <el-main>
         <router-view class="music-content"/>
+        <SongAudio/>
+        <PlayBar/>
         <scroll-top/>
       </el-main>
       <el-footer><TheFooter/></el-footer>
@@ -14,11 +16,15 @@
 <script>
 import TheHeader from "@/components/TheHeader";
 import ScrollTop from "@/components/ScrollTop";
-
 import TheFooter from "@/components/TheFooter";
+import SongAudio from "@/components/SongAudio.vue";
+import PlayBar from "@/components/PlayBar.vue";
+
 export default {
     name: 'App',
     components:{
+      PlayBar,
+      SongAudio,
       TheFooter,
       ScrollTop,
       TheHeader

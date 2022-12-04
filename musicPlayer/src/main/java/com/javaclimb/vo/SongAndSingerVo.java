@@ -37,4 +37,9 @@ public class SongAndSingerVo {
      * 专辑
      */
     private String introduction;
+
+    /**
+     * 歌曲地址
+     */
+    private String url;
 }
