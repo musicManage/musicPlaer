@@ -3,8 +3,11 @@
     <ul class="section-content">
       <li class="content-item" v-for="(item,index) in contentList" :key="index">
         <div class="kuo">
-          <div class="kuo2">
-            <img class="item-img":src="attachImageUrl(item.pic)">
+          <div class="imgTest">
+            <div class="kuo2">
+              <img  class="item-img" :src="attachImageUrl(item.pic)">
+              <div class="el-icon-caret-right"></div>
+            </div>
           </div>
             <h3 >{{item.title||item.name}}</h3>
         </div>
@@ -19,8 +22,7 @@ import {mixin} from "@/mixins";
 export default {
   name: 'content-list',
   mixins:[mixin],
-  props:['contentList']
-
+  props:['contentList'],
 }
 </script>
 
@@ -48,25 +50,23 @@ li {
   display: block;
   overflow: hidden;
   margin-bottom: 15px;
+  width: 228px;
+  height: 256px;
 }
 .kuo2{
   position: relative;
  overflow: hidden;
-  width: 230px;
-  height: 230px;
+  width: 228px;
+  height: 228px;
+}
+.kuo2:hover {
+  transform: scale(1.2);
+
 }
 .item-img {
   width: 228px;
   height: 228px;
   cursor: pointer;
-
-}
-.item-img:hover {
-  transform: scale(1.2);
-  transition: transform .75s;
-  overflow: hidden;
-  -webkit-filter: brightness(0.5);
-  filter: brightness(0.5);
 }
 h3 {
   overflow: hidden;
@@ -75,12 +75,33 @@ h3 {
   font-size: medium;
   font-weight: 400;
   zoom: 1;
-  margin-top: 10px;
+  margin-top: 5px;
   text-align: center;
   width: 100%;
   cursor: pointer;
 }
 ul {
   margin-right: -20px;
+}
+.kuo2 .el-icon-caret-right{
+  position: absolute;
+  left: 40%;
+  top: 40%;
+  color: white;
+  font-size: 50px;
+  display: none;
+  cursor: pointer;
+}
+.kuo2:hover .el-icon-caret-right{
+  display: inline-block;
+}
+.kuo2:hover .item-img {
+  -webkit-filter: brightness(0.5);
+  filter: brightness(0.5);
+}
+.imgTest {
+  overflow: hidden;
+  width: 230px;
+  height: 230px;
 }
 </style>
