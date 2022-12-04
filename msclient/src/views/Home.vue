@@ -17,14 +17,17 @@ import Swiper from "@/components/Swiper";
 import {allSinger, allSongList} from '../api/index';
 import contentList from "@/components/ContentList";
 import TheFooter from "@/components/TheFooter";
-
+import SongList from "@/views/SongList";
+import Singer from "@/views/Singer";
 
 export default {
   name: "home",
   components:{
     TheFooter,
     Swiper,
-    contentList
+    contentList,
+    SongList,
+    Singer
   },
   data() {
     return {

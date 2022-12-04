@@ -1,3 +1,18 @@
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
+
+export default new Vuex.Store({
+    state: {
+        HOST:'http://127.0.0.1:8888',
+        isPlay: false, //是否播放中
+        url:'', //歌曲地址
+        id:'', //歌曲id
+        tempList:{} //单个歌单信息或歌手信息
+    }
+
+})
 const song = {
     state: {
         HOST:'http://127.0.0.1:8888',

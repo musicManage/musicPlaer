@@ -5,6 +5,8 @@ import MyMusic from "@/views/MyMusic";
 import Singer from "@/views/Singer";
 import SongList from "@/views/SongList";
 import SearchPage from "@/views/SearchPage";
+import SingerAlbum from "@/views/SingerAlbum";
+import SongListAlbum from "@/views/SongListAlbum";
 
 Vue.use(VueRouter)
 
@@ -33,7 +35,17 @@ const routes = [
         path: '/search',
         name: 'search',
         component: SearchPage
-    }
+    },
+    {
+        path: '/singer-album/:id',
+        name: 'singer-album',
+        component: SingerAlbum
+    },
+    {
+        path: '/song-list-album/:id',
+        name: 'song-list-album',
+        component: SongListAlbum
+    },
 ]
 
 const router = new VueRouter({
