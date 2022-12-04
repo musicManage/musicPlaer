@@ -90,6 +90,7 @@ export default {
       songTime:'00:00', //当前歌曲总时间
       curLength:0, //进度条位置
       progressLength: 0, //进度条长度
+      mouseStartX: 0,//进度条拖拽开始位置
     }
   },
   computed:{
@@ -121,6 +122,9 @@ export default {
         this.$store.commit('setPlayButtonUrl','#icon-bofang');
       }
     },
+  },
+  mounted() {
+    this.progressLength = this.$refs.progress.getBoundingClientRect().width;
   },
   methods:{
     //控制音乐播放，暂停
