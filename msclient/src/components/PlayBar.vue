@@ -32,31 +32,30 @@
             <div>{{this.title}}</div>
             <div>{{this.artist}}</div>
           </div>
-<!--          <div ref="progress" class="progress" @mousemove="mousemove" >-->
+          <div ref="progress" class="progress" @mousemove="mousemove" >
 <!--            进度条-->
-            <div ref="bg" class="bg" >
-              <el-slider :max="endTimePoint"
-                         v-model="nowTimePoint"
-
-                         @change="changeTime"
-              ></el-slider>
-<!--              <div ref="curProgress" class="cur-progress" :style="{width: curLength+'%'}" ></div>-->
+            <div ref="bg" class="bg" @click="updatemove">
+              <div ref="curProgress" class="cur-progress" :style="{width: curLength+'%'}" ></div>
             </div>
 <!--            拖动点-->
-<!--            <div ref="idot" class="idot" :style="{left:curLength+'%'}"-->
-<!--                 @mousedown="mousedown"-->
-<!--                 @mouseup="mouseup"-->
-<!--            ></div>-->
-<!--          </div>-->
+            <div ref="idot" class="idot" :style="{left:curLength+'%'}"
+                 @mousedown="mousedown"
+                 @mouseup="mouseup"
+            ></div>
+          </div>
         </div>
 
 <!--        播放结束时间-->
         <div class="left-time">{{songTime}}</div>
 <!--        音量-->
         <div class="item item-volume">
-          <svg class="icon">
+          <svg v-if="volume == 0" class="icon">
+            <use xlink:href="#icon-yinliangjingyinheix"></use>
+          </svg>
+          <svg v-else class="icon">
             <use xlink:href="#icon-yinliang1"></use>
           </svg>
+          <el-slider class="volume" v-model="volume" :vertical="true"></el-slider>
         </div>
       </div>
 
@@ -142,9 +141,23 @@ export default {
       this.songTime = this.formatSeconds(this.duration);
       this.curLength = (this.curTime/this.duration)*100;
     },
+    //音量变化
+    volume(){
+      this.$store.commit('setVolume',this.volume / 100);
+    },
   },
   mounted() {
     this.progressLength = this.$refs.progress.getBoundingClientRect().width;
+    document.querySelector('.item-volume').addEventListener('click',function(e){
+      document.querySelector('.volume').classList.toggle('show-volume');
+      e.stopPropagation();
+    },false);
+    document.querySelector('.volume').addEventListener('click',function(e){
+      e.stopPropagation();
+    },false);
+    document.addEventListener('click',function(){
+      document.querySelector('.volume').classList.remove('show-volume');
+    },false);
   },
   methods:{
     //控制音乐播放，暂停
@@ -216,14 +229,25 @@ export default {
       }
     },
     //更改歌曲进度
-    changeTime(val){
-      console.log(val);
-      // let newCurTime = (percent*0.01)* this.duration;
-      this.$store.commit('setChangeTime',val);
+    changeTime(percent){
+      let newCurTime = (percent*0.01)* this.duration;
+      this.$store.commit('setChangeTime',newCurTime);
     },
-    formatTooltip(val){
-      return this.formatSeconds(val);
-    }
+    //点击播放条切换播放进度
+    updatemove(e){
+      if(!this.tag){
+        //进度条的左侧坐标
+        let curLength = this.$refs.bg.offsetLeft;
+        let newPercent = ((e.clientX - curLength) / this.progressLength) * 100;
+        if(newPercent>100){
+          newPercent = 100;
+        }else if(newPercent<0){
+          newPercent = 0;
+        }
+        this.curLength = newPercent;
+        this.changeTime(newPercent);
+      }
+    },
   }
 }
 </script>
