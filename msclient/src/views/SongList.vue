@@ -1,18 +1,61 @@
 <template>
-  <div class="song-list">
-    <div class="section" v-for="(item,index) in songsList" :key="index">
-        <div class="section-title" style="text-align: center" >
-          {{item.name}}
-        </div>
-      <content-list :contentList="item.list"></content-list>
-    </div>
-  </div>
+  <el-tabs v-model="activeName" @tab-click="getSongList" style="padding-left: 20px">
+    <el-tab-pane label="全部" name="all" @click="getSongList">
+      <div class="section" >
+        <content-list :contentList="songsList"></content-list>
+      </div>
+    </el-tab-pane>
+
+    <el-tab-pane label="华语" name="china">
+      <div class="section" >
+        <content-list :contentList="songsList"></content-list>
+      </div>
+    </el-tab-pane>
+
+    <el-tab-pane label="粤语" name="yueyu">
+      <div class="section" >
+        <content-list :contentList="songsList"></content-list>
+      </div>
+    </el-tab-pane>
+
+    <el-tab-pane label="日韩" name="rihang">
+      <div class="section" >
+        <content-list :contentList="songsList"></content-list>
+      </div>
+    </el-tab-pane>
+
+    <el-tab-pane label="欧美" name="oumei">
+      <div class="section" >
+        <content-list :contentList="songsList"></content-list>
+      </div>
+    </el-tab-pane>
+
+    <el-tab-pane label="BGM" name="BGM">
+      <div class="section" >
+        <content-list :contentList="songsList"></content-list>
+      </div>
+    </el-tab-pane>
+
+    <el-tab-pane label="轻音乐" name="qing">
+      <div class="section" >
+        <content-list :contentList="songsList"></content-list>
+      </div>
+    </el-tab-pane>
+
+    <el-tab-pane label="乐器" name="yueqi">
+      <div class="section" >
+        <content-list :contentList="songsList"></content-list>
+      </div>
+    </el-tab-pane>
+
+  </el-tabs>
+
 </template>
 <script>
 
 import TheFooter from "@/components/TheFooter";
 import contentList from "@/components/ContentList";
-import {allSongList} from "@/api";
+import {allSinger, allSongList,getSongListByStyle} from "@/api";
 
 export default {
   name: 'song-list',
@@ -22,9 +65,8 @@ export default {
   },
   data() {
     return {
-      songsList: [
-        {name: "歌单", list: []},
-      ]
+      activeName: 'all',
+      songsList: []
     }
   },
 
@@ -33,13 +75,45 @@ export default {
   },
 
   methods: {
-    getSongList() {        //获取前十条歌单
-      allSongList().then(
-          (res) => {
-            this.songsList[0].list = res.data.slice(0, 10);
-          }).catch((err) => {
-        console.log(err);
-      })
+    getSongList() {
+      if (this.activeName == 'all'){
+      //获取全部歌单
+      allSongList().then(res => {
+        this.songsList = res.data;
+        })
+      }else if (this.activeName == 'china'){
+        getSongListByStyle("华语").then(res => {
+          this.songsList = res.data;
+        })
+      }else if (this.activeName == 'yueyu'){
+        getSongListByStyle("粤语").then(res => {
+          this.songsList = res.data;
+        })
+      }else if (this.activeName == 'rihang'){
+        getSongListByStyle("日韩").then(res => {
+          this.songsList = res.data;
+        })
+      }else if (this.activeName == 'oumei'){
+        getSongListByStyle("欧美").then(res => {
+          this.songsList = res.data;
+        })
+      }else if (this.activeName == 'BGM'){
+        getSongListByStyle("BGM").then(res => {
+          this.songsList = res.data;
+        })
+      }else if (this.activeName == 'qing'){
+        getSongListByStyle("轻音乐").then(res => {
+          this.songsList = res.data;
+        })
+      }else if (this.activeName == 'yueqi'){
+        getSongListByStyle("乐器").then(res => {
+          this.songsList = res.data;
+        })
+      }
+    },
+
+    handleClick(tab, event) {
+      console.log(tab, event);
     }
   }
 }
