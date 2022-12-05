@@ -1,6 +1,6 @@
 <template>
   <transition name="slide-fade" >
-    <div class="the-aside" v-if="showAside">
+    <div class="the-aside" v-if="showAside" v-clickoutside="removeAside">
       <h2 class="title">歌单列表</h2>
       <ul class="menus">
         <li v-for="(item,index) in listOfSongs"
@@ -34,11 +34,6 @@ export default {
     ])
   },
   mounted(){
-    let _this = this;
-    document.addEventListener('click',function(){
-      _this.$store.commit('setShowAside',false)
-    },true);
-    console.log(this.listOfSongs);
   },
   directives: { Clickoutside },
   methods:{
