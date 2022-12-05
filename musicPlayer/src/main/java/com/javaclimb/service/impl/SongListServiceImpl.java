@@ -3,12 +3,9 @@ package com.javaclimb.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.javaclimb.common.Constants;
 import com.javaclimb.controller.util.R;
-import com.javaclimb.entity.Singer;
-import com.javaclimb.entity.Song;
 import com.javaclimb.entity.SongList;
 import com.javaclimb.mapper.SongListMapper;
 import com.javaclimb.service.ISongListService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
@@ -66,6 +63,8 @@ public class SongListServiceImpl implements ISongListService {
      */
     @Override
     public R delete(Integer id) {
+        SongList songList = songListMapper.selectById(id);
+        deleteOfPic(songList.getPic());
         if (songListMapper.deleteById(id)>0){
             return R.success("删除成功");
         } else {
