@@ -4,9 +4,9 @@
       <h2 class="title">歌单列表</h2>
       <ul class="menu">
         <li v-for="(item,index) in listOfSongs"
-            style="display: block"
             :key="index"
             :class="{'is-play': id===item.id}"
+            style="display: block"
             @click="toplay(item.id,item.url,item.pic,item.index,item.name,item.lyric)"
         >
           {{item.name}}
