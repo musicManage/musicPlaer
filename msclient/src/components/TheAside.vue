@@ -1,5 +1,5 @@
 <template>
-  <transition name="slide-fade">
+  <transition name="slide-fade" >
     <div class="the-aside" v-if="showAside">
       <h2 class="title">歌单列表</h2>
       <ul class="menus">
@@ -18,6 +18,7 @@
 <script>
 import {mapGetters} from "vuex";
 import {mixin} from "@/mixins";
+import Clickoutside from 'element-ui/src/utils/clickoutside';
 
 export default {
   mixins:[mixin],
@@ -37,8 +38,15 @@ export default {
     document.addEventListener('click',function(){
       _this.$store.commit('setShowAside',false)
     },true);
-    // console.log(this.listOfSongs);
+    console.log(this.listOfSongs);
   },
+  directives: { Clickoutside },
+  methods:{
+    removeAside(){
+      let _this = this;
+      _this.$store.commit('setShowAside',false);
+    }
+  }
 }
 </script>
 

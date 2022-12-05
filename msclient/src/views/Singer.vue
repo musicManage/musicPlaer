@@ -1,11 +1,15 @@
 <template>
-  <el-tabs v-model="activeName" @tab-click="handleClick" style="padding-left: 20px">
+  <el-tabs v-model="activeName" @tab-click="getSinger" style="padding-left: 20px">
     <el-tab-pane label="全部" name="all" @click="getSinger">
       <div class="section">
         <content-list :contentList="songsList"></content-list>
       </div>
     </el-tab-pane>
-    <el-tab-pane label="男歌手" name="man">男歌手</el-tab-pane>
+    <el-tab-pane label="男歌手" name="man" @click="getManSinger">
+      <div class="section">
+        <content-list :contentList="songsList"></content-list>
+      </div>
+    </el-tab-pane>
     <el-tab-pane label="女歌手" name="woman">女歌手</el-tab-pane>
   </el-tabs>
 
@@ -14,7 +18,7 @@
 
 import TheFooter from "@/components/TheFooter";
 import contentList from "@/components/ContentList";
-import {allSinger} from "@/api";
+import {allSinger, getSingerBySex} from "@/api";
 
 export default {
   name: 'singer',
@@ -34,15 +38,20 @@ export default {
   },
 
   methods: {
-    getSinger() {          //获取全部歌手
+    getSinger() {
+      if (this.activeName == 'all'){
+        //获取全部歌手
         allSinger().then(res => {
           this.songsList = res.data;
         })
+      } else if (this.activeName == 'man'){
+        getSingerBySex(1).then(res => {
+          this.songsList = res.data;
+        })
+      }
+
 
     },
-    handleClick(tab, event) {
-      console.log(tab, event);
-    }
   }
 }
 // methods:{
