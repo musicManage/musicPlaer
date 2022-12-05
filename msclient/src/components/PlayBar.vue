@@ -2,7 +2,7 @@
   <div class="play-bar">
     <div class="kongjian">
 <!--      上一首-->
-      <div class="item">
+      <div class="item" @click="prev">
         <svg class="icon">
           <use xlink:href="#icon-ziyuanldpi"></use>
         </svg>
@@ -14,7 +14,7 @@
         </svg>
       </div>
 <!--      下一首-->
-      <div class="item">
+      <div class="item" @click="next">
         <svg class="icon">
           <use xlink:href="#icon-ziyuanldpi1"></use>
         </svg>
@@ -251,7 +251,71 @@ export default {
     //显示播放列表
     changeAside(){
       this.$store.commit('setShowAside',true);
-    }
+    },
+    //上一首
+    prev(){
+      if(this.listIndex != -1 && this.listOfSongs.length > 1){    //当前处于不可能状态或者只有只有一首音乐的时候不执行）
+        if(this.listIndex > 0){                                 //不是第一首音乐
+          this.$store.commit('setListIndex',this.listIndex - 1);  //直接返回上一首
+        }else{                                                  //当前是第一首音乐
+          this.$store.commit('setListIndex',this.listOfSongs.length - 1);  //切换到倒数第一首
+        }
+        this.toplay1(this.listOfSongs[this.listIndex].url);
+      }
+    },
+    //下一首
+    next(){
+      if(this.listIndex != -1 && this.listOfSongs.length > 1){    //当前处于不可能状态或者只有只有一首音乐的时候不执行）
+        if(this.listIndex < this.listOfSongs.length - 1){                                 //不是最后一首音乐
+          this.$store.commit('setListIndex',this.listIndex + 1);  //直接返回下一首
+        }else{                                                      //当前是最后一首音乐
+          this.$store.commit('setListIndex',0);  //切换到第一首
+        }
+        this.toplay1(this.listOfSongs[this.listIndex].url);
+      }
+    },
+    //播放音乐
+    toplay1: function(url){
+      if(url && url != this.url){
+        this.$store.commit('setId',this.listOfSongs[this.listIndex].id);
+        this.$store.commit('setUrl',this.$store.state.HOST+url);
+        this.$store.commit('setPicUrl',this.$store.state.HOST+'/'+this.listOfSongs[this.listIndex].pic);
+        this.$store.commit('setTitle',this.listOfSongs[this.listIndex].name);
+        this.$store.commit('setArtist',this.listOfSongs[this.listIndex].singerName);
+        this.$store.commit('setLyric',this.parseLyric(this.listOfSongs[this.listIndex].lyric));
+        this.$store.commit('setIsActive',false);
+      }
+    },
+    //解析歌词
+    parseLyric(text){
+      let lines = text.split("\n");                   //将歌词按行分解成数组
+      let pattern = /\[\d{2}:\d{2}.(\d{3}|\d{2})\]/g; //时间格式的正则表达式
+      let result = [];                                //返回值
+      //对于歌词格式不对的直接返回
+      if(!(/\[.+\]/.test(text))){
+        return [[0,text]]
+      }
+      //去掉前面格式不正确的行
+      while(!pattern.test(lines[0])){
+        lines = lines.slice(1);
+      }
+      //遍历每一行，形成一个每行带着俩元素的数组，第一个元素是以秒为计算单位的时间，第二个元素是歌词
+      for(let item of lines){
+        let time = item.match(pattern);  //存前面的时间段
+        let value = item.replace(pattern,'');//存后面的歌词
+        for(let item1 of time){
+          let t = item1.slice(1,-1).split(":");   //取出时间，换算成数组
+          if(value!=''){
+            result.push([parseInt(t[0],10)*60 + parseFloat(t[1]),value]);
+          }
+        }
+      }
+      //按照第一个元素--时间--排序
+      result.sort(function(a,b){
+        return a[0] - b[0];
+      });
+      return result;
+    },
   }
 }
 </script>
