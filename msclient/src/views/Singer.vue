@@ -1,11 +1,8 @@
 <template>
   <el-tabs v-model="activeName" @tab-click="handleClick" style="padding-left: 20px">
     <el-tab-pane label="全部" name="all" @click="getSinger">
-      <div class="section" v-for="(item,index) in songsList" :key="index">
-<!--        <div class="section-title" style="text-align: center" >-->
-<!--          {{item.name}}-->
-<!--        </div>-->
-        <content-list :contentList="item.list"></content-list>
+      <div class="section">
+        <content-list :contentList="songsList"></content-list>
       </div>
     </el-tab-pane>
     <el-tab-pane label="男歌手" name="man">男歌手</el-tab-pane>
