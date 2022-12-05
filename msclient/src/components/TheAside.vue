@@ -2,14 +2,13 @@
   <transition name="slide-fade">
     <div class="the-aside" v-if="showAside">
       <h2 class="title">歌单列表</h2>
-      <ul class="menu">
+      <ul class="menus">
         <li v-for="(item,index) in listOfSongs"
             :key="index"
             :class="{'is-play': id===item.id}"
-            style="display: block"
             @click="toplay(item.id,item.url,item.pic,item.index,item.name,item.lyric)"
         >
-          {{item.name}}
+          {{item.singerName}}-{{item.name}}
         </li>
       </ul>
     </div>
