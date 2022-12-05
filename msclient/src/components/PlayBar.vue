@@ -74,7 +74,7 @@
     </div>
 
 <!--    当前播放歌曲列表-->
-    <div class="item">
+    <div class="item" @click="changeAside">
       <svg class="icon">
         <use xlink:href="#icon-liebiao"></use>
       </svg>
@@ -248,6 +248,10 @@ export default {
         this.changeTime(newPercent);
       }
     },
+    //显示播放列表
+    changeAside(){
+      this.$store.commit('setShowAside',true);
+    }
   }
 }
 </script>

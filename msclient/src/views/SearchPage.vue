@@ -62,13 +62,16 @@ export default {
       } else {
         if(!this.$route.query.keywords){
           this.$notify.warning('您输入的内容为空');
+          this.$store.commit('setListOfSongs',[]);
         }else{
           songOfSName(this.$route.query.keywords)
               .then(res =>{
                 if(res){
                   this.songMsg = res;
+                  this.$store.commit('setListOfSongs',res);
                 }else{
                   this.$notify.warning('暂无该歌曲内容');
+                  this.$store.commit('setListOfSongs',[]);
                 }
               })
         }

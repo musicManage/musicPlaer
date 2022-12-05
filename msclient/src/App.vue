@@ -5,6 +5,7 @@
       <el-main>
         <router-view class="music-content"/>
         <SongAudio/>
+        <TheAside/>
         <PlayBar/>
         <scroll-top/>
       </el-main>
@@ -19,10 +20,12 @@ import ScrollTop from "@/components/ScrollTop";
 import TheFooter from "@/components/TheFooter";
 import SongAudio from "@/components/SongAudio.vue";
 import PlayBar from "@/components/PlayBar.vue";
+import TheAside from "@/components/TheAside.vue";
 
 export default {
     name: 'App',
     components:{
+      TheAside,
       PlayBar,
       SongAudio,
       TheFooter,
