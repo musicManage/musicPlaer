@@ -21,8 +21,8 @@ import {mixin} from "@/mixins";
 
 export default {
   name: 'content-list',
-  mixins:[mixin],
   props:['contentList'],
+  mixins:[mixin],
   methods:{
     goAlbum(item,type){
       this.$store.commit("setTempList",item);
@@ -31,7 +31,8 @@ export default {
       } else {           //歌单
         this.$router.push({path:`song-list-album/${item.id}`});
       }
-    }
+    },
+
   }
 }
 </script>

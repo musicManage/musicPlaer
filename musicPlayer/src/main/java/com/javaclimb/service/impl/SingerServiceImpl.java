@@ -1,7 +1,6 @@
 package com.javaclimb.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.javaclimb.common.Constants;
 import com.javaclimb.controller.util.R;
 import com.javaclimb.entity.Singer;

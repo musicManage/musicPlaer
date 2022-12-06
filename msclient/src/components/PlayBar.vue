@@ -65,8 +65,8 @@
       </div>
 
 <!--      收藏-->
-      <div class="item">
-        <svg class="icon">
+      <div class="item" @click="collection">
+        <svg :class="{active:isActive}" class="icon">
           <use xlink:href="#icon-xihuan-shi"></use>
         </svg>
       </div>
@@ -92,7 +92,7 @@
 <script>
 import {mapGetters} from "vuex";
 import {mixin} from "@/mixins";
-import {download} from '../api/index';
+import {delCollect, download, setCollect} from '../api/index';
 
 export default {
   name: "PlayBar",
@@ -294,6 +294,19 @@ export default {
         this.$store.commit('setArtist',this.listOfSongs[this.listIndex].singerName);
         this.$store.commit('setLyric',this.parseLyric(this.listOfSongs[this.listIndex].lyric));
         this.$store.commit('setIsActive',false);
+
+        let param = new URLSearchParams();
+        param.append('userId',this.userId);
+        param.append('songId',this.listOfSongs[this.listIndex].id);
+        if(this.loginIn){
+          axios.post(`/collect/status`,param)
+              .then(res =>{
+                // console.log(res.data.code)
+                if (res.data.code == 1){
+                  this.$store.commit('setIsActive',true);
+                }
+              })
+        }
       }
     },
     //转向歌词页面
@@ -321,7 +334,32 @@ export default {
           .catch(err =>{
             console.log(err);
           })
-    }
+    },
+    //收藏
+    collection(){
+      if(this.loginIn){
+        let params = new URLSearchParams();
+        params.append('userId',this.userId);
+        params.append('type',0);
+        params.append('songId',this.id);
+        setCollect(params)
+            .then(res =>{
+              if(res.code == 1){
+                this.$store.commit('setIsActive',true);
+                this.$notify.success('收藏成功');
+              }else if(res.code == 2){
+                delCollect(params).then(res =>{
+                  this.$notify.warning("取消收藏成功");
+                  this.$store.commit('setIsActive',false);
+                })
+              }else{
+                this.$notify.error('收藏失败');
+              }
+            })
+      }else{
+        this.$notify.warning('请先登录');
+      }
+    },
   }
 }
 </script>

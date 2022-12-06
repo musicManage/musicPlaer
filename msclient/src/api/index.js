@@ -105,3 +105,10 @@ export const download = (url) => Axios({
     url: url,
     responseType: 'blob'
 });
+
+//新增收藏
+export const setCollect =(params) => post(`/collect/add`,params);
+//指定用户的收藏列表
+export const getCollectOfUserId = (userId) => get(`/collect/collectOfUserId?userId=${userId}`);
+//取消收藏
+export const delCollect = (params) => post(`/collect/delete`,params)

@@ -4,9 +4,7 @@ import com.javaclimb.controller.util.R;
 import com.javaclimb.entity.Singer;
 import com.javaclimb.service.ISingerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
