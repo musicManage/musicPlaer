@@ -15,6 +15,7 @@
     <div class="album-content">
       <div class="album-title">
           <p>{{tempList.title}}</p>
+          <br/>
       </div>
       <div class="songs-body" style="padding-top: 20px">
           <SongMsg :songMsg="listOfSongs"></SongMsg>

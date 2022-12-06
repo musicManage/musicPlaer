@@ -4,9 +4,18 @@
           <div class="singer-img">
             <img :src="attachImageUrl(tempList.pic)">
           </div>
-          <ul class="">
-
+          <ul class="info">
+            <li v-if="singer.sex==0||singer.sex==1">{{attachSex(singer.sex)}}</li>
+            <li>生日：{{attachBirth(singer.birth)}}</li>
+            <li>故乡：{{singer.location}}</li>
           </ul>
+        </div>
+        <div class="album-content">
+          <div class="intro">
+            <h2>{{singer.name}}</h2>
+            <br/>
+            <span>{{singer.introduction}}</span>
+          </div>
         </div>
     </div>
 </template>
@@ -20,7 +29,6 @@ import {songOfSId} from "@/api/";
 export default {
   name: "singer-album",
   mixins:[mixin],
-
   components: {
 
   },
@@ -37,9 +45,9 @@ export default {
     ])
   },
   created() {
-    this.singerId = this.$router.params.id;
     this.singer = this.tempList;
     this.getSongOfSingerId();
+    this.singerId = this.$router.params.id;
   },
   methods: {
     //根据歌手id查询歌曲
@@ -53,10 +61,13 @@ export default {
           })
     },
     //获取性别
-    attach(value){
-      if(value==0){
+    attachSex(value){
+      if(value == 0){
         return '女'
+      }else if(value == 1){
+        return '男'
       }
+      return ''
     }
   }
 }

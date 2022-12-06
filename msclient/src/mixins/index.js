@@ -68,5 +68,10 @@ export const mixin ={
             });
             return result;
         },
+        //获取生日
+        attachBirth(val){
+            return val.substr(0,10);
+        }
+
     }
 }

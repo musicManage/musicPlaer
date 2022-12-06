@@ -38,6 +38,7 @@ export default {
 </script>
 
 <style scoped>
+
 .content-list{
   max-width: 1240px;
   max-height: 764px;
