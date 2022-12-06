@@ -34,7 +34,7 @@
 <script>
 import {mixin} from "@/mixins";
 import {mapGetters} from "vuex";
-import {listSongOfSongId,songOfSId,songOfId} from "@/api";
+import {listSongOfSongId,songOfId} from "@/api";
 import SongMsg from "@/components/SongMsg";
 
 export default {
