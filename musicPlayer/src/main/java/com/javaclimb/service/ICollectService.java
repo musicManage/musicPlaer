@@ -42,4 +42,8 @@ public interface ICollectService {
      */
     public R collectionOfUser(Integer userId);
 
+    /**
+     * 通过歌名查找
+     */
+    public R selectByName(String name,Integer userId);
 }

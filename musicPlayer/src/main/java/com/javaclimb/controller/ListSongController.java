@@ -39,8 +39,8 @@ public class ListSongController {
         return iListSongService.allSongInList(songListId).getData();
     }
 
-    @GetMapping("/{id}/{songName}")
-    public Object listSongOfSongId(@PathVariable(value = "id") int songListId,@PathVariable(value = "songName") String songName) {
+    @GetMapping("/name/{id}/{name}")
+    public Object listSongOfSongId(@PathVariable(value = "id") int songListId,@PathVariable(value = "name") String songName) {
         return iListSongService.listSongOfSongName(songListId,songName).getData();
     }
 

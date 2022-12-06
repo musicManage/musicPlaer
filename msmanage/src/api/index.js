@@ -57,6 +57,9 @@ export const delListSong = (params) => post(`listSong/delete`,params);
 //添加歌曲到歌单中
 export const addSongInList = (params) => post('listSong/add',params);
 
+//搜索歌单里的歌曲
+export const selectSongsINSongList = (id,name) => get(`listSong/name/${id}/${name}`);
+
 //添加用户
 export const addConsumer = (params) => post(`consumer/add`,params);
 
@@ -75,3 +78,10 @@ export const consumerOfName = (name) => get(`consumer/name/${name}`);
 //检测用户名是否重复
 export const verifyUsername = (name) => get(`consumer/verify/${name}`);
 
+//指定用户的收藏列表
+export const getCollectOfUserId = (userId) => get(`/collect/userId/${userId}`);
+//删除用户收藏的歌曲
+export const deleteCollection = (userId,songId) => post(`collect/delete/${userId}/${songId}`);
+
+//通过歌名搜索某个用户的收藏歌
+export const selectCollectByName = (userId,name) => get(`collect/name/${userId}/${name}`);

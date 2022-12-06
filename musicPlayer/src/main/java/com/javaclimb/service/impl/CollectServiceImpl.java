@@ -109,4 +109,28 @@ public class CollectServiceImpl implements ICollectService {
         );
         return  R.success(null,songInCollects);
     }
+
+    /**
+     * 通过歌名查找
+     *
+     * @param name
+     */
+    @Override
+    public R selectByName(String name,Integer userId) {
+        List<SongInCollect> songInCollects = collectMapper.selectJoinList(SongInCollect.class,
+                new MPJLambdaWrapper<Collect>()
+                        .selectAll(Collect.class)
+                        .selectAs(Song::getName,SongInCollect::getName)
+                        .selectAs(Singer::getName,SongInCollect::getSingerName)
+                        .selectAs(Song::getIntroduction,SongInCollect::getIntroduction)
+                        .selectAs(Song::getUrl,SongInCollect::getUrl)
+                        .selectAs(Song::getPic,SongInCollect::getPic)
+                        .selectAs(Song::getLyric,SongInCollect::getLyric)
+                        .innerJoin(Song.class, Song::getId, Collect::getSongId)
+                        .innerJoin(Singer.class,Singer::getId,Song::getSingerId)
+                        .like(Song::getName,name)
+                        .eq(Collect::getUserId,userId)
+        );
+        return  R.success(null,songInCollects);
+    }
 }

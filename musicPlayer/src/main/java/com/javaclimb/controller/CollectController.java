@@ -30,8 +30,8 @@ public class CollectController {
     }
 
     // 取消收藏的歌曲
-    @PostMapping("/delete")
-    public R deleteCollection(@RequestParam Integer userId, @RequestParam Integer songId) {
+    @PostMapping("/delete/{userId}/{songId}")
+    public R deleteCollection(@PathVariable Integer userId, @PathVariable Integer songId) {
         return iCollectService.deleteCollect(userId, songId);
     }
 
@@ -45,5 +45,11 @@ public class CollectController {
     @GetMapping("/userId/{userId}")
     public R collectionOfUser(@PathVariable Integer userId) {
         return iCollectService.collectionOfUser(userId);
+    }
+
+    //通过歌名查找
+    @GetMapping("/name/{userId}/{name}")
+    public R selectOfName(@PathVariable String name,@PathVariable Integer userId){
+        return iCollectService.selectByName(name,userId);
     }
 }

@@ -115,3 +115,4 @@ export const delCollect = (params) => post(`/collect/delete`,params)
 
 //根据id查用户信息
 export const getUserById = (id) => get(`/consumer/id/${id}`);
+

@@ -66,12 +66,8 @@
 </template>
 
 <script>
-import { mixin } from '../mixins/index';
-import {
-  delListSong,
-  listSongOfSongId,
-  allSinger, songOfSId, addSongInList
-} from '../api/index';
+import {mixin} from '../mixins/index';
+import {addSongInList, allSinger, delListSong, listSongOfSongId, selectSongsINSongList, songOfSId} from '../api/index';
 
 export default {
   mixins: [mixin],
@@ -96,20 +92,12 @@ export default {
     }
   },
   watch:{
-    singerList() {
-      if (this.select_word == ''){
-        this.getData();
-      } else {
-        this.tableData = [];
-        this.tableData = this.singerList;
-      }
-    },
     singerId(newV,oldV) {
       if (newV != oldV) {
         this.registerForm.songId = '';
         songOfSId(this.registerForm.singerId)
             .then(res => {
-              this.songList = res.data;
+              this.songList = res;
             })
       };
     },
@@ -160,7 +148,10 @@ export default {
                 title: '添加成功',
                 type: 'success',
               });
+              this.centerDialogVisible = false;
               this.getData();
+              this.registerForm.singerId='';
+              this.registerForm.songId='';
             } else {
               this.$notify({
                 title: '添加失败',
@@ -169,6 +160,7 @@ export default {
               });
             }
           })
+
     },
     //删除一条歌曲
     deleteRow(){
@@ -199,11 +191,9 @@ export default {
       this.currentPage = val;
     },
     selectSingerList(){
-      const name = this.select_word;
-      const id = this.songListId;
-      axios.get(`/listSong/${id}/${name}`).then(res => {
-        // console.log(res.data);
-        this.singerList = res.data;
+      selectSongsINSongList(this.songListId,this.select_word).then(res => {
+        this.singerList = res;
+        this.tableData = this.singerList;
       })
     },
   }

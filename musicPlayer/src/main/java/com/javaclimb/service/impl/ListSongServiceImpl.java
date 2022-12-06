@@ -1,5 +1,6 @@
 package com.javaclimb.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import com.javaclimb.controller.util.R;
@@ -37,11 +38,17 @@ public class ListSongServiceImpl implements IListSongService {
      */
     @Override
     public R insert(ListSong listSong) {
-            if (listSongMapper.insert(listSong) > 0) {
-                return R.success("添加成功");
-            } else {
-                return R.error("添加失败");
-            }
+        LambdaQueryWrapper<ListSong> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(ListSong::getSongId,listSong.getSongId());
+        wrapper.eq(ListSong::getSongListId,listSong.getSongListId());
+        if (listSongMapper.selectList(wrapper).size()>0){
+            return R.error("添加失败");
+        }
+        if (listSongMapper.insert(listSong) > 0) {
+            return R.success("添加成功");
+        } else {
+            return R.error("添加失败");
+        }
 
     }
 
