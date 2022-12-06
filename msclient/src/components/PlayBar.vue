@@ -1,5 +1,10 @@
 <template>
-  <div class="play-bar">
+  <div class="play-bar" :class="{show:!toggle}">
+    <div @click="toggle=!toggle" class="item-up" :class="{turn: toggle}">
+      <svg class="icon">
+        <use xlink:href="#icon-jiantou-xia-cuxiantiao"></use>
+      </svg>
+    </div>
     <div class="kongjian">
 <!--      上一首-->
       <div class="item" @click="prev">
@@ -20,7 +25,7 @@
         </svg>
       </div>
 <!--      歌曲图片-->
-      <div class="item-img">
+      <div class="item-img" @click="toLyric">
         <img :src="picUrl"/>
       </div>
 <!--      播放进度-->
@@ -67,7 +72,7 @@
       </div>
 
 <!--    下载-->
-    <div class="item">
+    <div class="item" @click="downloadSong">
       <svg class="icon">
         <use xlink:href="#icon-xiazai"></use>
       </svg>
@@ -87,6 +92,7 @@
 <script>
 import {mapGetters} from "vuex";
 import {mixin} from "@/mixins";
+import {download} from '../api/index';
 
 export default {
   name: "PlayBar",
@@ -290,7 +296,32 @@ export default {
         this.$store.commit('setIsActive',false);
       }
     },
-
+    //转向歌词页面
+    toLyric(){
+      this.$router.push({path:`/lyric`});
+    },
+    //下载歌曲
+    downloadSong(){
+      download(this.url)
+          .then(res=>{
+            let content = res.data;
+            let eleLink = document.createElement('a');
+            eleLink.download = `${this.artist}-${this.title}.mp3`;
+            eleLink.style.display = 'none';
+            //把字符内容转换成blob地址
+            let blob = new Blob([content]);
+            eleLink.href = URL.createObjectURL(blob);
+            //把链接地址加到document里
+            document.body.appendChild(eleLink);
+            //触发点击
+            eleLink.click();
+            //然后移除掉这个新加的控件
+            document.body.removeChild(eleLink);
+          })
+          .catch(err =>{
+            console.log(err);
+          })
+    }
   }
 }
 </script>

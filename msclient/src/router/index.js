@@ -7,6 +7,7 @@ import SongList from "@/views/SongList";
 import SearchPage from "@/views/SearchPage";
 import SingerAlbum from "@/views/SingerAlbum";
 import SongListAlbum from "@/views/SongListAlbum";
+import Lyric from "@/views/Lyric.vue";
 
 Vue.use(VueRouter)
 
@@ -45,6 +46,11 @@ const routes = [
         path: '/song-list-album/:id',
         name: 'song-list-album',
         component: SongListAlbum
+    },
+    {
+        path: '/lyric',
+        name: 'lyricc',
+        component: Lyric
     },
 ]
 

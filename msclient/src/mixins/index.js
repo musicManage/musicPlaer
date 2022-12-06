@@ -12,7 +12,8 @@ export const mixin ={
             this.$store.commit('setListIndex',index);
             this.$store.commit('setTitle',songName);
             this.$store.commit('setArtist',singerName);
-            this.$store.commit('setLyric',lyric);
+            this.$store.commit('setLyric',this.parseLyric(lyric));
+            // console.log(index);
         },
         //解析歌词
         parseLyric(text){

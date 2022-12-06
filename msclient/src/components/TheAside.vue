@@ -6,7 +6,7 @@
         <li v-for="(item,index) in listOfSongs"
             :key="index"
             :class="{'is-play': id===item.id}"
-            @click="toplay(item.id,item.url,item.pic,item.index,item.name,item.singerName,item.lyric)"
+            @click="toplay(item.id,item.url,item.pic,index,item.name,item.singerName,item.lyric)"
         >
           {{item.singerName}}-{{item.name}}
         </li>
@@ -40,7 +40,7 @@ export default {
     removeAside(){
       let _this = this;
       _this.$store.commit('setShowAside',false);
-    }
+    },
   }
 }
 </script>
