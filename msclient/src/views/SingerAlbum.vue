@@ -16,6 +16,12 @@
             <br/>
             <span>{{singer.introduction}}</span>
           </div>
+
+          <div class="content">
+            <content-list :songList="listOfSongs">
+              <template slot="title">歌单</template>
+            </content-list>
+          </div>
         </div>
     </div>
 </template>
@@ -24,12 +30,14 @@
 import {mixin} from "@/mixins";
 import {mapGetters} from "vuex";
 import {songOfSId} from "@/api/";
+import ContentList from "@/components/ContentList.vue";
 
 
 export default {
   name: "singer-album",
   mixins:[mixin],
   components: {
+    ContentList
 
   },
   data(){
