@@ -30,13 +30,11 @@ import {mixin} from "@/mixins";
 import {mapGetters} from "vuex";
 import {listSongOfSongId} from "@/api";
 import SongMsg from "@/components/SongMsg";
-import SongMsg2 from "@/components/SongMsg2.vue";
 
 export default {
   name: "song-list-album",
   mixins:[mixin],
   components: {
-    SongMsg2,
     SongMsg
   },
   data(){

@@ -206,7 +206,7 @@ export default {
       this.tableData=[];
       songOfSId(this.singerId)
           .then(res => {
-            this.tableData = res.data;
+            this.tableData = res;
           })
     },
     addSong(){

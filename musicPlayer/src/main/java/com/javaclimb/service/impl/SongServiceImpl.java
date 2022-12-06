@@ -1,6 +1,5 @@
 package com.javaclimb.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import com.javaclimb.common.Constants;
 import com.javaclimb.controller.util.R;
@@ -159,9 +158,14 @@ public class SongServiceImpl implements ISongService {
      */
     @Override
     public R songOfSingerID(Integer singerID) {
-        LambdaQueryWrapper<Song> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-        lambdaQueryWrapper.like(true,Song::getSingerId,singerID);
-        return R.success(null,songMapper.selectList(lambdaQueryWrapper));
+        List<SongAndSingerVo> songAndSingerVos = songMapper.selectJoinList(SongAndSingerVo.class,
+                new MPJLambdaWrapper<Song>()
+                        .selectAll(Song.class)
+                        .selectAs(Singer::getName,SongAndSingerVo::getSingerName)
+                        .innerJoin(Singer.class,Singer::getId,Song::getSingerId)
+                        .eq(Song::getSingerId,singerID)
+        );
+        return  R.success(null,songAndSingerVos);
     }
 
     @Override

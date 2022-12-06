@@ -74,8 +74,8 @@ public class SongController {
      * 根据歌手ID查询
      */
     @GetMapping("/singer/{singerId}")
-    public R selectOfSId(@PathVariable(value = "singerId") Integer singerId){
-        return iSongService.songOfSingerID(singerId);
+    public Object selectOfSId(@PathVariable(value = "singerId") Integer singerId){
+        return iSongService.songOfSingerID(singerId).getData();
     }
 
     /**

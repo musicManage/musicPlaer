@@ -47,6 +47,8 @@ export default {
     return{
     }
   },
+  created() {
+  },
   computed:{
 
   },
@@ -62,5 +64,7 @@ export default {
 </script>
 
 <style scoped>
-
+.el-table {
+  min-height: 300px;
+}
 </style>
