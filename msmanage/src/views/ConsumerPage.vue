@@ -157,17 +157,11 @@
 </template>
 
 <script>
-import {
-  addConsumer,
-  allConsumer,
-  consumerOfName,
-  delConsumer,
-  updateConsumer,
-  verifyUsername
-} from "@/api/index"
+import {addConsumer, allConsumer, consumerOfName, delConsumer, updateConsumer, verifyUsername} from "@/api/index"
 import {mixin} from "@/mixins";
 import {provinceAndCityData} from "element-china-area-data";
 import {CodeToText, TextToCode} from "element-china-area-data/dist/app";
+
 export default {
   mixins:[mixin],
   data() {
@@ -423,11 +417,16 @@ export default {
     },
     ChangeArr1(val){
       this.arr2 = [];
-      let arr3 = val.split('-');
-      this.arr2.push(`${TextToCode[arr3[0]].code}`);
-      this.arr2.push(`${TextToCode[arr3[0]][arr3[1]].code}`);
+      if (val) {
+        let arr3 = val.split('-');
+        this.arr2.push(`${TextToCode[arr3[0]].code}`);
+        this.arr2.push(`${TextToCode[arr3[0]][arr3[1]].code}`);
+      }
     },
-
+    //转向该用户的收藏列表
+    getCollect(id){
+      this.$router.push({path:`/Collect`,query:{id}});
+    }
   },
 }
 </script>

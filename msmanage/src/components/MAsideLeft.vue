@@ -3,7 +3,7 @@
        :class="collapse ? 'noSpan':''">
     <el-menu
         :collapse="collapse"
-        :default-active="defaultIndex"
+        :default-active="activeIndex"
         class="el-menu-vertical-demo"
         background-color="#334256"
         text-color="#fff"
@@ -23,6 +23,7 @@
 
 <script>
 import bus from "@/assets/js/bus"
+
 export default {
   data() {
     return {
@@ -30,37 +31,43 @@ export default {
       items:[
         {
           icon: 'el-icon-house',
-          index: "Index",
+          index: "/Index",
           title: '系统首页'
         },
         {
           icon: 'el-icon-user',
-          index: "Consumer",
+          index: "/Consumer",
           title: '用户管理'
         },
         {
           icon: 'el-icon-headset',
-          index: "Singer",
+          index: "/Singer",
           title: '歌手管理'
         },
         {
           icon: 'el-icon-document',
-          index: "SongList",
+          index: "/SongList",
           title: '歌单管理'
         },
       ],
-      defaultIndex:'Index'
+      activeIndex:'Index'
     }
   },
   created() {
     //通过Bus进行组件间的通信，来折叠侧边栏
     bus.$on('collapse',msg =>{
       this.collapse = msg;
-    })
+    });
+    this.setCurrentRoute();
+  },
+  watch:{
+    $route(){
+      this.setCurrentRoute();
+    }
   },
   methods: {
-    changeIndex(row){
-      this.defaultIndex = row.index;
+    setCurrentRoute(){
+      this.activeIndex = this.$route.path;
     }
   }
 }

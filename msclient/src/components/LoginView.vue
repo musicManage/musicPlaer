@@ -237,7 +237,6 @@ export default {
       code:'',//验证码
       options: provinceAndCityData,//地区选择
       arr:[],
-      logined:false,
     }
   },
   created() {
@@ -280,13 +279,13 @@ export default {
       verifyPass(param)
           .then(res => {
             if (res.code === 1){
-              this.$notify.success("登录成功");
               this.LoginVisible = false;
+              let userForm = res.data;
               this.$store.commit('setLoginIn',true);
-              this.$store.commit('setUserId',res.data.id);
-              this.$store.commit('setUsername',res.data.username);
-              this.$store.commit('setAvator',res.data.avator);
-              this.logined = true;
+              this.$store.commit('setUserId',userForm.id);
+              this.$store.commit('setUsername',userForm.username);
+              this.$store.commit('setAvator',userForm.avator);
+              this.$notify.success("登录成功");
             } else {
               this.$notify({
                 title:"登录失败",

@@ -119,6 +119,7 @@
 <script>
 import {allSongList, delSongList, setSongList, updateSongList} from "@/api/index"
 import {mixin} from "@/mixins";
+
 export default {
   mixins:[mixin],
   data() {
@@ -309,7 +310,7 @@ export default {
       this.delVisible = false;
     },
     //转向歌曲管理页面
-    songEdit(id,name){
+    songEdit(id){
       this.$router.push({path:`/ListSong`,query:{id}});
     },
   }

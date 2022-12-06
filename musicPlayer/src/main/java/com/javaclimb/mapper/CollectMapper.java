@@ -1,6 +1,6 @@
 package com.javaclimb.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.github.yulichang.base.MPJBaseMapper;
 import com.javaclimb.entity.Collect;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,6 +13,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2022-12-06
  */
 @Mapper
-public interface CollectMapper extends BaseMapper<Collect> {
+public interface CollectMapper extends MPJBaseMapper<Collect> {
 
 }

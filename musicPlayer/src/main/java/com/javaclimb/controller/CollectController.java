@@ -42,8 +42,8 @@ public class CollectController {
     }
 
     // 返回的指定用户 ID 收藏的列表
-    @GetMapping("/detail")
-    public R collectionOfUser(@RequestParam Integer userId) {
+    @GetMapping("/userId/{userId}")
+    public R collectionOfUser(@PathVariable Integer userId) {
         return iCollectService.collectionOfUser(userId);
     }
 }

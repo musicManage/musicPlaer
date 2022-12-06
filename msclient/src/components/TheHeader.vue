@@ -99,7 +99,6 @@ export default {
   },
   created() {
     this.navMsg = navMsg;
-    this.loginedStatus();
   },
   computed: {
     userName() {
@@ -140,15 +139,9 @@ export default {
         this.$store.commit('setUserId','');
         this.$store.commit('setUsername','');
         this.$store.commit('setAvator','');
-        localStorage.clear();
-        this.logined = false;
       }
     },
-    loginedStatus(){
-      if (localStorage.getItem('username')){
-        this.logined = true;
-      };
-    },
+
   },
 }
 </script>

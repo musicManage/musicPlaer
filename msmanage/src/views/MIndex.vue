@@ -135,7 +135,7 @@ export default {
       },
     }
   },
-  mounted() {
+  created() {
     this.getConsumer();
     this.getSong();
     this.getSinger();

@@ -1,12 +1,19 @@
 package com.javaclimb.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import com.javaclimb.controller.util.R;
 import com.javaclimb.entity.Collect;
+import com.javaclimb.entity.Singer;
+import com.javaclimb.entity.Song;
 import com.javaclimb.mapper.CollectMapper;
 import com.javaclimb.service.ICollectService;
+import com.javaclimb.vo.SongInCollect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -34,6 +41,7 @@ public class CollectServiceImpl implements ICollectService {
         if (existSongId(addCollect).getFlag()){
             return R.warning("已经收藏过了");
         }
+        addCollect.setCreateTime(new Date());
         if (collectMapper.insert(addCollect) > 0) {
             return R.success("收藏成功", true);
         } else {
@@ -86,8 +94,19 @@ public class CollectServiceImpl implements ICollectService {
      */
     @Override
     public R collectionOfUser(Integer userId) {
-        QueryWrapper<Collect> queryWrapper = new QueryWrapper();
-        queryWrapper.eq("user_id",userId);
-        return R.success("用户收藏", collectMapper.selectList(queryWrapper));
+        List<SongInCollect> songInCollects = collectMapper.selectJoinList(SongInCollect.class,
+                new MPJLambdaWrapper<Collect>()
+                        .selectAll(Collect.class)
+                        .selectAs(Song::getName,SongInCollect::getName)
+                        .selectAs(Singer::getName,SongInCollect::getSingerName)
+                        .selectAs(Song::getIntroduction,SongInCollect::getIntroduction)
+                        .selectAs(Song::getUrl,SongInCollect::getUrl)
+                        .selectAs(Song::getPic,SongInCollect::getPic)
+                        .selectAs(Song::getLyric,SongInCollect::getLyric)
+                        .innerJoin(Song.class, Song::getId, Collect::getSongId)
+                        .innerJoin(Singer.class,Singer::getId,Song::getSingerId)
+                        .eq(Collect::getUserId,userId)
+        );
+        return  R.success(null,songInCollects);
     }
 }

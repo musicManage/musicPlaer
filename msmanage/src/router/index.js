@@ -8,6 +8,7 @@ import SongListPage from "@/views/SongListPage";
 import ConsumerPage from "@/views/ConsumerPage";
 import SongPage from "@/views/SongPage";
 import ListSongPage from "@/views/ListSongPage";
+import CollectPage from "@/views/CollectPage.vue";
 
 Vue.use(VueRouter)
 
@@ -68,6 +69,14 @@ const routes = [
         path: '/ListSong',
         name: 'ListSong',
         component: ListSongPage,
+        meta: {
+          requireAuth: true
+        },
+      },
+      {
+        path: '/Collect',
+        name: 'Collect',
+        component: CollectPage,
         meta: {
           requireAuth: true
         },

@@ -11,7 +11,9 @@ export const mixin ={
     methods: {
         //获取图片地址
         attachImageUrl (srcUrl){
-            return `${this.$store.state.HOST}/${srcUrl}`;
+            if (srcUrl){
+                return `${this.$store.state.HOST}/${srcUrl}`;
+            }
         },
         //播放
         toplay: function (id,url,pic,index,songName,singerName,lyric){
@@ -26,7 +28,7 @@ export const mixin ={
 
             let param = new URLSearchParams();
             param.append('userId',this.userId);
-            param.append('songId',this.id);
+            param.append('songId',id);
             if(this.loginIn){
                 axios.post(`/collect/status`,param)
                     .then(res =>{

@@ -1,4 +1,4 @@
-package com.javaclimb.entity;
+package com.javaclimb.vo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -6,8 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -20,7 +19,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Collect implements Serializable {
+public class SongInCollect{
 
     private static final long serialVersionUID = 1L;
 
@@ -53,6 +52,36 @@ public class Collect implements Serializable {
     /**
      * 收藏时间
      */
-    private Date createTime;
+    private LocalDateTime createTime;
+
+    /**
+     * 歌名
+     */
+    private String name;
+
+    /**
+     * 歌手
+     */
+    private String singerName;
+
+    /**
+     * 专辑
+     */
+    private String introduction;
+
+    /**
+     * 歌曲图片
+     */
+    private String pic;
+
+    /**
+     * 歌词
+     */
+    private String lyric;
+
+    /**
+     * 歌曲地址
+     */
+    private String url;
 
 }
