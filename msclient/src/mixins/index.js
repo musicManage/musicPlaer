@@ -1,4 +1,13 @@
+import {mapGetters} from 'vuex';
+
 export const mixin ={
+    computed:{
+      ...mapGetters([
+          'userId',
+          'id',
+          'loginIn',
+      ])
+    },
     methods: {
         //获取图片地址
         attachImageUrl (srcUrl){
@@ -13,6 +22,20 @@ export const mixin ={
             this.$store.commit('setTitle',songName);
             this.$store.commit('setArtist',singerName);
             this.$store.commit('setLyric',this.parseLyric(lyric));
+            this.$store.commit('setIsActive',false);
+
+            let param = new URLSearchParams();
+            param.append('userId',this.userId);
+            param.append('songId',this.id);
+            if(this.loginIn){
+                axios.post(`/collect/status`,param)
+                    .then(res =>{
+                        // console.log(res.data.code)
+                        if (res.data.code == 1){
+                            this.$store.commit('setIsActive',true);
+                        }
+                    })
+            }
             // console.log(index);
         },
         //解析歌词

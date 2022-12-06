@@ -2,9 +2,6 @@ package com.javaclimb.service;
 
 import com.javaclimb.controller.util.R;
 import com.javaclimb.entity.ListSong;
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.javaclimb.entity.Song;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  * <p>

@@ -2,7 +2,6 @@ package com.javaclimb.mapper;
 
 import com.github.yulichang.base.MPJBaseMapper;
 import com.javaclimb.entity.ListSong;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

@@ -96,7 +96,7 @@
 </template>
 
 <script>
-import {provinceAndCityData,CodeToText} from "element-china-area-data";
+import {CodeToText, provinceAndCityData} from "element-china-area-data";
 import {addConsumer, getEmail, setPass, verifyEmail, verifyPass, verifyUsername} from "@/api";
 import bus from "@/assets/js/bus";
 
@@ -281,13 +281,12 @@ export default {
           .then(res => {
             if (res.code === 1){
               this.$notify.success("登录成功");
-              this.loginedForm = res.data;
-              console.log(this.loginedForm);
               this.LoginVisible = false;
-              localStorage.setItem('username',this.loginForm.username);
-              localStorage.setItem('pic',this.loginedForm.avator);
+              this.$store.commit('setLoginIn',true);
+              this.$store.commit('setUserId',res.data.id);
+              this.$store.commit('setUsername',res.data.username);
+              this.$store.commit('setAvator',res.data.avator);
               this.logined = true;
-              bus.$emit('logined',this.logined);
             } else {
               this.$notify({
                 title:"登录失败",

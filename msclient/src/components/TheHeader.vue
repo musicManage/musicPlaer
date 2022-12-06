@@ -28,12 +28,12 @@
     </div>
 
 <!--    登录前-->
-    <div class="header-right" v-if="!logined">
+    <div class="header-right" v-if="!loginIn">
       <span class="rightWord" @click="LoginView">登录</span>
     </div>
 
 <!--    登录后的状态-->
-    <div class="header-right" v-if="logined">
+    <div class="header-right" v-if="loginIn">
       <div class="admin-box">
         <img :src="attachImageUrl(pic)" alt=""/>
       </div>
@@ -60,6 +60,7 @@ import {mixin} from "@/mixins";
 import {navMsg} from '../assets/data/header';
 import bus from "@/assets/js/bus";
 import LoginView from "@/components/LoginView";
+import {mapGetters} from "vuex";
 
 
 export default {
@@ -91,17 +92,14 @@ export default {
           name: 'MyMusic'
         },
       ],
-      logined:false,
       LoginVisible:false,
       registerVisible:false,
+      navMsg:[],
     }
   },
   created() {
     this.navMsg = navMsg;
     this.loginedStatus();
-    bus.$on('logined',msg =>{
-      this.logined = msg;
-    })
   },
   methods: {
     goSearch(){//搜索按钮点击后的事件
@@ -117,6 +115,10 @@ export default {
     handleCommand(command) {
       if (command === "logout"){
         this.$router.push('/');
+        this.$store.commit('setLoginIn',false);
+        this.$store.commit('setUserId','');
+        this.$store.commit('setUsername','');
+        this.$store.commit('setAvator','');
         localStorage.clear();
         this.logined = false;
       }
@@ -129,20 +131,24 @@ export default {
   },
   computed: {
     userName() {
-      if (this.logined === false){
+      if (this.loginIn === false){
         return '';
       } else {
-        return localStorage.getItem('username');
+        return this.username;
       }
     },
     pic() {
-      if (this.logined === false){
+      if (this.loginIn === false){
         return '';
       } else {
-        return localStorage.getItem('pic');
+        return this.avator;
       }
-
     },
+    ...mapGetters([
+        'username',
+        'avator',
+        'loginIn'
+    ])
   }
 }
 </script>

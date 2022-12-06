@@ -1,11 +1,8 @@
 package com.javaclimb.controller.util;
 
-import com.javaclimb.entity.Singer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -53,6 +50,14 @@ public class R {
         R r = success(msg);
         r.setFlag(false);
         r.setCode(0);
+
+        return r;
+    }
+
+    public static R warning(String msg){
+        R r = success(msg);
+        r.setFlag(false);
+        r.setCode(2);
 
         return r;
     }
