@@ -78,16 +78,16 @@ export default {
           name: 'home',
         },
         {
-          index: "Singer",
+          index: "/Singer",
           label: '歌手',
           name: 'singer',
         },
         {
-          index: "SongList",
+          index: "/SongList",
           label: '歌单',
           name: 'song-list'
         },{
-          index: "MyMusic",
+          index: "/MyMusic",
           label: '我的音乐',
           name: 'MyMusic'
         },
