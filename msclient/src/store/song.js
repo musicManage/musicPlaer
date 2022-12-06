@@ -19,7 +19,7 @@ const song = {
         picUrl: '', //歌曲图片
         autoNext:true,//自动播放下一个
         lyric:[], //未处理的歌词数据
-        tempList:{}, //单个歌单信息
+        tempList:{}, //单个歌单信息或歌手信息
         listIndex: null,//当前歌曲在歌单在的位置
         volume: 50, //音量
     },

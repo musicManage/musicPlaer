@@ -111,11 +111,15 @@ export default {
         })
       }
     },
-
-    handleClick(tab, event) {
-      console.log(tab, event);
-    }
-  }
+    goAlbum(item,type){
+      this.$store.commit("setTempList".item);
+          if(type){         //歌手
+              this.$router.push({path:`singer-album/${item.id}`});
+          } else {           //歌单
+              this.$router.push({path:`song-list-album/${item.id}`});
+          }
+        }
+      }
 }
 // methods:{
 // goAlbum(item,type){

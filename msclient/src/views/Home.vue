@@ -19,6 +19,8 @@ import contentList from "@/components/ContentList";
 import TheFooter from "@/components/TheFooter";
 import SongList from "@/views/SongList";
 import Singer from "@/views/Singer";
+import SingerAlbum from "@/views/SingerAlbum";
+import SongListAlbum from "@/views/SongListAlbum";
 
 export default {
   name: "home",
@@ -27,7 +29,9 @@ export default {
     Swiper,
     contentList,
     SongList,
-    Singer
+    Singer,
+    SongListAlbum,
+    SingerAlbum
   },
   data() {
     return {
