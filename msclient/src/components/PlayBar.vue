@@ -1,8 +1,13 @@
 <template>
-  <div class="play-bar">
+  <div class="play-bar" :class="{show:!toggle}">
+    <div @click="toggle=!toggle" class="item-up" :class="{turn: toggle}">
+      <svg class="icon">
+        <use xlink:href="#icon-jiantou-xia-cuxiantiao"></use>
+      </svg>
+    </div>
     <div class="kongjian">
 <!--      上一首-->
-      <div class="item">
+      <div class="item" @click="prev">
         <svg class="icon">
           <use xlink:href="#icon-ziyuanldpi"></use>
         </svg>
@@ -14,13 +19,13 @@
         </svg>
       </div>
 <!--      下一首-->
-      <div class="item">
+      <div class="item" @click="next">
         <svg class="icon">
           <use xlink:href="#icon-ziyuanldpi1"></use>
         </svg>
       </div>
 <!--      歌曲图片-->
-      <div class="item-img">
+      <div class="item-img" @click="toLyric">
         <img :src="picUrl"/>
       </div>
 <!--      播放进度-->
@@ -67,7 +72,7 @@
       </div>
 
 <!--    下载-->
-    <div class="item">
+    <div class="item" @click="downloadSong">
       <svg class="icon">
         <use xlink:href="#icon-xiazai"></use>
       </svg>
@@ -87,6 +92,7 @@
 <script>
 import {mapGetters} from "vuex";
 import {mixin} from "@/mixins";
+import {download} from '../api/index';
 
 export default {
   name: "PlayBar",
@@ -145,6 +151,10 @@ export default {
     volume(){
       this.$store.commit('setVolume',this.volume / 100);
     },
+    //自动播放下一首
+    autoNext(){
+      this.next();
+    }
   },
   mounted() {
     this.progressLength = this.$refs.progress.getBoundingClientRect().width;
@@ -251,6 +261,66 @@ export default {
     //显示播放列表
     changeAside(){
       this.$store.commit('setShowAside',true);
+    },
+    //上一首
+    prev(){
+      if(this.listIndex != -1 && this.listOfSongs.length > 1){    //当前处于不可能状态或者只有只有一首音乐的时候不执行）
+        if(this.listIndex > 0){                                 //不是第一首音乐
+          this.$store.commit('setListIndex',this.listIndex - 1);  //直接返回上一首
+        }else{                                                  //当前是第一首音乐
+          this.$store.commit('setListIndex',this.listOfSongs.length - 1);  //切换到倒数第一首
+        }
+        this.toplay1(this.listOfSongs[this.listIndex].url);
+      }
+    },
+    //下一首
+    next(){
+      if(this.listIndex != -1 && this.listOfSongs.length > 1){    //当前处于不可能状态或者只有只有一首音乐的时候不执行）
+        if(this.listIndex < this.listOfSongs.length - 1){                                 //不是最后一首音乐
+          this.$store.commit('setListIndex',this.listIndex + 1);  //直接返回下一首
+        }else{                                                      //当前是最后一首音乐
+          this.$store.commit('setListIndex',0);  //切换到第一首
+        }
+        this.toplay1(this.listOfSongs[this.listIndex].url);
+      }
+    },
+    //播放音乐
+    toplay1: function(url){
+      if(url && url != this.url){
+        this.$store.commit('setId',this.listOfSongs[this.listIndex].id);
+        this.$store.commit('setUrl',this.$store.state.HOST+url);
+        this.$store.commit('setPicUrl',this.$store.state.HOST+'/'+this.listOfSongs[this.listIndex].pic);
+        this.$store.commit('setTitle',this.listOfSongs[this.listIndex].name);
+        this.$store.commit('setArtist',this.listOfSongs[this.listIndex].singerName);
+        this.$store.commit('setLyric',this.parseLyric(this.listOfSongs[this.listIndex].lyric));
+        this.$store.commit('setIsActive',false);
+      }
+    },
+    //转向歌词页面
+    toLyric(){
+      this.$router.push({path:`/lyric`});
+    },
+    //下载歌曲
+    downloadSong(){
+      download(this.url)
+          .then(res=>{
+            let content = res.data;
+            let eleLink = document.createElement('a');
+            eleLink.download = `${this.artist}-${this.title}.mp3`;
+            eleLink.style.display = 'none';
+            //把字符内容转换成blob地址
+            let blob = new Blob([content]);
+            eleLink.href = URL.createObjectURL(blob);
+            //把链接地址加到document里
+            document.body.appendChild(eleLink);
+            //触发点击
+            eleLink.click();
+            //然后移除掉这个新加的控件
+            document.body.removeChild(eleLink);
+          })
+          .catch(err =>{
+            console.log(err);
+          })
     }
   }
 }

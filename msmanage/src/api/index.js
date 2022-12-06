@@ -74,3 +74,4 @@ export const consumerOfName = (name) => get(`consumer/name/${name}`);
 
 //检测用户名是否重复
 export const verifyUsername = (name) => get(`consumer/verify/${name}`);
+

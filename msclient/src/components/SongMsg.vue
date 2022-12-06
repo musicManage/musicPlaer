@@ -4,6 +4,7 @@
         :data="songMsg"
         style="width: 100%"
         @row-dblclick="toplays"
+        :row-class-name="tableRowClassName"
     >
       <el-table-column
           type="index"
@@ -44,7 +45,6 @@ export default {
   mixins:[mixin],
   data(){
     return{
-
     }
   },
   computed:{
@@ -52,7 +52,10 @@ export default {
   },
   methods:{
     toplays(row){
-      this.toplay(row.id,row.url,row.pic,row.index,row.name,row.singerName,row.lyric);
+      this.toplay(row.id,row.url,row.pic,row.row_index,row.name,row.singerName,row.lyric);
+    },
+    tableRowClassName({row, rowIndex}) {
+      row.row_index = rowIndex;
     }
   }
 }
