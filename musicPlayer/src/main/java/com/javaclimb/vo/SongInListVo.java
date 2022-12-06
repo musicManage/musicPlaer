@@ -30,6 +30,26 @@ public class SongInListVo {
     private String songName;
 
     /**
+     * 歌手名
+     */
+    private String singerName;
+
+    /**
+     * 歌曲文件
+     */
+    private String url;
+
+    /**
+     * 歌曲图片
+     */
+    private String pic;
+
+    /**
+     * 歌词
+     */
+    private String lyric;
+
+    /**
      * 歌单id
      */
     private Integer songListId;
@@ -39,5 +59,9 @@ public class SongInListVo {
      */
     private String songListName;
 
+    /**
+     * 歌曲专辑
+     */
+    private String introduction;
 
 }

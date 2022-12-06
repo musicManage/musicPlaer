@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import com.javaclimb.controller.util.R;
 import com.javaclimb.entity.ListSong;
+import com.javaclimb.entity.Singer;
 import com.javaclimb.entity.Song;
 import com.javaclimb.entity.SongList;
 import com.javaclimb.mapper.ListSongMapper;
@@ -84,8 +85,14 @@ public class ListSongServiceImpl implements IListSongService {
                 new MPJLambdaWrapper<ListSong>()
                         .selectAll(ListSong.class)
                         .selectAs(Song::getName,SongInListVo::getSongName)
+                        .selectAs(Song::getIntroduction,SongInListVo::getIntroduction)
+                        .selectAs(Singer::getName,SongInListVo::getSingerName)
+                        .selectAs(Song::getUrl,SongInListVo::getUrl)
+                        .selectAs(Song::getPic,SongInListVo::getPic)
+                        .selectAs(Song::getLyric,SongInListVo::getLyric)
                         .selectAs(SongList::getTitle,SongInListVo::getSongListName)
                         .innerJoin(Song.class, Song::getId, ListSong::getSongId)
+                        .innerJoin(Singer.class,Singer::getId,Song::getSingerId)
                         .innerJoin(SongList.class, SongList::getId, ListSong::getSongListId)
                         .eq(ListSong::getSongListId,songListId)
         );

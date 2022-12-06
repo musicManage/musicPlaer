@@ -1,5 +1,6 @@
 import axios from "axios";
 import router from "@/router";
+
 axios.defaults.timeout = 5000;//超时时间5s
 axios.defaults.withCredentials = true; //允许跨域
 //Content-Type 响应头
@@ -40,13 +41,13 @@ axios.interceptors.response.use(
 /**
  * 封装get方法
  */
-export function get(url,params={}) {
+export function get(url,params={}){
     return new Promise((resolve,reject) => {
         axios.get(url,{params:params})
-            .then(response => {
+            .then(response =>{
                 resolve(response.data);
             })
-            .catch(err => {
+            .catch(err =>{
                 reject(err);
             })
     });

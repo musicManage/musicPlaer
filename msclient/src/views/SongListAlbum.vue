@@ -17,14 +17,7 @@
           <p>{{tempList.title}}</p>
       </div>
       <div class="songs-body" style="padding-top: 20px">
-      <el-tabs type="border-card" v-model="activeName" stretch @tab-click="getMsg">
-        <el-tab-pane label="歌曲" name="first">
-          <SongMsg :songMsg="songMsg"></SongMsg>
-        </el-tab-pane>
-        <el-tab-pane label="歌单" name="second">
-          <ContentList :contentList="SongListMsg"></ContentList>
-        </el-tab-pane>
-      </el-tabs>
+          <SongMsg :songMsg="listOfSongs"></SongMsg>
     </div>
     </div>
 
@@ -34,18 +27,21 @@
 <script>
 import {mixin} from "@/mixins";
 import {mapGetters} from "vuex";
-import {listSongOfSongId,songOfId} from "@/api";
+import {listSongOfSongId} from "@/api";
 import SongMsg from "@/components/SongMsg";
+import SongMsg2 from "@/components/SongMsg2.vue";
 
 export default {
   name: "song-list-album",
   mixins:[mixin],
   components: {
+    SongMsg2,
     SongMsg
   },
   data(){
     return{
       songLists:[],   //当前页面需要展示的歌曲列表
+      songLists2:[],   //当前页面需要展示的歌曲列表
       songListsId:'', //前面传来的歌单id
     }
   },
@@ -56,7 +52,8 @@ export default {
     ])
   },
   created() {
-    this.songListsId = this.$router.params.id;
+    // console.log(this.tempList.id);
+    this.songListsId = this.tempList.id;
     this.getSongId();
   },
   methods:{
@@ -64,25 +61,36 @@ export default {
     getSongId(){
       listSongOfSongId(this.songListsId)
           .then(res => {
-            for(let item of res){
-                this.getSongList(item.songId);
+            this.songLists = res;
+            let resultData = [];
+            for (let i = 0; i < this.songLists.length; i++) {
+              let item = JSON.parse(
+                  JSON.stringify(this.songLists[i])
+                      .replace(/songId/g, 'id')
+                      .replace(/url/g, 'url')
+                      .replace(/songPic/g, 'songPic')
+                      .replace(/songName/g, 'name')
+                      .replace(/singerName/g, 'singerName')
+                      .replace(/lyric/g, 'lyric')
+              );
+              resultData.push(item);
             }
-            this.$store.commit('setListOfSongs',this.songLists);
+            this.$store.commit('setListOfSongs',resultData);
           })
            .catch(err =>{
              console.log(err)
           })
     },
     //根据歌曲id获取歌曲信息
-      getSongList(id){
-        songOfId(id)
-            .then(res =>{
-              this.songLists.push(res);
-            })
-            .catch(err =>{
-              console.log(err)
-            })
-      }
+    //   getSongList(id){
+    //     songOfId(id)
+    //         .then(res =>{
+    //           this.songLists.push(res);
+    //         })
+    //         .catch(err =>{
+    //           console.log(err)
+    //         })
+    //   }
     }
   }
 </script>

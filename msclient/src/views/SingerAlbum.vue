@@ -2,7 +2,7 @@
     <div class="singer-album">
         <div class="album-slide">
           <div class="singer-img">
-            <img :src="attachImageUrl(singer.pic)">
+            <img :src="attachImageUrl(tempList.pic)">
           </div>
           <ul class="">
 
@@ -14,7 +14,7 @@
 <script>
 import {mixin} from "@/mixins";
 import {mapGetters} from "vuex";
-import {songOfSId,songOfId} from "@/api";
+import {songOfSId} from "@/api/";
 
 
 export default {
