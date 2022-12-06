@@ -103,4 +103,12 @@ public class ConsumerController {
     public R getEmailOfName(@PathVariable(value = "name") String name){
         return iConsumerService.getEmail(name);
     }
+
+    /**
+     * 根据用户id查用户信息
+     */
+    @GetMapping("/id/{id}")
+    public R getById(@PathVariable Integer id){
+        return iConsumerService.selectByPrimaryKey(id);
+    }
 }

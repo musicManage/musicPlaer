@@ -112,3 +112,6 @@ export const setCollect =(params) => post(`/collect/add`,params);
 export const getCollectOfUserId = (userId) => get(`/collect/collectOfUserId?userId=${userId}`);
 //取消收藏
 export const delCollect = (params) => post(`/collect/delete`,params)
+
+//根据id查用户信息
+export const getUserById = (id) => get(`/consumer/id/${id}`);

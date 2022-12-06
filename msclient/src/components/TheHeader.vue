@@ -101,6 +101,27 @@ export default {
     this.navMsg = navMsg;
     this.loginedStatus();
   },
+  computed: {
+    userName() {
+      if (this.loginIn === false){
+        return '';
+      } else {
+        return this.username;
+      }
+    },
+    pic() {
+      if (this.loginIn === false){
+        return '';
+      } else {
+        return this.avator;
+      }
+    },
+    ...mapGetters([
+      'username',
+      'avator',
+      'loginIn'
+    ])
+  },
   methods: {
     goSearch(){//搜索按钮点击后的事件
       this.$router.push({path:'/search',query:{keywords: this.select_word}},()=>{});
@@ -129,27 +150,6 @@ export default {
       };
     },
   },
-  computed: {
-    userName() {
-      if (this.loginIn === false){
-        return '';
-      } else {
-        return this.username;
-      }
-    },
-    pic() {
-      if (this.loginIn === false){
-        return '';
-      } else {
-        return this.avator;
-      }
-    },
-    ...mapGetters([
-        'username',
-        'avator',
-        'loginIn'
-    ])
-  }
 }
 </script>
 
