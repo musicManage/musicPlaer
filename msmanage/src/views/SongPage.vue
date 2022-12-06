@@ -207,6 +207,7 @@ export default {
       songOfSId(this.singerId)
           .then(res => {
             this.tableData = res;
+            // console.log(this.tableData);
           })
     },
     addSong(){
