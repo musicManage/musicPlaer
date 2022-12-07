@@ -41,7 +41,7 @@ export default {
 
 .content-list{
   max-width: 1240px;
-  max-height: 764px;
+  min-height: 600px;
   margin: 0 auto;
   position: relative;
 }

@@ -4,6 +4,7 @@
       <div class="album-img">
         <img :src="attachImageUrl(avator)">
       </div>
+
       <ul class="album-info">
         <li>昵称:{{username}}</li>
         <li>性别:{{userSex}}</li>
@@ -19,6 +20,8 @@
         <SongMsg :songMsg="collection"></SongMsg>
       </div>
     </div>
+
+
   </div>
 </template>
 
@@ -28,6 +31,7 @@ import LoginView from "@/components/LoginView.vue";
 import {mapGetters} from "vuex";
 import {getCollectOfUserId, getUserById} from "@/api";
 import SongMsg from "@/components/SongMsg.vue";
+
 
 export default {
   name: "UserView",

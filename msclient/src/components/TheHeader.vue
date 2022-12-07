@@ -10,6 +10,7 @@
         :default-active="activeIndex"
         class="el-menu-demo"
         mode="horizontal"
+        active-text-color="#31c27c"
         router>
       <template v-for="item in items">
         <template>
@@ -33,7 +34,7 @@
     </div>
 
 <!--    登录后的状态-->
-    <div class="header-right" v-if="loginIn">
+    <div class="header-right" v-if="loginIn" >
       <div class="admin-box">
         <img :src="attachImageUrl(pic)" alt=""/>
       </div>
@@ -43,9 +44,11 @@
          <i class="el-icon-caret-bottom"></i>
        </span>
         <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item command="userSetting">个人设置</el-dropdown-item>
           <el-dropdown-item command="logout">退出登录</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
+
     </div>
 
     <LoginView/>
@@ -70,7 +73,7 @@ export default {
   data(){
     return {
       select_word:'',//搜索内容
-      activeIndex: '1',
+      activeIndex: '/',
       items:[//导航栏
         {
           index: "/",
@@ -99,6 +102,7 @@ export default {
   },
   created() {
     this.navMsg = navMsg;
+    this.setCurrentRoute();
   },
   computed: {
     userName() {
@@ -139,9 +143,13 @@ export default {
         this.$store.commit('setUserId','');
         this.$store.commit('setUsername','');
         this.$store.commit('setAvator','');
+      } else if (command === "userSetting"){
+        this.$router.push('/userSetting');
       }
     },
-
+    setCurrentRoute(){
+      this.activeIndex = this.$route.path;
+    }
   },
 }
 </script>
@@ -226,5 +234,8 @@ export default {
 }
 .rightWord:hover {
   color: black;
+}
+.el-dropdown-menu{
+  width: 96px;
 }
 </style>

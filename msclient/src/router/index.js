@@ -8,6 +8,7 @@ import SearchPage from "@/views/SearchPage";
 import SingerAlbum from "@/views/SingerAlbum";
 import SongListAlbum from "@/views/SongListAlbum";
 import Lyric from "@/views/Lyric.vue";
+import UserSetting from "@/views/UserSetting.vue";
 
 Vue.use(VueRouter)
 
@@ -51,6 +52,10 @@ const routes = [
         path: '/lyric',
         name: 'lyricc',
         component: Lyric
+    },{
+        path: '/UserSetting',
+        name: 'UserSetting',
+        component: UserSetting
     },
 ]
 
