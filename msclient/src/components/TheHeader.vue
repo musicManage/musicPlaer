@@ -138,7 +138,9 @@ export default {
     },
     handleCommand(command) {
       if (command === "logout"){
-        this.$router.push('/');
+        if (this.$route.path !== '/'){
+          this.$router.push('/');
+        }
         this.$store.commit('setLoginIn',false);
         this.$store.commit('setUserId','');
         this.$store.commit('setUsername','');
