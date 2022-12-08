@@ -149,7 +149,7 @@
 </template>
 
 <script>
-import {allSinger, delSinger, setSinger, updateSinger} from "@/api/index"
+import {allSinger, delSinger, selectSingerByName, setSinger, updateSinger} from "@/api/index"
 import {mixin} from "@/mixins";
 
 export default {
@@ -289,9 +289,8 @@ export default {
     selectSingerList(){
       let param = new URLSearchParams();
       param.append("name",this.select_word);
-      axios.post("/singer/name",param).then(res => {
-        // console.log(res.data);
-        this.singerList = res.data;
+      selectSingerByName(param).then(res => {
+        this.singerList = res;
       })
     },
     handleCurrentChange(val){

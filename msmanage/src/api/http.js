@@ -6,7 +6,7 @@ axios.defaults.withCredentials = true; //允许跨域
 //Content-Type 响应头
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
 //基础URL
-axios.defaults.baseURL = "http://localhost:8888/";
+axios.defaults.baseURL = "http://127.0.0.1:8888/";
 
 //响应拦截器
 axios.interceptors.response.use(
