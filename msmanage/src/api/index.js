@@ -51,6 +51,9 @@ export const updateSongList = (params) => post('songList/update',params);
 //删除歌单
 export const delSongList = (params) => post(`songList/delete`,params);
 
+//模糊查询歌单
+export const selectSListByName = (name) => get(`/songList/title/${name}`);
+
 //根据歌单id查询歌曲列表
 export const listSongOfSongId = (id) => get(`listSong/${id}`);
 

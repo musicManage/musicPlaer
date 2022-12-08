@@ -117,7 +117,7 @@
 </template>
 
 <script>
-import {allSongList, delSongList, setSongList, updateSongList} from "@/api/index"
+import {allSongList, delSongList, selectSListByName, setSongList, updateSongList} from "@/api/index"
 import {mixin} from "@/mixins";
 
 export default {
@@ -244,10 +244,10 @@ export default {
       return `${this.$store.state.HOST}/songList/update/pic/${id}`;
     },
     selectSongListList(){
-      axios.get(`/songList/title/${this.select_word}`).then(res => {
-        // console.log(res.data);
-        this.songListList = res.data;
-      })
+      selectSListByName(this.select_word)
+          .then(res => {
+            this.songListList = res;
+          })
     },
     handleCurrentChange(val){
       //获取当前页
