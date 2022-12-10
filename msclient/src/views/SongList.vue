@@ -55,7 +55,7 @@
 
 import TheFooter from "@/components/TheFooter";
 import contentList from "@/components/ContentList";
-import {allSinger, allSongList,getSongListByStyle} from "@/api";
+import {allSongList, getSongListByStyle} from "@/api";
 
 export default {
   name: 'song-list',
@@ -121,23 +121,12 @@ export default {
         }
       }
 }
-// methods:{
-// goAlbum(item,type){
-// this.$store.commit("setTempList".item);
-//   if(type){         //歌手
-//   this.$router.push({path:`singer-album/${item.id}`});
-//       } else {           //歌单
-//     this.$router.push({path:`song-list-album/${item.id}`});
-//        }
-//     }
-//   }
 
 </script>
 
 <style scoped>
 .content-list{
   max-width: 1240px;
-  max-height: 764px;
   margin: 0 auto;
   position: relative;
 }
