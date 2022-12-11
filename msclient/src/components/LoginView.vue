@@ -202,6 +202,9 @@ export default {
         username:[
           { require:true, validator: checkUsername, trigger: 'blur' }
         ],
+        password: [
+          {required: true, message: '请输入密码', trigger: 'blur'}
+        ],
         email:[
           { require:true, validator: checkMail, trigger: 'blur'}
         ],
@@ -256,9 +259,23 @@ export default {
       }
     },
     LoginVisible(newV){
-      if (newV){
+      if (newV==false){
         this.loginForm.username='';
         this.loginForm.password='';
+        this.$refs.form.clearValidate();
+      }
+    },
+    registerVisible(newV){
+      if (newV==false){
+        this.username='';
+        this.password= '';
+        this.sex= 1;
+        this.phoneNum= '';
+        this.email= '';
+        this.birth= '';
+        this.introduction= '';
+        this.location= '';
+        this.$refs.registerForm.clearValidate();
       }
     },
     arr(newV){

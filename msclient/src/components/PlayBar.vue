@@ -214,6 +214,7 @@ export default {
     },
     //拖拽开始
     mousedown(e){
+      this.$store.commit('setPlayButtonUrl','#icon-zanting');
       this.mouseStartX = e.clientX;
       this.tag = true;
     },

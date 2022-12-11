@@ -40,7 +40,6 @@ export default {
   data(){
     return{
       songLists:[],   //当前页面需要展示的歌曲列表
-      songLists2:[],   //当前页面需要展示的歌曲列表
       songListsId:'', //前面传来的歌单id
     }
   },
