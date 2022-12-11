@@ -39,12 +39,12 @@ const routes = [
         component: SearchPage
     },
     {
-        path: '/singer-album/:id',
+        path: '/singer-album',
         name: 'singer-album',
         component: SingerAlbum
     },
     {
-        path: '/song-list-album/:id',
+        path: '/song-list-album',
         name: 'song-list-album',
         component: SongListAlbum
     },
