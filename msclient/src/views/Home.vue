@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <swiper/>
-    <div class="section" v-for="(item,index) in songsList" :key="index">
+    <div class="section" v-for="(item,index) in List" :key="index">
       <div class="section-title" style="text-align: center" >
         {{item.name}}
       </div>
@@ -35,7 +35,7 @@ export default {
   },
   data() {
     return {
-      songsList: [
+      List: [
         {name:"歌单",list: []},
         {name:"歌手",list: []},
       ]
@@ -51,7 +51,7 @@ export default {
     getSongList() {        //获取前十条歌单
       allSongList().then(
           (res) => {
-        this.songsList[0].list = res.data.slice(0,10);
+        this.List[0].list = res.data.slice(0,10);
       }).catch((err) => {
         console.log(err);
       })
@@ -59,7 +59,7 @@ export default {
     getSinger() {          //获取前十名歌手
       allSinger().then(
           (res) => {
-            this.songsList[1].list = res.data.slice(0,10);
+            this.List[1].list = res.data.slice(0,10);
             // console.log(res.data);
           }).catch((err) => {
         console.log(err);
