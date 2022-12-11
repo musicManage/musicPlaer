@@ -51,6 +51,10 @@ export default {
       this.$store.commit('setDuration',player.duration);
       player.play();//开始播放
       this.$store.commit('setIsPlay',true);
+      if (player.paused){
+        this.$store.commit('setIsPlay',false);
+      }
+
     },
     //播放完成后触发
     ended(){

@@ -101,6 +101,9 @@ export default {
   },
   created() {
     this.setCurrentRoute();
+    if (this.username!=''){
+      this.$store.commit('setLoginIn',true);
+    }
   },
   computed: {
     userName() {
