@@ -1,32 +1,32 @@
-<template>
-    <div class="singer-album">
-        <div class="album-slide">
-          <div class="singer-img">
-            <img :src="attachImageUrl(tempList.pic)">
+  <template>
+      <div class="singer-album">
+          <div class="album-slide">
+            <div class="singer-img">
+              <img :src="attachImageUrl(tempList.pic)">
+            </div>
+            <ul class="info">
+              <li v-if="tempList.sex==0||tempList.sex==1">
+                性别：{{attachSex(tempList.sex)}}
+              </li>
+              <li>
+                生日：{{attachBirth(tempList.birth)}}
+              </li>
+              <li>
+                故乡：{{tempList.location}}
+              </li>
+            </ul>
           </div>
-          <ul class="info">
-            <li v-if="tempList.sex==0||tempList.sex==1">
-              性别：{{attachSex(tempList.sex)}}
-            </li>
-            <li>
-              生日：{{attachBirth(tempList.birth)}}
-            </li>
-            <li>
-              故乡：{{tempList.location}}
-            </li>
-          </ul>
-        </div>
-        <div class="album-content">
-          <div class="intro">
-            <h2>{{tempList.name}}</h2>
-            <br/>
-            <span style="font-size: small">{{tempList.introduction}}</span>
+          <div class="album-content">
+            <div class="intro">
+              <h2>{{tempList.name}}</h2>
+              <br/>
+              <span style="font-size: small">{{tempList.introduction}}</span>
+            </div>
+              <br/>
+              <SongMsg :songMsg="singer"/>
           </div>
-
-            <SongMsg :songMsg="singer"/>
-        </div>
-    </div>
-</template>
+      </div>
+  </template>
 
 <script>
 import {mixin} from "@/mixins";
@@ -66,7 +66,6 @@ export default {
       songOfSId(this.singerId)
           .then(res => {
             this.singer = res;
-
             this.$store.commit('setListOfSongs',this.singer);
           })
           .catch(err => {

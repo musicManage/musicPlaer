@@ -60,7 +60,6 @@
 
 <script>
 import {mixin} from "@/mixins";
-import {navMsg} from '../assets/data/header';
 import bus from "@/assets/js/bus";
 import LoginView from "@/components/LoginView";
 import {mapGetters} from "vuex";
@@ -97,11 +96,10 @@ export default {
       ],
       LoginVisible:false,
       registerVisible:false,
-      navMsg:[],
+
     }
   },
   created() {
-    this.navMsg = navMsg;
     this.setCurrentRoute();
   },
   computed: {

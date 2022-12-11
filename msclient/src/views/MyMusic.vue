@@ -1,5 +1,6 @@
 <template>
     <div>
+      //未登录
       <div class="loginBox" v-if="!loginIn">
         <div class="n-pglg">
           <div class="pic">
@@ -9,7 +10,7 @@
         </div>
       </div>
 
-
+      //已登录
       <div v-if="loginIn">
         <UserView/>
       </div>

@@ -19,7 +19,7 @@
       </div>
       <div class="songs-body" style="padding-top: 20px">
           <SongMsg :songMsg="listOfSongs"></SongMsg>
-    </div>
+      </div>
     </div>
 
   </div>

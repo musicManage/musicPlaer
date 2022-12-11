@@ -9,7 +9,6 @@
       </el-tab-pane>
     </el-tabs>
   </div>
-
 </template>
 
 <script>
@@ -82,10 +81,4 @@ export default {
 </script>
 
 <style scoped>
-.el-tabs {
-  min-height: 100vh;
-  width: 1240px;
-  margin: 20px auto;
-  background: white;
-}
 </style>
