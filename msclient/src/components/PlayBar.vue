@@ -46,6 +46,7 @@
             <div ref="idot" class="idot" :style="{left:curLength+'%'}"
                  @mousedown="mousedown"
                  @mouseup="mouseup"
+                 @mouseleave="mouseup"
             ></div>
           </div>
         </div>
