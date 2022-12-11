@@ -246,7 +246,7 @@ export default {
   },
   watch: {
     forgetVisible(newV){
-      if (newV){
+      if (newV==false){
         this.forgetForm.username='';
         this.forgetForm.password='';
         this.forgetForm.email='';
