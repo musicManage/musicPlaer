@@ -135,7 +135,9 @@ export default {
       bus.$emit('LoginVisible',this.LoginVisible);
     },
     goHome(){
-      this.$router.push({path:"/"});
+      if (this.$route.path!='/'){
+        this.$router.push({path:"/"});
+      }
     },
     handleCommand(command) {
       if (command === "logout"){
