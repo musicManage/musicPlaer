@@ -18,9 +18,9 @@ public class MailController {
     @GetMapping("/{email}")
     public String getCheckCode(@PathVariable(value = "email") String email){
         String checkCode = String.valueOf(new Random().nextInt(899999) + 100000);
-        String message = "您的注册验证码为："+checkCode;
+        String message = "您的验证码为："+checkCode;
         try {
-            mailService.sendSimpleMail(email, "注册验证码", message);
+            mailService.sendSimpleMail(email, "验证码", message);
         }catch (Exception e){
             return "";
         }

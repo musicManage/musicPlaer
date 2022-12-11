@@ -167,10 +167,10 @@ export default {
     const checkEmailCode = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请输入验证码'));
-      } else if (value !== this.code) {
-        callback(new Error('验证码错误'));
-      } else {
+      } else if (value == this.code) {
         callback();
+      } else {
+        callback(new Error('验证码错误'));
       }
     };
     return{
