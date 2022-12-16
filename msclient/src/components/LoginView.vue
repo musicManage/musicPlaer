@@ -321,7 +321,7 @@ export default {
       this.forgetVisible = true;
     },
     updatePass(){
-      if (this.code !== this.forgetForm.checkCode){
+      if (this.code != this.forgetForm.checkCode){
         this.$message.error("验证码错误");
       } else if (this.forgetForm.password === this.forgetForm.checkPass){
         let param = new URLSearchParams();
