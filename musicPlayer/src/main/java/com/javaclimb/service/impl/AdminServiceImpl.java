@@ -8,8 +8,6 @@ import com.javaclimb.service.IAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
-
 @Service
 public class AdminServiceImpl implements IAdminService {
 
@@ -23,12 +21,11 @@ public class AdminServiceImpl implements IAdminService {
      * @param session
      */
     @Override
-    public R verifyPassword(Admin admin, HttpSession session) {
+    public R verifyPassword(Admin admin) {
         QueryWrapper<Admin> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("name",admin.getName());
         queryWrapper.eq("password",admin.getPassword());
         if (adminMapper.selectCount(queryWrapper)>0){
-            session.setAttribute("name",admin.getName());
             return R.success("登录成功");
         }
         return R.error("用户名或密码错误");

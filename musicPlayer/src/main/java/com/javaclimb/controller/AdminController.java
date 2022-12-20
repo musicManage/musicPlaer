@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpSession;
-
 @RestController
 @RequestMapping
 public class AdminController {
@@ -22,8 +20,8 @@ public class AdminController {
      * 判断是否登录成功
      */
     @PostMapping("/admin/login/status")
-    public R loginStatus( Admin admin, HttpSession session){
-        return iAdminService.verifyPassword(admin,session);
+    public R loginStatus( Admin admin){
+        return iAdminService.verifyPassword(admin);
     }
 
 }
